@@ -3,8 +3,8 @@
 
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<a href="/admin/list">Product List</a> </br>
-<a href="/admin/products/add">ADD New Product</a></br>
+<a href="/admin/gel-list">Product List</a> </br>
+<a href="/admin/gels/add">ADD New Product</a></br>
 <!--<a href="/contact">Contact</a>-->
 
 </html>

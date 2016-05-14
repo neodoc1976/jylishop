@@ -24,7 +24,7 @@
 
         <tr>
             #set( $num = $velocityCount - 1 )
-            <td><a href="/products/$num">$gel.title</a></td>
+            <td><a href="/gels/$num">$gel.title</a></td>
             <td> $gel.reactantPercent %</td>
             <td> $gel.volume ml</td>
             <td> $gel.price $</td>

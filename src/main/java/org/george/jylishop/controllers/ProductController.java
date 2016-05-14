@@ -18,9 +18,9 @@ public class ProductController {
      @Autowired
      DataBase base;
 
-    @RequestMapping("/products/{id}")
+    @RequestMapping("/gels/{id}")
     public ModelAndView detailInfoMethod(@PathVariable int id) {
-        ModelAndView model = new ModelAndView("product");
+        ModelAndView model = new ModelAndView("gel-product");
         ArrayList<OpalescenseGel> catalogue = base.getCatalogue();
         model.addObject("opalescenseInfo",catalogue.get(id));
         return model;
@@ -28,7 +28,7 @@ public class ProductController {
 
     @RequestMapping("/")
     public ModelAndView productList() {
-        ModelAndView list = new ModelAndView("list");
+        ModelAndView list = new ModelAndView("gel-list");
         list.addObject("catalogue", base.getCatalogue());
         return list;
 

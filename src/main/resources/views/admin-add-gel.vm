@@ -1,5 +1,5 @@
-#include("views/admin-start.vm")
-    <form action="/admin/products" method="post">
+#include("views/admin-header.vm")
+    <form action="/admin/gels" method="post">
         <p><b>Add new type Opalescense Gel</b></p><br/>
         <p/>
         <p><b>Title:</b><br/>
