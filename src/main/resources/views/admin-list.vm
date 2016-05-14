@@ -1,0 +1,30 @@
+#include("views/admin-start.vm")
+
+
+<table cellpadding="25" cellspacing="0" border="5">
+    <tr>
+        <th> Product name</th>
+        <th> Reactant quatity</th>
+        <th> Syringe volume</th>
+        <th> Price</th>
+        <th> Delete Product</th>
+        <th> Edit Product</th>
+
+
+    </tr>
+
+    #foreach ($gel in $catalogue)
+
+        <tr>
+            #set( $num = $velocityCount - 1 )
+            <td><a href="/products/$num">$gel.title</a></td>
+            <td> $gel.reactantPercent %</td>
+            <td> $gel.volume ml</td>
+            <td> $gel.price $</td>
+            <td><a href="/admin/products/$num/delete">Delete THIS</a></td>
+            <td><a href="/admin/products/$num/update">Edit THIS</a></td>
+        </tr>
+    #end
+
+</table>
+#include("views/footer.vm")

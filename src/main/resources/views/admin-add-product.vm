@@ -1,0 +1,23 @@
+#include("views/admin-start.vm")
+    <form action="/admin/products" method="post">
+        <p><b>Add new type Opalescense Gel</b></p><br/>
+        <p/>
+        <p><b>Title:</b><br/>
+            <input type="text" size="40" name="title">
+        </p>
+        <p><b>Reactant percent:</b><br/>
+            <input type="text" size="10" name="reactantPercent">
+        </p>
+        <p><b>Syringe volume:</b><br/>
+            <input type="text" size="10" name="volume">
+        </p>
+        <p><b>Price:</b><br/>
+            <input type="text" size="10" name="price">
+        </p>
+
+        <p><b>Description:</b><br/>
+            <textarea name="description" cols="50" rows="5"></textarea>
+        </p>
+        <p><input type="submit" value="submit">
+        </p>
+#include("views/footer.vm")

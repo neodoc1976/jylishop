@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<style type="text/css">
+    .upper {
+        margin: 0px 0px 0px 430px;
+
+    }
+
+    .upperadd {
+        margin-left: 340px;
+        margin-bottom: 50px;
+
+
+    }
+
+    .upperaddtext {
+        font-family: "Lucida Bright", sans-serif;
+
+    }
+    .borderer{
+        border: 2px solid black;
+    }
+
+    body {
+        background-color: #DCDCDC; /* Цвет фона веб-страницы */
+    }
+
+    h1 {
+        background-color: #BDB76B; /* Цвет фона под заголовком */
+
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .letter {
+        color: #B22222;
+        font-size: 300%; /* Размер шрифта */
+        font-family: "Lucida Handwriting", sans-serif;
+    }
+    .letter1{
+        font-family: "Agency FB",sans-serif;
+    }
+
+    .multiplier {
+
+        font-size: 150%;
+    }
+
+    y {
+        color: #FF4500; /* Y */
+    }
+
+    l {
+        color: #FFA500; /* L */
+    }
+
+    v {
+        color: #00FF00; /* I */
+    }
+
+    z {
+        color: #87CEFA; /* S */
+    }
+
+    h {
+        color: #00008b; /* H */
+    }
+
+    o {
+        color: #9400D3; /* O */
+    }
+
+    r {
+        color: #FF00FF; /* P */
+    }
+
+    .otherletter {
+        font-size: 200%;
+        font-family: "Lucida Handwriting", sans-serif;
+
+    }
+
+    .distanser1 {
+        margin: 0px 0px 0px 300px;
+    }
+
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>JYLISHOP</title>
+</head>
+<div class="borderer">
+<h1>
+
+
+    <div class="upper"><span class="letter">J</span><span class="otherletter"><y>Y
+        <l>L
+            <v>I
+                <z><span class="multiplier">S</z>
+                <h>H
+                    <o>O
+                        <r>P
+    </y>
+        </l></v></o></r></span>
+    </div>
+
+    <br/>
+    <div class="upperadd">
+        <div class="upperaddtext">
+            <y> Buy Quality Products In Our Online Store!</y>
+        </div>
+    </div>
+
+    <span class="distanser1"><a href="/"><span class="multiplier"><span class="letter1"><o>Product List</o></span></span></a></span>
+    <span class="distanser1"><a href="/contact"><span class="multiplier"><span class="letter1"><h>Contact</h></span></a></span>
+
+
+
+</h1>
+</div>
+
+<body>
+
+
+

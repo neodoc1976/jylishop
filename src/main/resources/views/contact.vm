@@ -1,0 +1,15 @@
+#include("views/header.vm")
+<style>
+    letter {
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+    }
+</style>
+<letter>
+    <b>Your manager: </b> $contactInfo.name<br/>
+    <b>Email: </b> $contactInfo.email<br/>
+    <b>Telephone: </b>$contactInfo.telephone<br/>
+    <b>Adress: </b>$contactInfo.address
+</letter>
+
+#include("views/footer.vm")
