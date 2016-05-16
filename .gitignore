@@ -1,0 +1,7 @@
+# General ignores
+target/
+*.log
+
+# IntelliJ ignores
+*.iml
+.idea
