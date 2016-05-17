@@ -1,0 +1,45 @@
+#include("views/header.vm")
+
+<style>
+    table {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+    }
+    center {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+        color: black;
+
+
+</style>
+
+<table cellpadding="25" cellspacing="0" border="5">
+    <tr>
+        <center>HEMOSTATIC</center>
+        <th> Product name</th>
+        <th> Hemostatic Substance</th>
+        <th> Syringe/dispenser volume</th>
+        <th> Price</th>
+        <!-- <th> For admin</th> -->
+
+
+    </tr>
+
+    #foreach ($hemo in $hemolist)
+
+        <tr>
+            #set( $num = $velocityCount - 1 )
+            <td><a href="/hemos/$num">$hemo.title</a></td>
+            <td> $hemo.hemostaticSubstance</td>
+            <td> $hemo.volume ml</td>
+            <td> $hemo.price $</td>
+            <!-- <td><a href="/admin/hemo/$num/delete">Delete THIS</a></td> -->
+        </tr>
+    #end
+
+</table>
+
+
+#include("views/footer.vm")
