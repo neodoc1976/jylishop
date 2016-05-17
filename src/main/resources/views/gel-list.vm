@@ -1,16 +1,22 @@
 #include("views/header.vm")
 <style>
     table {
-        margin: auto ;
+        margin: auto;
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
-
-
     }
+    center {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+        color: black;
+
+
 </style>
 
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
+     <center>WHITHENING GELS</center>
         <th> Product name</th>
         <th> Reactant quatity</th>
         <th> Syringe volume</th>

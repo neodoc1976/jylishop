@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by Yulya on 02.05.2016.
  */
 @Controller
-public class ProductController {
+public class GelController {
      @Autowired
      DataBase base;
 
@@ -26,8 +26,8 @@ public class ProductController {
         return model;
     }
 
-    @RequestMapping("/")
-    public ModelAndView productList() {
+    @RequestMapping("/gels")
+    public ModelAndView gelList() {
         ModelAndView list = new ModelAndView("gel-list");
         list.addObject("catalogue", base.getCatalogue());
         return list;

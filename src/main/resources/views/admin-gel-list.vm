@@ -1,7 +1,13 @@
 #include("views/admin-header.vm")
+<style>
+    center {
+        margin: auto;
+    }
+</style>
 
 
-<table cellpadding="25" cellspacing="0" border="5">
+<center><table cellpadding="25" cellspacing="0" border="5">
+   <center> WHITHENING GELS</center>
     <tr>
         <th> Product name</th>
         <th> Reactant quatity</th>
@@ -27,4 +33,5 @@
     #end
 
 </table>
+</center>
 #include("views/footer.vm")

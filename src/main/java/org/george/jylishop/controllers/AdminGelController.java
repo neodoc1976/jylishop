@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Yulya on 03.05.2016.
  */
 @Controller
-public class AdminProductController {
+public class AdminGelController {
     @Autowired
     DataBase base;
 
@@ -67,7 +67,7 @@ public class AdminProductController {
 
     @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.GET)
     public ModelAndView getFilledForm(@PathVariable int id) {
-        ModelAndView update = new ModelAndView("admin-update-product");
+        ModelAndView update = new ModelAndView("admin-update-gel");
         ArrayList<OpalescenseGel> recall = base.getCatalogue();
         update.addObject("recall", recall.get(id));
         return update;
