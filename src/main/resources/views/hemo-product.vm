@@ -1,0 +1,16 @@
+#include("views/header.vm")
+<style>
+    letter {
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+    }
+</style>
+<letter>
+    <b>Product: </b> $hemoInfo.title<br/>
+    <b>Description: </b>$hemoInfo.description<br/>
+    <b>Hemostatic Substance:</b> $hemoInfo.hemostaticSubstance<br/>
+    <b>Syringe/dispenser volume: </b>$hemoInfo.volume ml<br/>
+    <b>Price per one: </b>$hemoInfo.price $
+</letter>
+
+#include("views/footer.vm")
