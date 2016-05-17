@@ -14,21 +14,21 @@ import java.util.ArrayList;
  * Created by Yulya on 02.05.2016.
  */
 @Controller
-public class ProductController {
+public class GelController {
      @Autowired
      DataBase base;
 
-    @RequestMapping("/products/{id}")
+    @RequestMapping("/gels/{id}")
     public ModelAndView detailInfoMethod(@PathVariable int id) {
-        ModelAndView model = new ModelAndView("product");
+        ModelAndView model = new ModelAndView("gel-product");
         ArrayList<OpalescenseGel> catalogue = base.getCatalogue();
         model.addObject("opalescenseInfo",catalogue.get(id));
         return model;
     }
 
-    @RequestMapping("/")
-    public ModelAndView productList() {
-        ModelAndView list = new ModelAndView("list");
+    @RequestMapping("/gels")
+    public ModelAndView gelList() {
+        ModelAndView list = new ModelAndView("gel-list");
         list.addObject("catalogue", base.getCatalogue());
         return list;
 

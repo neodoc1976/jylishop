@@ -17,27 +17,27 @@ import java.util.List;
  * Created by Yulya on 03.05.2016.
  */
 @Controller
-public class AdminProductController {
+public class AdminGelController {
     @Autowired
     DataBase base;
 
-    @RequestMapping(value = "admin/products/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
-        ModelAndView view = new ModelAndView("admin-add-product");
+        ModelAndView view = new ModelAndView("admin-add-gel");
         return view;
     }
 
-    @RequestMapping(value = "admin/products", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/gels", method = RequestMethod.POST)
     public ModelAndView postForm(@RequestParam String title, @RequestParam Double volume,
                                  @RequestParam Double price, @RequestParam Integer reactantPercent, @RequestParam String description) {
-        ModelAndView post = new ModelAndView("product");
+        ModelAndView post = new ModelAndView("admin-gel-list");
         // post.addObject("title", title);
         // post.addObject("reactantPercent", reactantPercent);
         // post.addObject("volume", volume);
         // post.addObject("price", price);
         //  post.addObject("description", description);
         OpalescenseGel added = new OpalescenseGel();
-        post.addObject("opalescenseInfo", added);
+        post.addObject("catalogue", base.getCatalogue());
         added.setTitle(title);
         added.setDescription(description);
         added.setVolume(volume);
@@ -49,32 +49,25 @@ public class AdminProductController {
 
     }
 
-    @RequestMapping(value = "admin/products/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/gels/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteForm(@PathVariable int id) {
-        ModelAndView delete = new ModelAndView("list");
+        ModelAndView delete = new ModelAndView("admin-gel-list");
         List<OpalescenseGel> list = base.getCatalogue();
         list.remove(id);
         delete.addObject("catalogue", base.getCatalogue());
         return delete;
     }
 
-    @RequestMapping("/admin")
-    public ModelAndView adminForm() {
-        ModelAndView admin = new ModelAndView("admin-start");
-        return admin;
-
-    }
-
-    @RequestMapping("/admin/list")
+    @RequestMapping({"/admin/gel-list", "/admin"})
     public ModelAndView productList() {
-        ModelAndView list = new ModelAndView("admin-list");
+        ModelAndView list = new ModelAndView("admin-gel-list");
         list.addObject("catalogue", base.getCatalogue());
         return list;
     }
 
-    @RequestMapping(value = "/admin/products/{id}/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.GET)
     public ModelAndView getFilledForm(@PathVariable int id) {
-        ModelAndView update = new ModelAndView("admin-update-product");
+        ModelAndView update = new ModelAndView("admin-update-gel");
         ArrayList<OpalescenseGel> recall = base.getCatalogue();
         update.addObject("recall", recall.get(id));
         return update;
@@ -82,14 +75,14 @@ public class AdminProductController {
 
     }
 
-    @RequestMapping(value = "/admin/products/{id}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.POST)
     public ModelAndView editForm(@PathVariable int id,
                                  @RequestParam String title,
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
                                  @RequestParam String description) {
-        ModelAndView post = new ModelAndView("admin-list");
+        ModelAndView post = new ModelAndView("admin-gel-list");
         ArrayList<OpalescenseGel> catalogue = base.getCatalogue();
         OpalescenseGel added = catalogue.get(id);
         added.setTitle(title);

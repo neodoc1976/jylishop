@@ -1,5 +1,7 @@
+#include("views/admin-header.vm")
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">#include("views/admin-start.vm")
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
 <form  method="post">
     <p><b>EDIT  Opalescense Gel</b></p><br/>
     <p/>
@@ -18,7 +20,7 @@
     </p>
 
     <p><b>Description:</b><br/>
-        <textarea type="text" name="description" cols="50" rows="5" value="$recall.description"></textarea>
+        <textarea name="description" cols="50" rows="5">$recall.description</textarea>
     </p>
     <p><input type="submit" value="submit">
     </p>

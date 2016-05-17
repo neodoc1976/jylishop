@@ -1,16 +1,22 @@
 #include("views/header.vm")
 <style>
     table {
-        margin: auto ;
+        margin: auto;
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
-
-
     }
+    center {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+        color: black;
+
+
 </style>
 
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
+     <center>WHITHENING GELS</center>
         <th> Product name</th>
         <th> Reactant quatity</th>
         <th> Syringe volume</th>
@@ -24,7 +30,7 @@
 
         <tr>
             #set( $num = $velocityCount - 1 )
-            <td><a href="/products/$num">$gel.title</a></td>
+            <td><a href="/gels/$num">$gel.title</a></td>
             <td> $gel.reactantPercent %</td>
             <td> $gel.volume ml</td>
             <td> $gel.price $</td>

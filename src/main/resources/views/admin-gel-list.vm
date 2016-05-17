@@ -1,7 +1,13 @@
-#include("views/admin-start.vm")
+#include("views/admin-header.vm")
+<style>
+    center {
+        margin: auto;
+    }
+</style>
 
 
-<table cellpadding="25" cellspacing="0" border="5">
+<center><table cellpadding="25" cellspacing="0" border="5">
+   <center> WHITHENING GELS</center>
     <tr>
         <th> Product name</th>
         <th> Reactant quatity</th>
@@ -17,14 +23,15 @@
 
         <tr>
             #set( $num = $velocityCount - 1 )
-            <td><a href="/products/$num">$gel.title</a></td>
+            <td><a href="/gels/$num">$gel.title</a></td>
             <td> $gel.reactantPercent %</td>
             <td> $gel.volume ml</td>
             <td> $gel.price $</td>
-            <td><a href="/admin/products/$num/delete">Delete THIS</a></td>
-            <td><a href="/admin/products/$num/update">Edit THIS</a></td>
+            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
+            <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
         </tr>
     #end
 
 </table>
+</center>
 #include("views/footer.vm")
