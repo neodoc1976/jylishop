@@ -3,8 +3,8 @@
 
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<a href="/admin/gel-list">Product List</a> </br>
-<a href="/admin/gels/add">ADD New Opalescense Gel</a></br>
+<a href="/admin/gels/add">ADD New OPASLESCENCE Gel</a></br>
+<a href="/admin/hemos/add">ADD New HEMOSTATIC </a></br>
 <body>
 <img src="/resources/jylishop.png" alt="aaallll">
 </body>

@@ -5,14 +5,14 @@
     }
 </style>
 <center><table cellpadding="25" cellspacing="0" border="5">
-    <center> OUR PRODUCTS </center>
+    <center> OUR PRODUCTS  </center>
     <tr>
+        <th> ID</th>
         <th> Product name</th>
         <th> Picture </th>
         <th> Price</th>
-        <th> Product ID</th>
-##        <th> Delete Product</th>
-##        <th> Edit Product</th>
+       <th> Delete Product</th>
+       <th> Edit Product</th>
 
 
     </tr>
@@ -20,12 +20,12 @@
     #foreach ($product in $catalogue)
 
         <tr>
+            <td> $product.id</td>
             <td>$product.title</td>
             <td><img src="/resources/$product.picture" width="200" alt="File not found"></td>
             <td> $product.price</td>
-            <td> $product.id</td>
-##            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
-##            <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
+            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
+           <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
         </tr>
     #end
 
