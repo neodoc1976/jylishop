@@ -4,31 +4,28 @@
         margin: auto;
     }
 </style>
-
-
 <center><table cellpadding="25" cellspacing="0" border="5">
-    <center> WHITHENING GELS</center>
+    <center> OUR PRODUCTS </center>
     <tr>
         <th> Product name</th>
-        <th> Reactant quatity</th>
-        <th> Syringe volume</th>
+        <th> Picture </th>
         <th> Price</th>
-        <th> Delete Product</th>
-        <th> Edit Product</th>
+        <th> Product ID</th>
+##        <th> Delete Product</th>
+##        <th> Edit Product</th>
 
 
     </tr>
 
-    #foreach ($gel in $catalogue)
+    #foreach ($product in $catalogue)
 
         <tr>
-            #set( $num = $velocityCount - 1 )
-            <td><a href="/gels/$num">$gel.title</a></td>
-            <td> $gel.reactantPercent %</td>
-            <td> $gel.volume ml</td>
-            <td> $gel.price $</td>
-            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
-            <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
+            <td>$product.title</td>
+            <td><img src="/resources/$product.picture" width="200" alt="File not found"></td>
+            <td> $product.price</td>
+            <td> $product.id</td>
+##            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
+##            <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
         </tr>
     #end
 

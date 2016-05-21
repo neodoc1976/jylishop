@@ -6,7 +6,7 @@
 <a href="/admin/gel-list">Product List</a> </br>
 <a href="/admin/gels/add">ADD New Opalescense Gel</a></br>
 <body>
-<img src="static/jylishop.png" alt="альтернативный текст">
+<img src="/resources/jylishop.png" alt="aaallll">
 </body>
 <!--<a href="/">Client
 <!--<a href="/contact">Contact</a>-->
