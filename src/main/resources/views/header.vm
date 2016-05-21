@@ -92,6 +92,9 @@
 <head>
     <meta charset="UTF-8">
     <title>JYLISHOP</title>
+    <head>
+        <link rel="shortcut icon" href="/resources/favicon.ico" type="image/ico">
+    </head>
 </head>
 <div class="borderer">
 <h1>

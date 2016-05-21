@@ -1,27 +1,20 @@
-#include("views/header.vm")
+#include("views/admin-header.vm")
 <style>
-    table {
-        margin: auto;
-        font-family: "Agency FB", sans-serif;
-        font-size: 170%;
-    }
     center {
         margin: auto;
-        font-family: "Agency FB", sans-serif;
-        font-size: 170%;
-        color: black;
-
-
+    }
 </style>
 
-<table cellpadding="25" cellspacing="0" border="5">
+
+<center><table cellpadding="25" cellspacing="0" border="5">
+    <center> WHITHENING GELS</center>
     <tr>
-     <center>WHITHENING GELS</center>
         <th> Product name</th>
         <th> Reactant quatity</th>
         <th> Syringe volume</th>
         <th> Price</th>
-     <!-- <th> For admin</th> -->
+        <th> Delete Product</th>
+        <th> Edit Product</th>
 
 
     </tr>
@@ -34,11 +27,11 @@
             <td> $gel.reactantPercent %</td>
             <td> $gel.volume ml</td>
             <td> $gel.price $</td>
-
-
-           <!-- <td><a href="/admin/products/$num/delete">Delete THIS</a></td> -->
+            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
+            <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
         </tr>
     #end
 
 </table>
+</center>
 #include("views/footer.vm")

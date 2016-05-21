@@ -1,0 +1,5 @@
+#include("views/header.vm")
+
+$message
+
+#include("views/footer.vm")

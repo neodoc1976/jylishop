@@ -1,0 +1,89 @@
+#include ("views/header.vm")
+
+<style>
+    table {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+    }
+    center {
+        margin: auto;
+        font-family: "Agency FB", sans-serif;
+        font-size: 170%;
+        color: black;
+
+
+</style>
+
+<table cellpadding="25" cellspacing="0" border="5">
+    <tr>
+        <center>Product</center>
+        <th> Product name</th>
+        <th> Price</th>
+        <th> Picture </th>
+        <!-- <th> For admin</th> -->
+
+
+    </tr>
+
+    #foreach ($product in $catalogue)
+
+        <tr>
+
+            <td><a href="/products/$product.id">$product.title</a></td>
+            <td> $product.price $</td>
+            <td>  <img src="/resources/$product.picture" width="200" alt="File not found"></td>
+
+        </tr>
+    #end
+
+</table>
+
+##<style>
+##    table {
+##        margin: auto;
+##        font-family: "Agency FB", sans-serif;
+##        font-size: 170%;
+##    }
+##    center {
+##        margin: auto;
+##        font-family: "Agency FB", sans-serif;
+##        font-size: 170%;
+##        color: black;
+##
+##
+##</style>
+##<br/>
+##<br/>
+##<br/>
+##
+##
+##<table cellpadding="25" cellspacing="0" border="5">
+##    <tr>
+##        <center>HEMOSTATIC</center>
+##        <th> Product name</th>
+##        <th> Hemostatic Substance</th>
+##        <th> Syringe/</br>dispenser volume</th>
+##        <th> Price</th>
+##        <!--  <th> Picture</th>-->
+##          <!-- <th> For admin</th> -->
+##
+##
+##    </tr>
+##
+##    #foreach ($hemo in $hemolist)
+##
+##        <tr>
+##            #set( $num = $velocityCount - 1 )
+##            <td><a href="/hemos/$num">$hemo.title</a></td>
+##            <td> $hemo.hemostaticSubstance</td>
+##            <td> $hemo.volume ml</td>
+##            <td> $hemo.price $</td>
+##
+##            <!-- <td><a href="/admin/hemo/$num/delete">Delete THIS</a></td> -->
+##        </tr>
+##    #end
+##
+##</table>
+
+#include("views/footer.vm")

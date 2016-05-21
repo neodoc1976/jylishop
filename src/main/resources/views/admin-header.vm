@@ -5,7 +5,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <a href="/admin/gel-list">Product List</a> </br>
 <a href="/admin/gels/add">ADD New Opalescense Gel</a></br>
-<!--<a href="/">Client Version</a></br>-->
+<body>
+<img src="static/jylishop.png" alt="альтернативный текст">
+</body>
+<!--<a href="/">Client
 <!--<a href="/contact">Contact</a>-->
 
 </html>

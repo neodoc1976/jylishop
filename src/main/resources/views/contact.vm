@@ -1,15 +1,16 @@
 #include("views/header.vm")
 <style>
-    letter {
+    div.contacts {
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
     }
 </style>
-<letter>
+<img src="/resources/jylishop.png" alt="File not found">
+<div class="contacts">
     <b>Your manager: </b> $contactInfo.name<br/>
     <b>Email: </b> $contactInfo.email<br/>
     <b>Telephone: </b>$contactInfo.telephone<br/>
     <b>Adress: </b>$contactInfo.address
-</letter>
+</div>
 
 #include("views/footer.vm")

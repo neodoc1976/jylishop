@@ -1,4 +1,4 @@
-#include("views/header.vm")
+#include("views/admin-header.vm")
 
 <style>
     table {
@@ -23,7 +23,8 @@
         <th> Hemostatic Substance</th>
         <th> Syringe/dispenser volume</th>
         <th> Price</th>
-        <!-- <th> For admin</th> -->
+        <th> Delete</th>
+        <th> Edit</th>
 
 
     </tr>
@@ -34,15 +35,17 @@
             #set( $num = $velocityCount - 1 )
             <td><a href="/hemos/$num">$hemo.title</a></td>
             <td> $hemo.hemostaticSubstance</td>
-             <td> $hemo.volume ml</td> -->
-           <td> $hemo.price $</td> -->
-             <td><a href="/admin/hemo/$num/delete">Delete THIS</a></td>
+            <td> $hemo.volume ml</td>
+            <td> $hemo.price $</td>
+            <td><a href="/admin/hemos/$num/delete">Delete THIS</a></td>
+            <td><a href="/admin/hemos/$num/update">Edit THIS</a></td>
+
         </tr>
     #end
 
 </table>
+<p>THIS IS NOT FULL ADMIN VERSION/NEED a "EDIT/DELETE" Menu</p>
 
-<p> NU PIZDETSCH !!!</p>
 
 
 #include("views/footer.vm")

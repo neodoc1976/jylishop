@@ -10,6 +10,7 @@
 <b>Description: </b>$opalescenseInfo.description<br/>
 <b>Volume of reagent: </b> $opalescenseInfo.reactantPercent %<br/>
 <b>Syringe volume: </b>$opalescenseInfo.volume ml<br/>
-<b>Price per one: </b>$opalescenseInfo.price $
+<b>Price per one: </b>$opalescenseInfo.price $<br/>
+<b>Picture: <td> <img src="/resources/$opalescenseInfo.picture" alt="File not found"> </td></b>
 </letter>
 #include("views/footer.vm")
