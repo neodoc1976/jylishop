@@ -28,7 +28,7 @@ public class AdminHemoController {
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-hemo");// Stop here
         return view;
-     }
+    }
 
     @RequestMapping(value = "/admin/hemos", method = RequestMethod.POST)//Stop here
     public ModelAndView postForm(@RequestParam String title,
@@ -52,7 +52,7 @@ public class AdminHemoController {
 
     }
 
-//    @RequestMapping(value = "/admin/hemos/{id}/delete", method = RequestMethod.GET)//Stop here
+    //    @RequestMapping(value = "/admin/hemos/{id}/delete", method = RequestMethod.GET)//Stop here
 //    public ModelAndView deleteForm(@PathVariable int id) {
 //        ModelAndView delete = new ModelAndView("admin-hemos-list");
 //        List<Hemostatic> list = base.getHemolist();
@@ -78,27 +78,39 @@ public class AdminHemoController {
 //
 //    }
 //
-//    @RequestMapping(value = "/admin/hemos/{id}/update", method = RequestMethod.POST)
-//    public ModelAndView editForm(@PathVariable int id,
-//                                 @RequestParam String title,
-//                                 @RequestParam Double volume,
-//                                 @RequestParam Double price,
-//                                 @RequestParam String hemostaticSubstance,
-//                                 @RequestParam String description) {
-//        ModelAndView post = new ModelAndView("admin-hemos-list");
-//        ArrayList<Hemostatic> hemolist = base.getHemolist();
-//        Hemostatic updated = hemolist.get(id);
-//        updated.setTitle(title);
-//        updated.setDescription(description);
-//        updated.setVolume(volume);
-//        updated.setHemostaticSubstance(hemostaticSubstance);
-//        updated.setPrice(price);
-//        post.addObject("hemolist", base.getHemolist());
-//        return post;
-//
-//
-//    }
-//
+    @RequestMapping(value = "/admin/hemos/{id}/update", method = RequestMethod.POST)
+    public ModelAndView editForm(@PathVariable int id,
+                                 @RequestParam String title,
+                                 @RequestParam Double volume,
+                                 @RequestParam Double price,
+                                 @RequestParam String hemostaticSubstance,
+                                 @RequestParam String description) {
+
+        ModelAndView post = new ModelAndView("admin-total");
+
+        for (Product p : base.getCatalogue()) {
+            if (p.getId() == id) {
+                Hemostatic updated = (Hemostatic) p;// Casting
+                updated.setTitle(title);
+                updated.setDescription(description);
+                updated.setVolume(volume);
+                updated.setHemostaticSubstance(hemostaticSubstance);
+                updated.setPrice(price);
+                post.addObject("catalogue", base.getCatalogue());
+                return post;
+            }
+
+
+
+
+        }
+        ModelAndView view = new ModelAndView("error");
+        view.addObject("message", "Sorry, the product with the ID does not exist");
+        return view;
+
+
+    }
+
 
 }
 

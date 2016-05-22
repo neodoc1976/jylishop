@@ -33,7 +33,7 @@ public class DataBase {
         first.setDescription("Whitening gel for home whitening.");
         first.setPrice(5);
         first.setPicture("first.jpg");
-        first.setId(1);
+        first.setId(101);
         catalogue.add(first);
 
         OpalescenseGel second = new OpalescenseGel();
@@ -43,7 +43,7 @@ public class DataBase {
         second.setDescription("Whitening gel for home whitening.");
         second.setPrice(6);
         second.setPicture("second.jpg");
-        second.setId(2);
+        second.setId(202);
         catalogue.add(second);
 
         OpalescenseGel third = new OpalescenseGel();
@@ -53,7 +53,7 @@ public class DataBase {
         third.setDescription("Whitening gel for home whitening.");
         third.setPrice(7);
         third.setPicture("third.jpg");
-        third.setId(3);
+        third.setId(303);
         catalogue.add(third);
 
         Hemostatic viscosyringe = new Hemostatic();
@@ -62,7 +62,7 @@ public class DataBase {
         viscosyringe.setDescription("ViscoStat hemostatic is a 20% ferric sulfate equivalent solution with inert binding agents in a viscous, aqueous vehicle. ");
         viscosyringe.setVolume(1.2);
         viscosyringe.setPrice(4.8);
-        viscosyringe.setId(4);
+        viscosyringe.setId(404);
         catalogue.add(viscosyringe);
 
         Hemostatic viscoclearsyringe = new Hemostatic();
@@ -71,7 +71,7 @@ public class DataBase {
         viscoclearsyringe.setDescription("ViscoStat Clear is recommended for anterior restorations because it quickly eliminates minor bleeding without leaving any residue.");
         viscoclearsyringe.setVolume(1.2);
         viscoclearsyringe.setPrice(5.04);
-        viscoclearsyringe.setId(5);
+        viscoclearsyringe.setId(505);
         catalogue.add(viscoclearsyringe);
 
         Hemostatic viscodispenser = new Hemostatic();
@@ -80,7 +80,7 @@ public class DataBase {
         viscodispenser.setDescription("ViscoStat hemostatic is a 20% ferric sulfate equivalent solution with inert binding agents in a viscous, aqueous vehicle.");
         viscodispenser.setVolume(30);
         viscodispenser.setPrice(43.3);
-        viscodispenser.setId(6);
+        viscodispenser.setId(606);
         catalogue.add(viscodispenser);
 
         Hemostatic viscocleardispenser = new Hemostatic();
@@ -89,7 +89,7 @@ public class DataBase {
         viscocleardispenser.setDescription("ViscoStat Clear is recommended for anterior restorations because it quickly eliminates minor bleeding without leaving any residue.");
         viscocleardispenser.setVolume(30);
         viscocleardispenser.setPrice(45.4);
-        viscocleardispenser.setId(7);
+        viscocleardispenser.setId(707);
         catalogue.add(viscocleardispenser);
     }
 

@@ -24,8 +24,8 @@
             <td>$product.title</td>
             <td><img src="/resources/$product.picture" width="200" alt="File not found"></td>
             <td> $product.price</td>
-            <td><a href="/admin/gels/$num/delete">Delete THIS</a></td>
-           <td><a href="/admin/gels/$num/update">Edit THIS</a></td>
+            <td><a href="/admin/product/$product.id/delete">Delete THIS</a></td>
+           <td><a href="/admin/product/$product.id/update">Edit THIS</a></td>
         </tr>
     #end
 

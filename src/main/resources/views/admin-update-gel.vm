@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
-<form  method="post">
+<form action="/admin/gels/$recall.id/update" method="post">
     <p><b>EDIT  Opalescense Gel</b></p><br/>
     <p/>
     <p><b>Title:</b><br/>
