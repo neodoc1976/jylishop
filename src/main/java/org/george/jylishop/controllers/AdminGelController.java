@@ -1,19 +1,20 @@
 package org.george.jylishop.controllers;
 
-        import org.george.jylishop.db.DataBase;
-        import org.george.jylishop.domain.Hemostatic;
-        import org.george.jylishop.domain.OpalescenseGel;
-        import org.george.jylishop.domain.Product;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RequestParam;
-        import org.springframework.web.servlet.ModelAndView;
+import org.george.jylishop.db.DataBase;
+import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.OpalescenseGel;
+import org.george.jylishop.domain.Product;
+import org.george.jylishop.utils.ProductUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yulya on 03.05.2016.
@@ -22,6 +23,9 @@ package org.george.jylishop.controllers;
 public class AdminGelController {
     @Autowired
     DataBase base;
+    @Autowired
+    ProductUtils utils;
+
 
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
@@ -86,25 +90,25 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
                                  @RequestParam String description) {
-        ModelAndView post = new ModelAndView("admin-total");
-        for (Product p : base.getCatalogue()) {
-            if (p.getId() == id) {
-                OpalescenseGel updated = (OpalescenseGel) p;// Casting
-                updated.setTitle(title);
-                updated.setDescription(description);
-                updated.setVolume(volume);
-                updated.setReactantPercent(reactantPercent);
-                updated.setPrice(price);
-                post.addObject("catalogue", base.getCatalogue());
-                return post;
-            }
 
+        Product selectedProduct = utils.getProductById(id);
 
-
-
+        if (selectedProduct==null){
+            ModelAndView view = new ModelAndView("error");
+            view.addObject("message", "Sorry, the product with the ID does not exist");
+            return view;
         }
-        ModelAndView view = new ModelAndView("error");
-        view.addObject("message", "Sorry, the product with the ID does not exist");
-        return view;}
+
+        ModelAndView post = new ModelAndView("admin-total");
+        OpalescenseGel updated = (OpalescenseGel) selectedProduct;// Casting
+        updated.setTitle(title);
+        updated.setDescription(description);
+        updated.setVolume(volume);
+        updated.setReactantPercent(reactantPercent);
+        updated.setPrice(price);
+        post.addObject("catalogue", base.getCatalogue());
+        return post;
+
+    }
 
 }

@@ -18,6 +18,7 @@
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
         <center>Product</center>
+        <th> Product<br/>ID</th>
         <th> Product name</th>
         <th> Price</th>
         <th> Picture </th>
@@ -30,6 +31,8 @@
 
         <tr>
 
+
+            <td>$product.id</td>
             <td><a href="/products/$product.id">$product.title</a></td>
             <td> $product.price $</td>
             <td>  <img src="/resources/$product.picture" width="200" alt="File not found"></td>

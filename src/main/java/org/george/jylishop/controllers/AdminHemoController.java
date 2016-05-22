@@ -5,6 +5,7 @@ package org.george.jylishop.controllers;
         import org.george.jylishop.domain.Hemostatic;
         import org.george.jylishop.domain.OpalescenseGel;
         import org.george.jylishop.domain.Product;
+        import org.george.jylishop.utils.ProductUtils;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,10 @@ package org.george.jylishop.controllers;
 public class AdminHemoController {
     @Autowired
     DataBase base;
+    @Autowired
+    ProductUtils utils;
+
+
 
     @RequestMapping(value = "/admin/hemos/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
@@ -88,29 +93,24 @@ public class AdminHemoController {
 
         ModelAndView post = new ModelAndView("admin-total");
 
-        for (Product p : base.getCatalogue()) {
-            if (p.getId() == id) {
-                Hemostatic updated = (Hemostatic) p;// Casting
-                updated.setTitle(title);
-                updated.setDescription(description);
-                updated.setVolume(volume);
-                updated.setHemostaticSubstance(hemostaticSubstance);
-                updated.setPrice(price);
-                post.addObject("catalogue", base.getCatalogue());
-                return post;
-            }
+        Product selectedProduct = utils.getProductById(id);
 
-
-
-
+        if (selectedProduct == null) {
+            ModelAndView view = new ModelAndView("error");
+            view.addObject("message", "Sorry, the product with the ID does not exist");
+            return view;
         }
-        ModelAndView view = new ModelAndView("error");
-        view.addObject("message", "Sorry, the product with the ID does not exist");
-        return view;
 
+        Hemostatic updated = (Hemostatic) selectedProduct;// Casting
+        updated.setTitle(title);
+        updated.setDescription(description);
+        updated.setVolume(volume);
+        updated.setHemostaticSubstance(hemostaticSubstance);
+        updated.setPrice(price);
+        post.addObject("catalogue", base.getCatalogue());
+        return post;
 
     }
-
 
 }
 

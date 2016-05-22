@@ -3,12 +3,20 @@
 
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<style>
+    center {
+        margin: auto;
+</style>
+<center>
 <a href="/admin/gels/add">ADD New OPASLESCENCE Gel</a></br>
 <a href="/admin/hemos/add">ADD New HEMOSTATIC </a></br>
 <body>
+</br>
+</br>
+</br>
 <img src="/resources/jylishop.png" alt="aaallll">
-</body>
-<!--<a href="/">Client
-<!--<a href="/contact">Contact</a>-->
-
+</body></center>
+</br>
+</br>
+</br>
 </html>

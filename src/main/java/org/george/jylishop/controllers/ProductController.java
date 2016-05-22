@@ -4,6 +4,7 @@ import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.utils.ProductUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductController {
     @Autowired
     DataBase base;
+    @Autowired
+    ProductUtils utils;
+
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList() {
@@ -28,12 +32,7 @@ public class ProductController {
 
     @RequestMapping({"/products/{id}"})
     public ModelAndView getProduct(@PathVariable int id) {
-        Product selectedProduct = null;
-        for (Product p : base.getCatalogue()) {
-            if (p.getId() == id) {
-                selectedProduct = p;
-            }
-        }
+        Product selectedProduct = utils.getProductById(id);
 
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
@@ -47,8 +46,8 @@ public class ProductController {
             return view;
         }
 
-        ModelAndView view = new ModelAndView ("error");
-        view.addObject("message"," SORRY,PRODUCT IS NOT FOUND ");
+        ModelAndView view = new ModelAndView("error");
+        view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
         return view;
     }
 
