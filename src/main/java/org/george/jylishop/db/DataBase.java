@@ -27,7 +27,7 @@ public class DataBase {
 
     public DataBase() {
         OpalescenseGel first = new OpalescenseGel();
-        first.setTitle("Opalescense Gel");
+        first.setTitle("Opalescense Gel PF");
         first.setReactantPercent(10);
         first.setVolume(1.2);
         first.setDescription("Whitening gel for home whitening.");
@@ -37,7 +37,7 @@ public class DataBase {
         catalogue.add(first);
 
         OpalescenseGel second = new OpalescenseGel();
-        second.setTitle("Opalescense Gel");
+        second.setTitle("Opalescense Gel PF");
         second.setReactantPercent(15);
         second.setVolume(1.2);
         second.setDescription("Whitening gel for home whitening.");
@@ -47,7 +47,7 @@ public class DataBase {
         catalogue.add(second);
 
         OpalescenseGel third = new OpalescenseGel();
-        third.setTitle("Opalescense Gel");
+        third.setTitle("Opalescense Gel PF");
         third.setReactantPercent(20);
         third.setVolume(1.2);
         third.setDescription("Whitening gel for home whitening.");
@@ -63,6 +63,7 @@ public class DataBase {
         viscosyringe.setVolume(1.2);
         viscosyringe.setPrice(4.8);
         viscosyringe.setId(404);
+        viscosyringe.setPicture("visco.jpg");
         catalogue.add(viscosyringe);
 
         Hemostatic viscoclearsyringe = new Hemostatic();
@@ -72,6 +73,7 @@ public class DataBase {
         viscoclearsyringe.setVolume(1.2);
         viscoclearsyringe.setPrice(5.04);
         viscoclearsyringe.setId(505);
+        viscoclearsyringe.setPicture("viscoclear.jpg");
         catalogue.add(viscoclearsyringe);
 
         Hemostatic viscodispenser = new Hemostatic();
@@ -81,6 +83,7 @@ public class DataBase {
         viscodispenser.setVolume(30);
         viscodispenser.setPrice(43.3);
         viscodispenser.setId(606);
+        viscodispenser.setPicture("viscobig.jpg ");
         catalogue.add(viscodispenser);
 
         Hemostatic viscocleardispenser = new Hemostatic();
@@ -90,6 +93,7 @@ public class DataBase {
         viscocleardispenser.setVolume(30);
         viscocleardispenser.setPrice(45.4);
         viscocleardispenser.setId(707);
+        viscocleardispenser.setPicture("viscoclearbig.jpg");
         catalogue.add(viscocleardispenser);
     }
 

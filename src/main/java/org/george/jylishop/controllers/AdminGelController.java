@@ -43,6 +43,14 @@ public class AdminGelController {
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
         post.addObject("catalogue", base.getCatalogue());
+        Product selectedProduct = utils.getProductById(id);
+
+        if (selectedProduct.getId()== id) {
+
+            ModelAndView error = new ModelAndView("error");
+            error.addObject("message", "Product with this ID already exists, please fill out the form again.");
+            return error;
+        }
         added.setTitle(title);
         added.setDescription(description);
         added.setVolume(volume);
@@ -55,33 +63,6 @@ public class AdminGelController {
 
     }
 
-//    @RequestMapping(value = "/admin/gels/{id}/delete", method = RequestMethod.GET)
-//    public ModelAndView deleteForm(@PathVariable int id) {
-//        ModelAndView delete = new ModelAndView("admin-gel-list");
-//        List<Product> list = base.getCatalogue();
-//        list.remove(id);
-//        delete.addObject("catalogue", base.getCatalogue());
-//        return delete;
-//    }
-//}
-//    }
-//
-//    @RequestMapping({"/admin/gel-list"})
-//    public ModelAndView productList() {
-//        ModelAndView list = new ModelAndView("admin-gel-list");
-//        list.addObject("catalogue", base.getCatalogue());
-//        return list;
-//    }
-//
-//    @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.GET)
-//    public ModelAndView getFilledForm(@PathVariable int id) {
-//        ModelAndView update = new ModelAndView("admin-gel-list");
-//        ArrayList<OpalescenseGel> recall = base.getCatalogue();
-//        update.addObject("recall", recall.get(id));
-//        return update;
-//
-//
-//    }
 
     @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.POST)
     public ModelAndView editForm(@PathVariable int id,

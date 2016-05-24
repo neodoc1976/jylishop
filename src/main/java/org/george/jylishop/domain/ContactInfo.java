@@ -3,11 +3,20 @@ package org.george.jylishop.domain;
 /**
  * Created by Yulya on 02.05.2016.
  */
-public class ContactInfo  {
+public class ContactInfo {
     private String name;
     private String email;
     private String telephone;
     private String address;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getName() {
         return name;
@@ -40,4 +49,5 @@ public class ContactInfo  {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

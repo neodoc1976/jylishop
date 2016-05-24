@@ -1,16 +1,28 @@
 #include("views/header.vm")
 <style>
-    letter {
+    center {
+        margin: auto;
+    }
+    .type{
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
+        margin-left: 75px;
     }
 </style>
-<letter>
+<br/>
+<br/>
+<br/>
+<div class="type">
 <b>Product: </b> $opalescenseInfo.title<br/>
 <b>Description: </b>$opalescenseInfo.description<br/>
 <b>Volume of reagent: </b> $opalescenseInfo.reactantPercent %<br/>
 <b>Syringe volume: </b>$opalescenseInfo.volume ml<br/>
 <b>Price per one: </b>$opalescenseInfo.price $<br/>
-<b>Picture: <td> <img src="/resources/$opalescenseInfo.picture" alt="File not found"> </td></b>
-</letter>
+</div>
+<br/>
+<br/>
+<br/>
+<center>
+<img src="/resources/$opalescenseInfo.picture" alt="File not found">
+</center>
 #include("views/footer.vm")

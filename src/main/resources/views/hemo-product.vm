@@ -1,16 +1,29 @@
 #include("views/header.vm")
 <style>
-    letter {
-        font-family: "Agency FB", sans-serif;
-        font-size: 170%;
+   center{
+       margin: auto;
+   }
+   .type{
+       font-family: "Agency FB", sans-serif;
+       font-size: 170%;
+       margin-left: 75px;
+
     }
 </style>
-<letter>
+<br/>
+<br/>
+<br/>
+<div class="type">
     <b>Product: </b> $hemoInfo.title<br/>
     <b>Description: </b>$hemoInfo.description<br/>
     <b>Hemostatic Substance:</b> $hemoInfo.hemostaticSubstance<br/>
     <b>Syringe/dispenser volume: </b>$hemoInfo.volume ml<br/>
     <b>Price per one: </b>$hemoInfo.price $
-</letter>
-
+</div>
+<br/>
+<br/>
+<br/>
+<center>
+<img src="/resources/$hemoInfo.picture" alt="File not found">
+</center>
 #include("views/footer.vm")
