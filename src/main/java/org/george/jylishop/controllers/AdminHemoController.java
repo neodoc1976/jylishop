@@ -40,7 +40,8 @@ public class AdminHemoController {
                                  @RequestParam Double price,
                                  @RequestParam String substance,
                                  @RequestParam String description,
-                                 @RequestParam Integer id) {
+                                 @RequestParam Integer id,
+                                 @RequestParam String picture) {
 
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
@@ -58,6 +59,7 @@ public class AdminHemoController {
         newcomer.setVolume(volume);
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
+        newcomer.setPicture(picture);
         List<Product> list = base.getCatalogue();
         list.add(newcomer);
         return post;
@@ -71,7 +73,8 @@ public class AdminHemoController {
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
                                  @RequestParam String hemostaticSubstance,
-                                 @RequestParam String description) {
+                                 @RequestParam String description,
+                                 @RequestParam String picture) {
 
         ModelAndView post = new ModelAndView("admin-total");
         Product selectedProduct = utils.getProductById(id);
@@ -88,6 +91,7 @@ public class AdminHemoController {
         updated.setVolume(volume);
         updated.setHemostaticSubstance(hemostaticSubstance);
         updated.setPrice(price);
+        updated.setPicture(picture);
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }

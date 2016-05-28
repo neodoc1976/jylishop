@@ -15,9 +15,11 @@
             <input type="text" size="10" name="volume">
         </p>
         <p><b>Price:</b><br/>
-            <input type="text" size="10" name="price">
+        <input type="text" size="10" name="price">
+       </p>
+        <p><b>Picture:</b><br/>
+            <input type="text" size="10" name="picture">
         </p>
-
         <p><b>Description:</b><br/>
             <textarea name="description" cols="50" rows="5"></textarea>
         </p>
