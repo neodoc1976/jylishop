@@ -20,7 +20,7 @@
 <br/>
 <br/>
 <br/>
-<center><iframe src= $ci.location width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe> </center>
+<center><iframe src= "$ci.location" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe> </center>
 
 
 #include("views/footer.vm")
