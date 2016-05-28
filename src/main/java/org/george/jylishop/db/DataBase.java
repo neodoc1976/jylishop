@@ -14,17 +14,13 @@ import java.util.ArrayList;
 @Component
 public class DataBase {
     ArrayList<Product> catalogue= new ArrayList<Product>();
-   // ArrayList<OpalescenseGel> catalogue = new ArrayList<OpalescenseGel>();
+
 
     public ArrayList<Product> getCatalogue() {
         return catalogue;
     }
 
-//    public ArrayList<Hemostatic> getHemolist() {
-//       return hemolist;
-//    }
-//
-//    ArrayList<Hemostatic> hemolist = new ArrayList<Hemostatic>();
+
 
     public DataBase() {
         OpalescenseGel first = new OpalescenseGel();
