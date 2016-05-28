@@ -36,11 +36,13 @@ public class AdminTotalController {
     public ModelAndView deleteForm(@PathVariable int id) {
         ModelAndView delete = new ModelAndView("admin-total");
         Product selectedProduct = utils.getProductById(id);
+
         if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");
             view.addObject("message", "Sorry, the product with the ID does not exist");
             return view;
         }
+
         base.getCatalogue().remove(selectedProduct);
         delete.addObject("catalogue", base.getCatalogue());
         return delete;
@@ -57,18 +59,16 @@ public class AdminTotalController {
             view.addObject("recall", selectedProduct);
             return view;
         }
+
         if (selectedProduct instanceof Hemostatic) {
             ModelAndView view = new ModelAndView("admin-update-hemo");
             view.addObject("recall", selectedProduct);
             return view;
-
         }
-
 
         ModelAndView view = new ModelAndView("error");
         view.addObject("message", "Sorry, the product with the ID does not exist");
         return view;
     }
-
 
 }

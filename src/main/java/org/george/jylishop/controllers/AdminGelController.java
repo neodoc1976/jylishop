@@ -26,7 +26,6 @@ public class AdminGelController {
     @Autowired
     ProductUtils utils;
 
-
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-gel");
@@ -46,11 +45,11 @@ public class AdminGelController {
         Product selectedProduct = utils.getProductById(id);
 
         if (selectedProduct != null) {
-
             ModelAndView error = new ModelAndView("error");
             error.addObject("message", "Product with this ID already exists, please fill out the form again.");
             return error;
         }
+
         added.setTitle(title);
         added.setDescription(description);
         added.setVolume(volume);
@@ -60,9 +59,7 @@ public class AdminGelController {
         List<Product> list = base.getCatalogue();
         list.add(added);
         return post;
-
     }
-
 
     @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.POST)
     public ModelAndView editForm(@PathVariable int id,
@@ -74,7 +71,7 @@ public class AdminGelController {
 
         Product selectedProduct = utils.getProductById(id);
 
-        if (selectedProduct==null){
+        if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");
             view.addObject("message", "Sorry, the product with the ID does not exist");
             return view;
@@ -89,7 +86,6 @@ public class AdminGelController {
         updated.setPrice(price);
         post.addObject("catalogue", base.getCatalogue());
         return post;
-
     }
 
 }

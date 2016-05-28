@@ -7,7 +7,6 @@ public class Hemostatic extends Product {
     private String hemostaticSubstance;
     private double volume;
 
-
     public String getHemostaticSubstance() {
         return hemostaticSubstance;
     }
