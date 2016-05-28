@@ -73,5 +73,14 @@ public class ProductControllerTest {
         assertTrue(view.getModel().get("hemoInfo")instanceof Hemostatic);
 
     }
+    @Test
+    public void getProdustErrorID (){
+        when(utils.getProductById(3)).thenReturn(null);
+
+        ModelAndView view=controller.getProduct(3);
+        assertEquals(view.getViewName(),"error");
+        assertNotNull(view.getModel().get("message"));
+
+    }
 
 }
