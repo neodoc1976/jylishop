@@ -3,7 +3,9 @@ package org.george.jylishop.test.controllers;
 import org.george.jylishop.controllers.ContactController;
 import org.george.jylishop.controllers.ProductController;
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.utils.ProductUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,9 +13,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
+
 import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
+
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -28,20 +34,33 @@ public class ProductControllerTest {
     @Mock
     private DataBase base;
 
+    @Mock
+    ProductUtils utils;
+
     @Test
-    public void totalList (){
+    public void totalList() {
         ArrayList<Product> catalogue = new ArrayList<Product>();
         Product p = new Product();
         catalogue.add(p);
         when(base.getCatalogue()).thenReturn(catalogue);
 
-        ModelAndView view=controller.totalList();
-        assertEquals(view.getViewName(),"total");
+        ModelAndView view = controller.totalList();
+        assertEquals(view.getViewName(), "total");
         assertNotNull(view.getModel().get("catalogue"));
 
-        ArrayList list = (ArrayList)view.getModel().get("catalogue");
-        assertEquals(list.size() , 1 );
+        ArrayList list = (ArrayList) view.getModel().get("catalogue");
+        assertEquals(list.size(), 1);
+    }
 
+    @Test
+    public void getProductOpalescenceGel() {
+
+        when(utils.getProductById(1)).thenReturn(new OpalescenseGel());
+
+        ModelAndView view = controller.getProduct(1);
+        assertEquals(view.getViewName(), "gel-product");
+        assertNotNull(view.getModel().get("opalescenseInfo"));
+        assertTrue(view.getModel().get("opalescenseInfo")instanceof OpalescenseGel);
     }
 
 }
