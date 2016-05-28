@@ -24,7 +24,6 @@
         <th> Picture </th>
 
 
-
     </tr>
 
     #foreach ($product in $catalogue)

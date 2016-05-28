@@ -20,8 +20,6 @@ public class ContactController {
         ModelAndView model = new ModelAndView("contact");
         model.addObject("ci",base.getContact());
         return model;
-
     }
-
 
 }

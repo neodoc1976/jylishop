@@ -15,12 +15,9 @@ import java.util.ArrayList;
 public class DataBase {
     ArrayList<Product> catalogue= new ArrayList<Product>();
 
-
     public ArrayList<Product> getCatalogue() {
         return catalogue;
     }
-
-
 
     public DataBase() {
         OpalescenseGel first = new OpalescenseGel();
@@ -93,8 +90,5 @@ public class DataBase {
         viscocleardispenser.setPicture("viscoclearbig.jpg");
         catalogue.add(viscocleardispenser);
     }
-
-
-
 
 }
