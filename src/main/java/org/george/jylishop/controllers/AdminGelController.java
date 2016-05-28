@@ -45,7 +45,7 @@ public class AdminGelController {
         post.addObject("catalogue", base.getCatalogue());
         Product selectedProduct = utils.getProductById(id);
 
-        if (selectedProduct.getId()== id) {
+        if (selectedProduct != null) {
 
             ModelAndView error = new ModelAndView("error");
             error.addObject("message", "Product with this ID already exists, please fill out the form again.");
