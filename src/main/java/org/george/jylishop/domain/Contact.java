@@ -3,7 +3,7 @@ package org.george.jylishop.domain;
 /**
  * Created by Yulya on 02.05.2016.
  */
-public class ContactInfo {
+public class Contact {
     private String name;
     private String email;
     private String telephone;

@@ -1,5 +1,6 @@
 package org.george.jylishop.db;
 
+import org.george.jylishop.domain.Contact;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
@@ -96,6 +97,8 @@ public class DataBase {
         viscocleardispenser.setPicture("viscoclearbig.jpg");
         catalogue.add(viscocleardispenser);
     }
+
+
 
 
 }

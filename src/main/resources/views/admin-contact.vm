@@ -1,0 +1,7 @@
+#include ("views/admin-header.vm")
+<b>Your manager: </b> $contactInfo.name<br/>
+<b>Email: </b> $contactInfo.email<br/>
+##<b>Telephone: </b>$contactInfo.telephone<br/>
+<b>Adress: </b>$contactInfo.address<br/>
+<b>Location:</b><br/>$contactInfo.location</b>
+#include ("views/footer.vm")

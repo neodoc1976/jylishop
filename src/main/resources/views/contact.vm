@@ -1,25 +1,26 @@
 #include("views/header.vm")
 <style xmlns="http://www.w3.org/1999/html">
-    .type{
+    .type {
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
-        margin-top: 50px;
-        margin-left: 350px;
+        margin-left: 75px;
     }
-    center{
+
+    center {
         margin: auto;
     }
 </style>
 <div class="type">
     <img src="/resources/jylishop.png" alt="File not found"><br/>
-    <b>Your manager: </b> $contactInfo.name<br/>
-    <b>Email: </b> $contactInfo.email<br/>
-    <b>Telephone: </b>$contactInfo.telephone<br/>
-    <b>Adress: </b>$contactInfo.address<br/>
+    <b>Your manager: </b> $ci.name<br/>
+    <b>Email: </b> $ci.email<br/>
+    <b>Telephone: </b>$ci.telephone<br/>
+    <b>Adress: </b>$ci.address<br/> </b>
 </div>
 <br/>
 <br/>
 <br/>
-<center>$contactInfo.location</center>
+<center>$locate.location</center>
+
 
 #include("views/footer.vm")
