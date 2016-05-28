@@ -3,6 +3,7 @@ package org.george.jylishop.test.controllers;
 import org.george.jylishop.controllers.ContactController;
 import org.george.jylishop.controllers.ProductController;
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.george.jylishop.utils.ProductUtils;
@@ -61,6 +62,16 @@ public class ProductControllerTest {
         assertEquals(view.getViewName(), "gel-product");
         assertNotNull(view.getModel().get("opalescenseInfo"));
         assertTrue(view.getModel().get("opalescenseInfo")instanceof OpalescenseGel);
+    }
+    @Test
+    public void getProductHemostatic(){
+        when(utils.getProductById(2)).thenReturn(new Hemostatic());
+
+        ModelAndView view = controller.getProduct(2);
+        assertEquals(view.getViewName(),"hemo-product");
+        assertNotNull(view.getModel().get("hemoInfo"));
+        assertTrue(view.getModel().get("hemoInfo")instanceof Hemostatic);
+
     }
 
 }
