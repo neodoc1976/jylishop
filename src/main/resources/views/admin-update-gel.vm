@@ -18,7 +18,9 @@
     <p><b>Price:</b><br/>
         <input type="text" size="10" name="price" value="$recall.price">
     </p>
-
+    <p><b>Picture:</b><br/>
+        <input type="text" size="10" name="picture" value="$recall.picture">
+    </p>
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5">$recall.description</textarea>
     </p>

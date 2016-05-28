@@ -41,29 +41,4 @@
     #end
 
 </table>
-
-<table cellpadding="25" cellspacing="0" border="5">
-    <tr>
-        <center>Product</center>
-
-        <th> Price</th>
-
-
-
-
-    </tr>
-
-#foreach ($product in $catalogue)
-
-<tr>
-
-
-
-    <td> $product.price $</td>
-
-
-</tr>
-#end
-
-</table>
 #include("views/footer.vm")
