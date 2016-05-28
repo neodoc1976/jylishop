@@ -38,7 +38,9 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam Integer reactantPercent,
                                  @RequestParam String description,
-                                 @RequestParam Integer id) {
+                                 @RequestParam Integer id,
+                                 @RequestParam String picture)
+    {
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
         post.addObject("catalogue", base.getCatalogue());
@@ -56,6 +58,7 @@ public class AdminGelController {
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
         added.setId(id);
+        added.setPicture(picture);
         List<Product> list = base.getCatalogue();
         list.add(added);
         return post;
@@ -67,7 +70,8 @@ public class AdminGelController {
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
-                                 @RequestParam String description) {
+                                 @RequestParam String description,
+                                 @RequestParam String picture) {
 
         Product selectedProduct = utils.getProductById(id);
 
@@ -84,6 +88,7 @@ public class AdminGelController {
         updated.setVolume(volume);
         updated.setReactantPercent(reactantPercent);
         updated.setPrice(price);
+        updated.setPicture(picture);
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }
