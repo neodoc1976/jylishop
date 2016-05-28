@@ -33,7 +33,8 @@ public class AdminContactController {
             @RequestParam String location) {
 
         ModelAndView view = new ModelAndView("contact");
-        Contact fresh = new Contact();
+
+        Contact fresh=base.getContact();
 
         fresh.setName(name);
         fresh.setEmail(email);
@@ -41,6 +42,7 @@ public class AdminContactController {
         fresh.setTelephone(telephone);
         fresh.setLocation(location);
         view.addObject("ci", fresh);
+
         return view;
     }
 
