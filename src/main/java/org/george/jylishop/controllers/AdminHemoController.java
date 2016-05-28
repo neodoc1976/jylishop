@@ -48,7 +48,6 @@ public class AdminHemoController {
         Product selectedProduct = utils.getProductById(id);
 
         if (selectedProduct != null) {
-
             ModelAndView error = new ModelAndView("error");
             error.addObject("message", "Product with this ID already exists, please fill out the form again.");
             return error;
@@ -75,7 +74,6 @@ public class AdminHemoController {
                                  @RequestParam String description) {
 
         ModelAndView post = new ModelAndView("admin-total");
-
         Product selectedProduct = utils.getProductById(id);
 
         if (selectedProduct == null) {
@@ -92,7 +90,6 @@ public class AdminHemoController {
         updated.setPrice(price);
         post.addObject("catalogue", base.getCatalogue());
         return post;
-
     }
 
 }

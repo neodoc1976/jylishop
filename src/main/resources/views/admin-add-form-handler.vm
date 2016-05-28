@@ -1,8 +1,0 @@
-#include("views/header.vm")
-<b><b>FORM IS SENT!</b></b><br/>
-<b>Title: </b> $title<br/>
-<b>Reactant percentage: </b> $reactantPercent %<br/>
-<b>Volume: </b> $volume ml<br/>
-<b>Price: </b> $price $<br/>
-<b>Description:</b>$description<br/>
-#include("views/footer.vm")

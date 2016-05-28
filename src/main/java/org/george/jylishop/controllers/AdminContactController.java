@@ -24,8 +24,6 @@ public class AdminContactController {
         return view;
     }
 
-
-
     @RequestMapping(value = "/admin/contact/update", method = RequestMethod.POST)
     public ModelAndView editForm(
             @RequestParam String name,
@@ -33,8 +31,6 @@ public class AdminContactController {
             @RequestParam String address,
             @RequestParam String telephone,
             @RequestParam String location) {
-
-
 
         ModelAndView view = new ModelAndView("contact");
         Contact fresh = new Contact();
@@ -46,7 +42,6 @@ public class AdminContactController {
         fresh.setLocation(location);
         view.addObject("ci", fresh);
         return view;
-
     }
 
 }
