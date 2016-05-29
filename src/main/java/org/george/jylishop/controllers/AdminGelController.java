@@ -69,7 +69,7 @@ public class AdminGelController {
                                  @RequestParam String title,
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
-                                 @RequestParam Double reactantPercent,
+                                 @RequestParam Integer reactantPercent,
                                  @RequestParam String description,
                                  @RequestParam String picture) {
 
