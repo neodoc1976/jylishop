@@ -1,7 +1,6 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
-import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.george.jylishop.utils.ProductUtils;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +34,7 @@ public class AdminGelController {
     public ModelAndView postForm(@RequestParam String title,
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
-                                 @RequestParam Integer reactantPercent,
+                                 @RequestParam Double reactantPercent,
                                  @RequestParam String description,
                                  @RequestParam Integer id,
                                  @RequestParam String picture)
@@ -69,7 +67,7 @@ public class AdminGelController {
                                  @RequestParam String title,
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
-                                 @RequestParam Integer reactantPercent,
+                                 @RequestParam double reactantPercent,
                                  @RequestParam String description,
                                  @RequestParam String picture) {
 
