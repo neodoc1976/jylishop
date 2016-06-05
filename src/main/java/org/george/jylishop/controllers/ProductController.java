@@ -18,6 +18,7 @@ import java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -35,26 +36,26 @@ public class ProductController {
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
         ModelAndView total = new ModelAndView("total");
         total.addObject("catalogue", base.getCatalogue());
-        if (sort != null && sort.equals("pricedesc")) {
-            PriceCompartor sorter = new PriceCompartor();
-            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
-            cloned.sort(sorter);
-            total.addObject("catalogue", cloned);
+        if (sort != null && sort.equals("priceasc")) {
+            PriceCompartor compartor = new PriceCompartor();
+            List<Product> sorted = base.getCatalogue();
+            sorted.sort(compartor);
+            total.addObject("catalogue", sorted);
         }
 
         if (sort != null && sort.equals("name")) {
-            NameComparator sorter = new NameComparator();
-            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
-            cloned.sort(sorter);
-            total.addObject("catalogue", cloned);
+            NameComparator comparator = new NameComparator();
+            List<Product> sorted = base.getCatalogue();
+            sorted.sort(comparator);
+            total.addObject("catalogue", sorted);
         }
 
-        if (sort != null && sort.equals("priceasc")) {
-            PriceCompartor sorter = new PriceCompartor();
-            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
-            cloned.sort(sorter);
-            Collections.reverse(cloned);
-            total.addObject("catalogue", cloned);
+        if (sort != null && sort.equals("pricedesc")) {
+            PriceCompartor compartor = new PriceCompartor();
+            List<Product> sorted = base.getCatalogue();
+            sorted.sort(compartor);
+            Collections.reverse(sorted);
+            total.addObject("catalogue", sorted);
         }
         return total;
     }
