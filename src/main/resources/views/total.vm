@@ -19,8 +19,8 @@
     <tr>
         <center>Product</center>
         <th> Product<br/>ID</th>
-        <th> Product name</th>
-        <th> Price</th>
+        <th><a href="?sort=name"> Product name</th>
+        <th><a href="?sort=pricedesc">V</a>Price<a href="?sort=priceasc">^</a></th>
         <th> Picture </th>
 
 

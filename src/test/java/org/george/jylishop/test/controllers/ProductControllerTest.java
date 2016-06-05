@@ -45,7 +45,7 @@ public class ProductControllerTest {
         catalogue.add(p);
         when(base.getCatalogue()).thenReturn(catalogue);
 
-        ModelAndView view = controller.totalList();
+        ModelAndView view = controller.totalList("sort");
         assertEquals(view.getViewName(), "total");
         assertNotNull(view.getModel().get("catalogue"));
 

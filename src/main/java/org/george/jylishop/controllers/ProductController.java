@@ -4,6 +4,8 @@ import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.utils.NameComparator;
+import org.george.jylishop.utils.PriceCompartor;
 import org.george.jylishop.utils.ProductUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collections;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 /**
  * Created by Yulya on 20.05.2016.
@@ -24,9 +32,30 @@ public class ProductController {
 
 
     @RequestMapping({"/", "/total"})
-    public ModelAndView totalList() {
+    public ModelAndView totalList(@RequestParam(required = false) String sort) {
         ModelAndView total = new ModelAndView("total");
         total.addObject("catalogue", base.getCatalogue());
+        if (sort != null && sort.equals("pricedesc")) {
+            PriceCompartor sorter = new PriceCompartor();
+            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
+            cloned.sort(sorter);
+            total.addObject("catalogue", cloned);
+        }
+
+        if (sort != null && sort.equals("name")) {
+            NameComparator sorter = new NameComparator();
+            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
+            cloned.sort(sorter);
+            total.addObject("catalogue", cloned);
+        }
+
+        if (sort != null && sort.equals("priceasc")) {
+            PriceCompartor sorter = new PriceCompartor();
+            ArrayList<Product> cloned = (ArrayList<Product>) base.getCatalogue().clone();
+            cloned.sort(sorter);
+            Collections.reverse(cloned);
+            total.addObject("catalogue", cloned);
+        }
         return total;
     }
 
@@ -50,5 +79,6 @@ public class ProductController {
         view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
         return view;
     }
+
 
 }
