@@ -3,15 +3,12 @@ package org.george.jylishop.test.controllers;
 import org.george.jylishop.controllers.AdminGelController;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.domain.Product;
-import org.george.jylishop.utils.ProductUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.junit.Assert.assertEquals;
@@ -27,9 +24,6 @@ public class AdminGelControllerTest {
 
     @Spy
     DataBase base;
-
-    @Mock
-    ProductUtils utils;
 
     @InjectMocks
     AdminGelController gelController;
@@ -51,14 +45,14 @@ public class AdminGelControllerTest {
         int id = 111;
         String picture = "Picture";
 
-        base.getCatalogue().clear();
-        assertEquals(base.getCatalogue().size(), 0);
 
-        when(utils.getProductById(id)).thenReturn(null);
+//        when(base.getProductById(id)).thenReturn(null); // Ця логіка працювала коли base була Mock (мщмент "навчання")
+
+        int a= base.getCatalogue().size();
 
         ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, id, picture);
 
-        OpalescenseGel product = (OpalescenseGel) base.getCatalogue().get(0);//Casting. Привів клас Product до Opalescence Gel
+        OpalescenseGel product = (OpalescenseGel) base.getProductById(id);//Casting. Привів клас Product до Opalescence Gel
 
         assertEquals(view.getViewName(), "admin-total");
         assertNotNull(view.getModel().get("catalogue"));
@@ -69,7 +63,7 @@ public class AdminGelControllerTest {
         assertEquals(product.getDescription(), description);
         assertEquals(product.getPicture(), picture);
         assertEquals(product.getId(), id);
-        assertEquals(base.getCatalogue().size(), 1);
+        assertEquals(base.getCatalogue().size(),a+1);
     }
 
     @Test
@@ -84,9 +78,9 @@ public class AdminGelControllerTest {
 
         assertEquals(base.getCatalogue().size(), 7);
 
-        OpalescenseGel product = (OpalescenseGel) base.getCatalogue().get(0);
+        OpalescenseGel product = (OpalescenseGel) base.getProductById(id);
 
-        when(utils.getProductById(id)).thenReturn(product);
+        when(base.getProductById(id)).thenReturn(product);
 
         ModelAndView view1 = gelController.postForm(title, volume, price,reactantPercent, description, id, picture);
         assertEquals(view1.getViewName(), "error");
@@ -103,7 +97,7 @@ public class AdminGelControllerTest {
         double reactantPercent = 10;
         double volume = 1.2;
 
-        OpalescenseGel product = (OpalescenseGel) base.getCatalogue().get(0);
+        OpalescenseGel product = (OpalescenseGel) base.getProductById(id);
         assertEquals(product.getId(), id);
         assertEquals(product.getTitle(), title);
         assertEquals(product.getDescription(), description);
@@ -120,7 +114,7 @@ public class AdminGelControllerTest {
         reactantPercent = 40;
         volume = 0.4;
 
-        when(utils.getProductById(id)).thenReturn(product);
+        when(base.getProductById(id)).thenReturn(product);
 
         ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture);
 
@@ -144,7 +138,7 @@ public class AdminGelControllerTest {
         double reactantPercent = 10;
         double volume = 1.2;
 
-        when(utils.getProductById(id)).thenReturn(null);
+        when(base.getProductById(id)).thenReturn(null);
 
         ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture);
         assertEquals(view.getViewName(),"error");

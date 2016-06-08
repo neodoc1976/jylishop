@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
         AdminContactControllerForEditModeTest.class,
         AdminGelControllerTest.class,
         AdminHemoControllerTest.class})
+
 public class ControllerTestSuit {
 
 

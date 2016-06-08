@@ -9,18 +9,18 @@
     center {
         margin: auto;
         font-family: "Agency FB", sans-serif;
-        font-size: 170%;
+        font-size: 250%;
         color: black;
-
 
 </style>
 
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
-        <center>Product</center>
+        <br/>
+        <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
-        <th><a href="?sort=name"> Product name</th>
-        <th><a href="?sort=pricedesc">V</a>Price<a href="?sort=priceasc">^</a></th>
+        <th>Product name<br/><a href="?sort=name">alphabetically</th>
+        <th><a href="?sort=pricedesc">Asc.</a><br/>Price<br/><a href="?sort=priceasc">Desc.</a></th>
         <th> Picture </th>
 
 

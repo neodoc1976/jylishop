@@ -27,11 +27,15 @@ public class DataBase {
         return list;
     }
 
+    public Product getProductById(int id) {
+        return  catalogue.get(id);
+    }
+    
+    public void addProduct(Product product){
+         catalogue.put(product.getId(),product);
+    }
 
-
-//    public ArrayList<Product> getCatalogue() {
-//        return catalogue;
-
+    public void deleteProduct(Product product){catalogue.remove(product.getId(),product);}
 
     public DataBase() {
         OpalescenseGel first = new OpalescenseGel();
@@ -92,7 +96,7 @@ public class DataBase {
         viscodispenser.setPrice(43.3);
         viscodispenser.setId(606);
         viscodispenser.setPicture("viscobig.jpg ");
-        catalogue.put(viscoclearsyringe.getId(),viscodispenser);
+        catalogue.put(viscodispenser.getId(),viscodispenser);
 
         Hemostatic viscocleardispenser = new Hemostatic();
         viscocleardispenser.setTitle("ViscoStat Clear");

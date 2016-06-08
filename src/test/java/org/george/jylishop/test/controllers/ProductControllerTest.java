@@ -1,12 +1,10 @@
 package org.george.jylishop.test.controllers;
 
-import org.george.jylishop.controllers.ContactController;
 import org.george.jylishop.controllers.ProductController;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
-import org.george.jylishop.utils.ProductUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,8 +33,6 @@ public class ProductControllerTest {
     @Mock
     private DataBase base;
 
-    @Mock
-    ProductUtils utils;
 
     @Test
     public void totalList() {
@@ -56,7 +52,7 @@ public class ProductControllerTest {
     @Test
     public void getProductOpalescenceGel() {
 
-        when(utils.getProductById(1)).thenReturn(new OpalescenseGel());
+        when(base.getProductById(1)).thenReturn(new OpalescenseGel());
 
         ModelAndView view = controller.getProduct(1);
         assertEquals(view.getViewName(), "gel-product");
@@ -65,7 +61,7 @@ public class ProductControllerTest {
     }
     @Test
     public void getProductHemostatic(){
-        when(utils.getProductById(2)).thenReturn(new Hemostatic());
+        when(base.getProductById(2)).thenReturn(new Hemostatic());
 
         ModelAndView view = controller.getProduct(2);
         assertEquals(view.getViewName(),"hemo-product");
@@ -75,7 +71,7 @@ public class ProductControllerTest {
     }
     @Test
     public void getProdustErrorID (){
-        when(utils.getProductById(3)).thenReturn(null);
+        when(base.getProductById(3)).thenReturn(null);
 
         ModelAndView view=controller.getProduct(3);
         assertEquals(view.getViewName(),"error");

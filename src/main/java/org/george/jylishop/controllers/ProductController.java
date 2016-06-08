@@ -6,7 +6,6 @@ import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.george.jylishop.utils.NameComparator;
 import org.george.jylishop.utils.PriceCompartor;
-import org.george.jylishop.utils.ProductUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -28,9 +25,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     DataBase base;
-    @Autowired
-    ProductUtils utils;
-
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
@@ -62,7 +56,7 @@ public class ProductController {
 
     @RequestMapping({"/products/{id}"})
     public ModelAndView getProduct(@PathVariable int id) {
-        Product selectedProduct = utils.getProductById(id);
+        Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
