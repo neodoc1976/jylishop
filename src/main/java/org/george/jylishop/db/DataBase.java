@@ -30,11 +30,9 @@ public class DataBase {
     public Product getProductById(int id) {
         return  catalogue.get(id);
     }
-    
     public void addProduct(Product product){
          catalogue.put(product.getId(),product);
     }
-
     public void deleteProduct(Product product){catalogue.remove(product.getId(),product);}
 
     public DataBase() {

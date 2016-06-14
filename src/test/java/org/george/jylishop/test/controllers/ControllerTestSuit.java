@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
         AdminContactControllerTest.class,
         AdminContactControllerForEditModeTest.class,
         AdminGelControllerTest.class,
-        AdminHemoControllerTest.class})
+        AdminHemoControllerTest.class,
+        AdminTotalControllerTest.class})
 
 public class ControllerTestSuit {
 
