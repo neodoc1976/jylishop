@@ -157,6 +157,27 @@ public class DataBase {
 
     }
 
+    public List<Product> getCatalogueOrderByTitle (){
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+        String sql = "SELECT * FROM \"Product\" ORDER BY title";
+        List<Product> list=jdbcTemplate.query(sql,new ProductRowMapper());
+        return list;
+    }
+
+    public List<Product> getCatalogueOrderByPriceAsc (){
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+        String sql = "SELECT * FROM \"Product\" ORDER BY price";
+        List<Product> list=jdbcTemplate.query(sql,new ProductRowMapper());
+        return list;
+    }
+
+    public List<Product> getCatalogueOrderByPriceDesc () {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT * FROM \"Product\" ORDER BY price DESC ";
+        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
+        return list;
+    }
+
     public List<Product> getCatalogue() {
 
 

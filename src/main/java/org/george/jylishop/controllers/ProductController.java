@@ -31,49 +31,49 @@ public class ProductController {
         ModelAndView total = new ModelAndView("total");
         total.addObject("catalogue", base.getCatalogue());
         if (sort != null && sort.equals("priceasc")) {
-            PriceCompartor compartor = new PriceCompartor();
-            List<Product> sorted = base.getCatalogue();
-            sorted.sort(compartor);
+//            PriceCompartor compartor = new PriceCompartor();
+            List<Product> sorted = base.getCatalogueOrderByPriceAsc();
+//            sorted.sort(compartor);
             total.addObject("catalogue", sorted);
         }
-
+//
         if (sort != null && sort.equals("name")) {
-            NameComparator comparator = new NameComparator();
-            List<Product> sorted = base.getCatalogue();
-            sorted.sort(comparator);
+//             NameComparator comparator = new NameComparator();
+            List<Product> sorted = base.getCatalogueOrderByTitle();
+//              sorted.sort(comparator);
             total.addObject("catalogue", sorted);
         }
-
+//
         if (sort != null && sort.equals("pricedesc")) {
-            PriceCompartor compartor = new PriceCompartor();
-            List<Product> sorted = base.getCatalogue();
-            sorted.sort(compartor);
-            Collections.reverse(sorted);
+//            PriceCompartor compartor = new PriceCompartor();
+            List<Product> sorted = base.getCatalogueOrderByPriceDesc();
+//            sorted.sort(compartor);
+//            Collections.reverse(sorted);
             total.addObject("catalogue", sorted);
         }
-        return total;
+            return total;
     }
 
-    @RequestMapping({"/products/{id}"})
-    public ModelAndView getProduct(@PathVariable int id) {
-        Product selectedProduct = base.getProductById(id);
+        @RequestMapping({"/products/{id}"})
+        public ModelAndView getProduct ( @PathVariable int id){
+            Product selectedProduct = base.getProductById(id);
 
-        if (selectedProduct instanceof OpalescenseGel) {
-            ModelAndView view = new ModelAndView("gel-product");
-            view.addObject("opalescenseInfo", selectedProduct);
+            if (selectedProduct instanceof OpalescenseGel) {
+                ModelAndView view = new ModelAndView("gel-product");
+                view.addObject("opalescenseInfo", selectedProduct);
+                return view;
+            }
+
+            if (selectedProduct instanceof Hemostatic) {
+                ModelAndView view = new ModelAndView("hemo-product");
+                view.addObject("hemoInfo", selectedProduct);
+                return view;
+            }
+
+            ModelAndView view = new ModelAndView("error");
+            view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
             return view;
         }
 
-        if (selectedProduct instanceof Hemostatic) {
-            ModelAndView view = new ModelAndView("hemo-product");
-            view.addObject("hemoInfo", selectedProduct);
-            return view;
-        }
 
-        ModelAndView view = new ModelAndView("error");
-        view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
-        return view;
     }
-
-
-}
