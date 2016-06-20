@@ -32,4 +32,12 @@
         <property name="prefix" value="/views/"/>
         <property name="suffix" value=".vm"/>
     </bean>
-</beans>
+    <bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="org.postgresql.Driver" />
+    <property name="url" value= "jdbc:postgresql://127.0.0.1:5432/postgres"/>
+    <property name="username" value="postgres" />
+    <property name="password" value="java9900" />
+</bean>
+
+        </beans>

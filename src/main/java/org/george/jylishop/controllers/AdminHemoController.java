@@ -35,20 +35,12 @@ public class AdminHemoController {
                                  @RequestParam Double price,
                                  @RequestParam String substance,
                                  @RequestParam String description,
-                                 @RequestParam Integer id,
                                  @RequestParam String picture) {
 
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
         post.addObject("catalogue", base.getCatalogue());
-        Product selectedProduct = base.getProductById(id);
 
-        if (selectedProduct != null) {
-            ModelAndView error = new ModelAndView("error");
-            error.addObject("message", "Product with this ID already exists, please fill out the form again.");
-            return error;
-        }
-        newcomer.setId(id);
         newcomer.setTitle(title);
         newcomer.setDescription(description);
         newcomer.setVolume(volume);
@@ -86,6 +78,7 @@ public class AdminHemoController {
         updated.setHemostaticSubstance(hemostaticSubstance);
         updated.setPrice(price);
         updated.setPicture(picture);
+        base.updatePtroduct(updated);
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }

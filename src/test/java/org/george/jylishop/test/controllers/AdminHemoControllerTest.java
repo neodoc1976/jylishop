@@ -45,7 +45,7 @@ public class AdminHemoControllerTest {
         String picture = "Picture";
         int a=base.getCatalogue().size();
 
-        ModelAndView view = hemoController.postForm(title,volume, price,substance,description, id, picture);
+        ModelAndView view = hemoController.postForm(title,volume, price,substance,description, picture);
         Hemostatic product = (Hemostatic) base.getProductById(id);
 
         assertEquals(view.getViewName(), "admin-total");
@@ -56,7 +56,6 @@ public class AdminHemoControllerTest {
         assertEquals(product.getHemostaticSubstance(),substance);
         assertEquals(product.getDescription(), description);
         assertEquals(product.getPicture(), picture);
-        assertEquals(product.getId(), id);
         assertEquals(base.getCatalogue().size(),a+1);
     }
 
@@ -76,7 +75,7 @@ public class AdminHemoControllerTest {
 
         when(base.getProductById(id)).thenReturn(product);
 
-        ModelAndView view = hemoController.postForm(title, volume, price,substance, description, id, picture);
+        ModelAndView view = hemoController.postForm(title, volume, price,substance, description, picture);
         assertEquals(view.getViewName(), "error");
         assertNotNull(view.getModel().get("message"));
     }

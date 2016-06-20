@@ -33,26 +33,17 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
                                  @RequestParam String description,
-                                 @RequestParam Integer id,
                                  @RequestParam String picture)
     {
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
         post.addObject("catalogue", base.getCatalogue());
-        Product selectedProduct = base.getProductById(id);
-
-        if (selectedProduct != null) {
-            ModelAndView error = new ModelAndView("error");
-            error.addObject("message", "Product with this ID already exists, please fill out the form again.");
-            return error;
-        }
 
         added.setTitle(title);
         added.setDescription(description);
         added.setVolume(volume);
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
-        added.setId(id);
         added.setPicture(picture);
         base.addProduct(added);
         return post;
@@ -83,6 +74,7 @@ public class AdminGelController {
         updated.setReactantPercent(reactantPercent);
         updated.setPrice(price);
         updated.setPicture(picture);
+        base.updatePtroduct(updated);
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }

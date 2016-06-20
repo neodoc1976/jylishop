@@ -50,7 +50,7 @@ public class AdminGelControllerTest {
 
         int a= base.getCatalogue().size();
 
-        ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, id, picture);
+        ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, picture);
 
         OpalescenseGel product = (OpalescenseGel) base.getProductById(id);//Casting. Привів клас Product до Opalescence Gel
 
@@ -62,7 +62,6 @@ public class AdminGelControllerTest {
         assertEquals(product.getReactantPercent(),reactantPercent,0);
         assertEquals(product.getDescription(), description);
         assertEquals(product.getPicture(), picture);
-        assertEquals(product.getId(), id);
         assertEquals(base.getCatalogue().size(),a+1);
     }
 
@@ -82,7 +81,7 @@ public class AdminGelControllerTest {
 
         when(base.getProductById(id)).thenReturn(product);
 
-        ModelAndView view1 = gelController.postForm(title, volume, price,reactantPercent, description, id, picture);
+        ModelAndView view1 = gelController.postForm(title, volume, price,reactantPercent, description, picture);
         assertEquals(view1.getViewName(), "error");
         assertNotNull(view1.getModel().get("message"));
     }

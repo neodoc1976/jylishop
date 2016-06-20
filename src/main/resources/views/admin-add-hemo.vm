@@ -3,9 +3,9 @@
     <p><b>NEW Hemostatic</b></p><br/>
 
     <p/>
-    <p><b>ID</b><br/>
-        <input type="text" size="10" name="id">
-    </p>
+##    <p><b>ID</b><br/>
+##        <input type="text" size="10" name="id">
+##    </p>
     <p><b>Title:</b><br/>
         <input type="text" size="40" name="title">
     </p>
