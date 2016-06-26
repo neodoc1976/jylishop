@@ -25,15 +25,15 @@
 ##<br/>
 ##<br/>
 
+#foreach ($contact in $ci)
 <div class="type">
     <br/>
     <br/>
-<div class="indent">  <a href="/total"> <img src="/resources/jylishop.png" alt="My_vse_proybaly"></a>
-    <br/>
-    <br/>
-#foreach ($contact in $ci)
-##<tr>
-    <b>
+    <div class="indent"><a href="/total"> <img src="/resources/jylishop.png" alt="My_vse_proybaly"></a>
+        <br/>
+        <br/>
+    ##<tr>
+        <b>
             <td>Your manager: $contact.name</td>
             <br/>
             <td>Email: $contact.email</td>
@@ -42,8 +42,8 @@
             <br/>
             <td>Adress: $contact.address</td>
             <br/>
-    </b>
-</div>
+        </b>
+    </div>
 </div>
 <div class="type">
     <center><b> Our location</b></center>
