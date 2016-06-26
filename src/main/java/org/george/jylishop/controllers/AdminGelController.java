@@ -3,7 +3,6 @@ package org.george.jylishop.controllers;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
-import org.george.jylishop.utils.ProductUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +20,6 @@ import java.util.List;
 public class AdminGelController {
     @Autowired
     DataBase base;
-    @Autowired
-    ProductUtils utils;
 
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
@@ -42,7 +39,7 @@ public class AdminGelController {
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
         post.addObject("catalogue", base.getCatalogue());
-        Product selectedProduct = utils.getProductById(id);
+        Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct != null) {
             ModelAndView error = new ModelAndView("error");
@@ -57,8 +54,7 @@ public class AdminGelController {
         added.setPrice(price);
         added.setId(id);
         added.setPicture(picture);
-        List<Product> list = base.getCatalogue();
-        list.add(added);
+        base.addProduct(added);
         return post;
     }
 
@@ -71,7 +67,7 @@ public class AdminGelController {
                                  @RequestParam String description,
                                  @RequestParam String picture) {
 
-        Product selectedProduct = utils.getProductById(id);
+        Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");

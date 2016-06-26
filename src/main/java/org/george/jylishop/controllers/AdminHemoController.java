@@ -3,9 +3,7 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
-import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
-import org.george.jylishop.utils.ProductUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +21,6 @@ import java.util.List;
 public class AdminHemoController {
     @Autowired
     DataBase base;
-    @Autowired
-    ProductUtils utils;
 
 
     @RequestMapping(value = "/admin/hemos/add", method = RequestMethod.GET)
@@ -46,7 +41,7 @@ public class AdminHemoController {
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
         post.addObject("catalogue", base.getCatalogue());
-        Product selectedProduct = utils.getProductById(id);
+        Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct != null) {
             ModelAndView error = new ModelAndView("error");
@@ -60,8 +55,7 @@ public class AdminHemoController {
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
         newcomer.setPicture(picture);
-        List<Product> list = base.getCatalogue();
-        list.add(newcomer);
+        base.addProduct(newcomer);
         return post;
 
     }
@@ -77,7 +71,7 @@ public class AdminHemoController {
                                  @RequestParam String picture) {
 
         ModelAndView post = new ModelAndView("admin-total");
-        Product selectedProduct = utils.getProductById(id);
+        Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");

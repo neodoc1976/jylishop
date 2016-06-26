@@ -3,8 +3,6 @@ package org.george.jylishop.test.controllers;
 import org.george.jylishop.controllers.AdminHemoController;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
-import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.utils.ProductUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,9 +24,6 @@ public class AdminHemoControllerTest {
     @Spy
     DataBase base;
 
-    @Mock
-    ProductUtils utils;
-
     @InjectMocks
     AdminHemoController hemoController;
 
@@ -48,15 +43,10 @@ public class AdminHemoControllerTest {
         String description = "Description";
         int id = 444;
         String picture = "Picture";
-
-        base.getCatalogue().clear();
-        assertEquals(base.getCatalogue().size(), 0);
-
-        when(utils.getProductById(id)).thenReturn(null);
+        int a=base.getCatalogue().size();
 
         ModelAndView view = hemoController.postForm(title,volume, price,substance,description, id, picture);
-
-        Hemostatic product = (Hemostatic) base.getCatalogue().get(0);
+        Hemostatic product = (Hemostatic) base.getProductById(id);
 
         assertEquals(view.getViewName(), "admin-total");
         assertNotNull(view.getModel().get("catalogue"));
@@ -67,7 +57,7 @@ public class AdminHemoControllerTest {
         assertEquals(product.getDescription(), description);
         assertEquals(product.getPicture(), picture);
         assertEquals(product.getId(), id);
-        assertEquals(base.getCatalogue().size(), 1);
+        assertEquals(base.getCatalogue().size(),a+1);
     }
 
     @Test
@@ -82,9 +72,9 @@ public class AdminHemoControllerTest {
 
         assertEquals(base.getCatalogue().size(), 7);
 
-        Hemostatic product = (Hemostatic) base.getCatalogue().get(4);
+        Hemostatic product = (Hemostatic) base.getProductById(id);
 
-        when(utils.getProductById(id)).thenReturn(product);
+        when(base.getProductById(id)).thenReturn(product);
 
         ModelAndView view = hemoController.postForm(title, volume, price,substance, description, id, picture);
         assertEquals(view.getViewName(), "error");
@@ -101,7 +91,7 @@ public class AdminHemoControllerTest {
         String hemostaticSubstance = "Ferric Sulphate" ;
         double volume = 1.2;
 
-        Hemostatic product = (Hemostatic) base.getCatalogue().get(3);
+        Hemostatic product = (Hemostatic) base.getProductById(id);
         assertEquals(product.getId(),id);
         assertEquals(product.getVolume(),volume,0);
         assertEquals(product.getTitle(), title);
@@ -119,7 +109,7 @@ public class AdminHemoControllerTest {
         hemostaticSubstance="12.7% iron solution";
         volume = 30;
 
-        when(utils.getProductById(id)).thenReturn(product);
+        when(base.getProductById(id)).thenReturn(product);
 
         ModelAndView view = hemoController.editForm(id,title,volume,price,hemostaticSubstance,description,picture);
 
@@ -143,7 +133,7 @@ public class AdminHemoControllerTest {
         String hemostaticSubstance = "substance";
         double volume = 1.2;
 
-        when(utils.getProductById(id)).thenReturn(null);
+        when(base.getProductById(id)).thenReturn(null);
 
         ModelAndView view = hemoController.editForm(id,title,volume,price,hemostaticSubstance,description,picture);
         assertEquals(view.getViewName(),"error");

@@ -5,6 +5,12 @@ import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.springframework.stereotype.Component;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+
 
 import java.util.ArrayList;
 
@@ -13,11 +19,21 @@ import java.util.ArrayList;
  */
 @Component
 public class DataBase {
-    ArrayList<Product> catalogue= new ArrayList<Product>();
 
-    public ArrayList<Product> getCatalogue() {
-        return catalogue;
+    private Map<Integer,Product> catalogue = new HashMap<>();
+
+    public List<Product> getCatalogue(){
+        List<Product> list= new ArrayList<>(catalogue.values());
+        return list;
     }
+
+    public Product getProductById(int id) {
+        return  catalogue.get(id);
+    }
+    public void addProduct(Product product){
+         catalogue.put(product.getId(),product);
+    }
+    public void deleteProduct(Product product){catalogue.remove(product.getId(),product);}
 
     public DataBase() {
         OpalescenseGel first = new OpalescenseGel();
@@ -28,7 +44,7 @@ public class DataBase {
         first.setPrice(5);
         first.setPicture("first.jpg");
         first.setId(101);
-        catalogue.add(first);
+        catalogue.put(first.getId(),first);
 
         OpalescenseGel second = new OpalescenseGel();
         second.setTitle("Opalescense Gel PF");
@@ -38,7 +54,7 @@ public class DataBase {
         second.setPrice(6);
         second.setPicture("second.jpg");
         second.setId(202);
-        catalogue.add(second);
+        catalogue.put(second.getId(),second);
 
         OpalescenseGel third = new OpalescenseGel();
         third.setTitle("Opalescense Gel PF");
@@ -48,7 +64,7 @@ public class DataBase {
         third.setPrice(7);
         third.setPicture("third.jpg");
         third.setId(303);
-        catalogue.add(third);
+        catalogue.put(third.getId(),third);
 
         Hemostatic viscosyringe = new Hemostatic();
         viscosyringe.setTitle("ViscoStat");
@@ -58,7 +74,7 @@ public class DataBase {
         viscosyringe.setPrice(4.8);
         viscosyringe.setId(404);
         viscosyringe.setPicture("visco.jpg");
-        catalogue.add(viscosyringe);
+        catalogue.put(viscosyringe.getId(),viscosyringe);
 
         Hemostatic viscoclearsyringe = new Hemostatic();
         viscoclearsyringe.setTitle("ViscoStat Clear");
@@ -68,7 +84,7 @@ public class DataBase {
         viscoclearsyringe.setPrice(5.04);
         viscoclearsyringe.setId(505);
         viscoclearsyringe.setPicture("viscoclear.jpg");
-        catalogue.add(viscoclearsyringe);
+        catalogue.put(viscoclearsyringe.getId(),viscoclearsyringe);
 
         Hemostatic viscodispenser = new Hemostatic();
         viscodispenser.setTitle("ViscoStat");
@@ -78,7 +94,7 @@ public class DataBase {
         viscodispenser.setPrice(43.3);
         viscodispenser.setId(606);
         viscodispenser.setPicture("viscobig.jpg ");
-        catalogue.add(viscodispenser);
+        catalogue.put(viscodispenser.getId(),viscodispenser);
 
         Hemostatic viscocleardispenser = new Hemostatic();
         viscocleardispenser.setTitle("ViscoStat Clear");
@@ -88,7 +104,7 @@ public class DataBase {
         viscocleardispenser.setPrice(45.4);
         viscocleardispenser.setId(707);
         viscocleardispenser.setPicture("viscoclearbig.jpg");
-        catalogue.add(viscocleardispenser);
+        catalogue.put(viscocleardispenser.getId(),viscocleardispenser);
     }
 
 }
