@@ -1,5 +1,7 @@
 package PostgreTest;
 
+import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.junit.Test;
 
@@ -51,15 +53,39 @@ public class PostgreTest {
             System.out.println("Выводим product");
             while (result1.next()) {
                 Product product = new Product();
+
+                if (product instanceof Hemostatic){
+
                 product.setPrice(result1.getDouble("price"));
                 product.setTitle(result1.getString("title"));
                 product.setPicture(result1.getString("picture"));
                 product.setDescription(result1.getString("description"));
+                ((Hemostatic) product).setVolume(result1.getDouble("volume"));
+                ((Hemostatic) product).setHemostaticSubstance(result1.getString("hemostatic_substance"));
+                }
+
+                if (product instanceof OpalescenseGel){
+
+                    product.setPrice(result1.getDouble("price"));
+                    product.setTitle(result1.getString("title"));
+                    product.setPicture(result1.getString("picture"));
+                    product.setDescription(result1.getString("description"));
+                    ((OpalescenseGel) product).setVolume(result1.getDouble("volume"));
+                    ((OpalescenseGel) product).setReactantPercent(result1.getDouble("reactant_percent"));
+                }
+
                 list.add(product);
-                System.out.println("Виборка # " + result1.getRow()
-                        + "\t Ціна " + result1.getDouble("price")
-                        + "\t Назва " + result1.getString("title")
-                        + "\t Опис " + result1.getString("description"));
+
+
+
+                System.out.println("#" + result1.getRow()
+                        + " Ціна " + result1.getDouble("price")
+                        + " Назва " + result1.getString("title")
+                        + " Опис " + result1.getString("description")
+                        + " Файл малюнку "+ result1.getString("picture")
+                        + " Об'єм "+ result1.getDouble("volume")
+                +" Тип гемостатика "+result1.getString("hemostatic_substance")
+                +" Відсоток діючої речовини "+result1.getDouble("reactant_percent"));
 
             }
 

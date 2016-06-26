@@ -36,7 +36,7 @@ public class AdminContactControllerForEditModeTest {
         assertEquals(view.getViewName(),"contact");
         assertNotNull(view.getModel().get("ci"));
 
-        Contact updated = base.getContact();
+        Contact updated = (Contact) base.getContact();
         assertEquals(updated.getName(),"Name");
         assertEquals(updated.getEmail(),"Email");
         assertEquals(updated.getAddress(),"Address");

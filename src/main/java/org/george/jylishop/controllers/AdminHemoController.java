@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 /**
  * Created by Yulya on 21.05.2016.
  */
@@ -78,7 +76,7 @@ public class AdminHemoController {
         updated.setHemostaticSubstance(hemostaticSubstance);
         updated.setPrice(price);
         updated.setPicture(picture);
-        base.updatePtroduct(updated);
+        base.updateProduct(updated);
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }

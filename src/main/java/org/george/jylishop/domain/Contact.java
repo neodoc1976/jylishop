@@ -9,6 +9,7 @@ public class Contact {
     private String telephone;
     private String address;
     private String location;
+    public final static String Contact_Type="contact_type" ;//додаткове поле-маркер для точної ідентифікації класу даних при виклику з бази.
 
     public String getLocation() {
         return location;

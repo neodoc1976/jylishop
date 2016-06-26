@@ -17,7 +17,7 @@ public class ProductRowMapper implements RowMapper<Product> {
     public Product mapRow(ResultSet resultSet, int i) throws SQLException {
 
         String type = resultSet.getString("product_type");
-        if (type.equals("hemostatic")) {
+        if (type.equals(Product.Hemo_Type)) {
             Hemostatic product = new Hemostatic();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));
@@ -29,7 +29,7 @@ public class ProductRowMapper implements RowMapper<Product> {
             return product;
         }
 
-        if (type.equals("opal_gel")) {
+        if (type.equals(Product.Gel_Type)) {
             OpalescenseGel product = new OpalescenseGel();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));

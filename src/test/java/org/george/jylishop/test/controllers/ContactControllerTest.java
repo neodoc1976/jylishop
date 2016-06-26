@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 import org.junit.Assert;
+
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -35,8 +38,6 @@ public class ContactControllerTest {
         c.setEmail("test neodoc3@gmail.com");
         c.setAddress("test Kiyv,Kasyana str,2,office 97");
         c.setName("test George Doc");
-        c.setLocation("test https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2544.383883998672!2d30.454544915423373!3d50.378041979465436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c8fc4d5058a5%3A0x16341f27ce6cd8be!2z0LLRg9C7LiDQktCw0YHQuNC70Y8g0JrQsNGB0ZbRj9C90LAsIDIsINCa0LjRl9Cy!5e0!3m2!1suk!2sua!4v1464367094200");
-        when(base.getContact()).thenReturn(c);
 
         ModelAndView view=controller.contactMethod();
         assertEquals(view.getViewName(), "contact");

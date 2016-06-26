@@ -34,7 +34,7 @@ public class AdminContactController {
 
         ModelAndView view = new ModelAndView("contact");
 
-        Contact fresh=base.getContact();
+        Contact fresh= (Contact) base.getContact();
 
         fresh.setName(name);
         fresh.setEmail(email);

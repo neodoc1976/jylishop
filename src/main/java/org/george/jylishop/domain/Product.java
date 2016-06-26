@@ -9,6 +9,8 @@ public class Product {
     private double price;
     private String picture;
     private int id;
+    public final static String Gel_Type="opal_gel";
+    public final static String Hemo_Type="hemostatic";
 
     public String getDescription() {
         return description;

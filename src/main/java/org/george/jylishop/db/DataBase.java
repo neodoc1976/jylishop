@@ -86,29 +86,32 @@ public class DataBase {
         if (product instanceof Hemostatic) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume, hemostatic_substance, product_type) " +
-                    "VALUES (?,?,?,?,?,?,'hemostatic')"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+                    "VALUES (?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
                     product.getDescription(),
                     product.getPicture(),
                     ((Hemostatic) product).getVolume(),
-                    ((Hemostatic) product).getHemostaticSubstance());
+                    ((Hemostatic) product).getHemostaticSubstance(),
+                    Product.Hemo_Type);
         }
         if (product instanceof OpalescenseGel) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume,reactant_percent , product_type) " +
-                    "VALUES (?,?,?,?,?,?,'opal_gel')"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+                    "VALUES (?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
                     product.getDescription(),
                     product.getPicture(),
                     ((OpalescenseGel) product).getVolume(),
-                    ((OpalescenseGel) product).getReactantPercent());
+                    ((OpalescenseGel) product).getReactantPercent(),
+                    Product.Gel_Type);
+
         }
 
     }
 
-    public void updatePtroduct(Product product) {
+    public void updateProduct(Product product) {
 
 
         Product productInBase = getProductById(product.getId());
