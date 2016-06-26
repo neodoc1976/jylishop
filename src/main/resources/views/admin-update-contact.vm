@@ -1,8 +1,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
-<form action="/admin/contact/update" method="post">
+<form action="/admin/contact/$ci.id/update" method="post">
     <p><b>EDIT  Contact</b></p><br/>
     <p/>
+
     <p><b>Name:</b><br/>
 
         <input type="text" size="40" name="name"  value="$ci.name">

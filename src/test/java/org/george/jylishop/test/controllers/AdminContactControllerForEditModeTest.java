@@ -25,29 +25,25 @@ public class AdminContactControllerForEditModeTest {
     AdminContactController controller;
 
     @Test
-    public void editMethodTest(){
-        String name= ("Name");
-        String email=("Email");
-        String address=("Address");
-        String telephone=("Telephone");
-        String location=("Location");
+    public void editMethodTest() {
+        String name = ("Name");
+        String email = ("Email");
+        String address = ("Address");
+        String telephone = ("Telephone");
+        String location = ("Location");
 
-        ModelAndView view=controller.editForm(name,email,address,telephone,location);
-        assertEquals(view.getViewName(),"contact");
+        ModelAndView view = controller.editForm(0, name, email, address, telephone, location);
+        assertEquals(view.getViewName(), "contact");
         assertNotNull(view.getModel().get("ci"));
 
         Contact updated = (Contact) base.getContact();
-        assertEquals(updated.getName(),"Name");
-        assertEquals(updated.getEmail(),"Email");
-        assertEquals(updated.getAddress(),"Address");
-        assertEquals(updated.getTelephone(),"Telephone");
-        assertEquals(updated.getLocation(),"Location");
+        assertEquals(updated.getName(), "Name");
+        assertEquals(updated.getEmail(), "Email");
+        assertEquals(updated.getAddress(), "Address");
+        assertEquals(updated.getTelephone(), "Telephone");
+        assertEquals(updated.getLocation(), "Location");
 
     }
-
-
-
-
 
 
 }

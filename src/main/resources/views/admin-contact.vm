@@ -1,0 +1,41 @@
+#include("views/admin-header.vm")
+<style>
+    center {
+        margin: auto;
+    }
+</style>
+<a href="/admin/contact/add">ADD New Contact </a></br>
+<center><table cellpadding="25" cellspacing="0" border="5">
+    <center> CONTACTS  </center>
+    </br>
+    </br>
+    </br>
+    <tr>
+        <th> ID</th>
+        <th> Manager name</th>
+        <th> Email </th>
+        <th> Telephone</th>
+        <th> Address</th>
+##       <th> Location </th>
+        <th> Edit Contact</th>
+
+
+    </tr>
+
+    #foreach ($contact in $ci)
+
+        <tr>
+            <td> $contact.id</td>
+            <td>$contact.name</td>
+            <td>$contact.email</td>
+            <td> $contact.telephone</td>
+            <td>$contact.address</td>
+##            <td>$contact.location</td>
+            <td><a href="/admin/contact/$contact.id/update">Edit THIS</a></td>
+            <td><a href="/admin/contact/$contact.id/delete">Delete THIS</a></td>
+        </tr>
+    #end
+
+</table>
+</center>
+#include("views/footer.vm")

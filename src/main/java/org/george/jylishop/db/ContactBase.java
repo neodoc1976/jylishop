@@ -28,4 +28,46 @@ public class ContactBase {
 
         return contactList;
     }
+
+    public Contact getContactById(int id){
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+        String sql = "SELECT * FROM  \"contact\" WHERE id = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ContactRowMapper());
+    }
+
+    public void updateContact(Contact contact){
+        String sql = "UPDATE \"contact\" " +
+                "SET name = ?, email = ?,address =?,telephone=?,location=?" +
+                "WHERE id=?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(sql, contact.getName(),
+                contact.getEmail(),
+                contact.getAddress(),
+                contact.getTelephone(),
+                contact.getLocation(),
+                contact.getId());
+
+    }
+    public void deleteContact(Contact contact) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "DELETE  FROM \"contact\" WHERE id=?";
+        jdbcTemplate.update(sql, contact.getId());
+    }
+
+    public void addContact(Contact contact) {
+
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+            String sql = "INSERT INTO \"contact\" (email,address ,telephone,location,name,data_type) " +
+                    "VALUES (?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+            jdbcTemplate.update(sql, contact.getEmail(),
+                    contact.getAddress(),
+                    contact.getTelephone(),
+                    contact.getLocation(),
+                    contact.getName(),
+                    Contact.Contact_Type);
+
+    }
+
 }
