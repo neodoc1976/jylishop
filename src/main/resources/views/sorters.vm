@@ -1,0 +1,18 @@
+##<br/>
+##<br/>
+##SORT BY:
+##<br/>
+##<p>
+##PRICE<a href="?sort=pricedesc"> Descend</p>
+##    OR
+##    <a href="?sort=priceasc"> Ascend <br/>
+##
+##        PRODUCT<a href="?sort=title"> Name Alphabetically
+##            OR
+##            <a href="?sort=title"> Name Reverse <br/>
+##
+##                MANUFACTURER<a href="?sort=by_name"> Alphabetically
+##                    OR
+##                    <a href="?sort=reverse_by_name"> Reverse
+##
+##                        </p>

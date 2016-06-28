@@ -31,27 +31,37 @@ public class ProductController {
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
         ModelAndView total = new ModelAndView("total");
         total.addObject("catalogue", base.getCatalogue());
+
         if (sort != null && sort.equals("priceasc")) {
 //            PriceCompartor compartor = new PriceCompartor();
             List<Product> sorted = base.getCatalogueOrderByPriceAsc();
 //            sorted.sort(compartor);
             total.addObject("catalogue", sorted);
         }
-//
-        if (sort != null && sort.equals("name")) {
-//             NameComparator comparator = new NameComparator();
-            List<Product> sorted = base.getCatalogueOrderByTitle();
-//              sorted.sort(comparator);
-            total.addObject("catalogue", sorted);
-        }
-//
+
         if (sort != null && sort.equals("pricedesc")) {
 //            PriceCompartor compartor = new PriceCompartor();
             List<Product> sorted = base.getCatalogueOrderByPriceDesc();
 //            sorted.sort(compartor);
 //            Collections.reverse(sorted);
             total.addObject("catalogue", sorted);
+
         }
+        if (sort != null && sort.equals("title")) {
+//             NameComparator comparator = new NameComparator();
+            List<Product> sorted = base.getCatalogueOrderByTitle();
+//              sorted.sort(comparator);
+            total.addObject("catalogue", sorted);
+        }
+        if (sort!=null && sort.equals("by_name")){
+            List<Product> sorted = base.getCatalogueOrderByManufacturer();
+            total.addObject("catalogue",sorted);
+        }
+        if (sort!=null && sort.equals("reverse_by_name")) {
+            List<Product> sorted = base.getCatalogueOrderByManufacturerReverse();
+            total.addObject("catalogue", sorted);
+        }
+
         return total;
     }
 

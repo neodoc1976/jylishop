@@ -1,4 +1,5 @@
 #include ("views/header.vm")
+#include ("views/sorters.vm")
 
 <style>
     table {
@@ -13,14 +14,33 @@
         color: black;
 
 </style>
+<br/>
+<br/>
+SORT BY:
+<br/>
+<p>
+    PRICE<a href="?sort=pricedesc"> Descend</p>
+OR
+<a href="?sort=priceasc"> Ascend <br/>
+
+    PRODUCT<a href="?sort=title"> Name Alphabetically
+        OR
+        <a href="?sort=title"> Name Reverse <br/>
+
+            MANUFACTURER<a href="?sort=by_name"> Alphabetically
+                OR
+                <a href="?sort=reverse_by_name"> Reverse
+
+                    </p>
+
 
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
         <br/>
         <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
-        <th>Product name<br/><a href="?sort=name">alphabetically</th>
-        <th><a href="?sort=pricedesc">Desc.</a><br/>Price<br/><a href="?sort=priceasc">Asc.</a></th>
+        <th>Product name<br/></th>
+        <th>Price<br/></th>
         <th> Picture </th>
         <th> Manufacturer</th>
 
@@ -30,7 +50,6 @@
     #foreach ($product in $catalogue)
 
         <tr>
-
 
             <td>$product.id</td>
             <td><a href="/products/$product.id">$product.title</a></td>

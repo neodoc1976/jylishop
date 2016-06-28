@@ -20,10 +20,9 @@ import java.util.Map;
 public class DataBase {
     @Autowired
     private DataSource dataSource;
-
     private Map<Integer, Product> catalogue = new HashMap<>();
 
-//    public List<Product> getCatalogue() {
+    //    public List<Product> getCatalogue() {
 //
 //        List<Product> list = new ArrayList<>(catalogue.values());
 //        Connection connection = null;
@@ -53,7 +52,6 @@ public class DataBase {
 //                        + "\t Ціна " + result1.getDouble("price")
 //                        + "\t Назва " + result1.getString("title")
 //                        + "\t Опис " + result1.getString("description"));
-//
 //            }
 //
 //        } catch (Exception ex) {
@@ -73,8 +71,8 @@ public class DataBase {
 //
 //        return list;
 //    }
-
     public Product getProductById(int id) {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
@@ -85,7 +83,6 @@ public class DataBase {
 
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductRowMapper());
     }
-
 
     public void addProduct(Product product) {
         if (product instanceof Hemostatic) {
@@ -111,13 +108,10 @@ public class DataBase {
                     ((OpalescenseGel) product).getVolume(),
                     ((OpalescenseGel) product).getReactantPercent(),
                     Product.GEL_TYPE);
-
         }
-
     }
 
     public void updateProduct(Product product) {
-
 
         Product productInBase = getProductById(product.getId());
 
@@ -140,7 +134,6 @@ public class DataBase {
                     ((Hemostatic) product).getVolume(),
                     ((Hemostatic) product).getHemostaticSubstance(),
                     product.getId());
-
         }
         if (product instanceof OpalescenseGel) {
 
@@ -159,13 +152,14 @@ public class DataBase {
     }
 
     public void deleteProduct(Product product) {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "DELETE  FROM \"Product\" WHERE id=?";
         jdbcTemplate.update(sql, product.getId());
-
     }
 
     public List<Product> getCatalogueOrderByTitle() {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
@@ -176,6 +170,7 @@ public class DataBase {
     }
 
     public List<Product> getCatalogueOrderByPriceAsc() {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
@@ -186,6 +181,7 @@ public class DataBase {
     }
 
     public List<Product> getCatalogueOrderByPriceDesc() {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
@@ -194,21 +190,44 @@ public class DataBase {
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
-    public List<Product> getCatalogueOrderById(){
+
+    public List<Product> getCatalogueOrderByManufacturer(){
+
         JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
         String sql="SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY m.name ";
+        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
+        return list;
+
+    }
+    public List<Product> getCatalogueOrderByManufacturerReverse(){
+
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+        String sql="SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
+                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "FROM \"Product\" p " +
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY m.name DESC ";
+        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
+        return list;
+
+    }
+
+    public List<Product> getCatalogueOrderById() {
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
+                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY p.id ";
-        List<Product> list=jdbcTemplate.query(sql,new ProductRowMapper());
+        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
 
     public List<Product> getCatalogue() {
 
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
         String sql = "SELECT p.id,p.product_type, p.title , p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
                 " FROM \"Product\" p " +
