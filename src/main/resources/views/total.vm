@@ -20,8 +20,9 @@
         <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
         <th>Product name<br/><a href="?sort=name">alphabetically</th>
-        <th><a href="?sort=pricedesc">Asc.</a><br/>Price<br/><a href="?sort=priceasc">Desc.</a></th>
+        <th><a href="?sort=pricedesc">Desc.</a><br/>Price<br/><a href="?sort=priceasc">Asc.</a></th>
         <th> Picture </th>
+        <th> Manufacturer</th>
 
 
     </tr>
@@ -35,6 +36,7 @@
             <td><a href="/products/$product.id">$product.title</a></td>
             <td> $product.price $</td>
             <td>  <img src="/resources/$product.picture" width="200" alt="File not found"></td>
+            <td><a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>
 
         </tr>
     #end

@@ -4,13 +4,15 @@ package org.george.jylishop.domain;
  * Created by Yulya on 21.05.2016.
  */
 public class Product {
+    public final static String GEL_TYPE = "opal_gel";
+    public final static String HEMO_TYPE = "hemostatic";
     private String description;
     private String title;
     private double price;
     private String picture;
     private int id;
-    public final static String Gel_Type="opal_gel";
-    public final static String Hemo_Type="hemostatic";
+    private Manufacturer manufacturer = new Manufacturer();
+
 
     public String getDescription() {
         return description;
@@ -51,4 +53,13 @@ public class Product {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
 }

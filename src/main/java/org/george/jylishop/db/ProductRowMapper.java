@@ -1,6 +1,7 @@
 package org.george.jylishop.db;
 
 import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,7 +18,12 @@ public class ProductRowMapper implements RowMapper<Product> {
     public Product mapRow(ResultSet resultSet, int i) throws SQLException {
 
         String type = resultSet.getString("product_type");
-        if (type.equals(Product.Hemo_Type)) {
+
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(resultSet.getInt("manufacturer"));
+        manufacturer.setName(resultSet.getString("name"));
+
+        if (type.equals(Product.HEMO_TYPE)) {
             Hemostatic product = new Hemostatic();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));
@@ -26,10 +32,11 @@ public class ProductRowMapper implements RowMapper<Product> {
             product.setDescription(resultSet.getString("description"));
             product.setVolume(resultSet.getDouble("volume"));
             product.setHemostaticSubstance(resultSet.getString("hemostatic_substance"));
+            product.setManufacturer(manufacturer);
             return product;
         }
 
-        if (type.equals(Product.Gel_Type)) {
+        if (type.equals(Product.GEL_TYPE)) {
             OpalescenseGel product = new OpalescenseGel();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));
@@ -38,6 +45,7 @@ public class ProductRowMapper implements RowMapper<Product> {
             product.setDescription(resultSet.getString("description"));
             product.setVolume(resultSet.getDouble("volume"));
             product.setReactantPercent(resultSet.getDouble("reactant_percent"));
+            product.setManufacturer(manufacturer);
             return product;
         }
 

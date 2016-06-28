@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by Yulya on 20.05.2016.
@@ -21,10 +24,14 @@ public class AdminTotalController {
 
 
 
-    @RequestMapping("/admin")
-    public ModelAndView adminList() {
+    @RequestMapping({"/admin","/aaa","/фвьшт"})
+    public ModelAndView adminList(@RequestParam(required = false) String sort) {
         ModelAndView admin = new ModelAndView("admin-total");
         admin.addObject("catalogue", base.getCatalogue());
+        if (sort != null && sort.equals("orderbyid")){
+            List<Product> sorted = base.getCatalogueOrderById();
+            admin.addObject("catalogue",sorted);
+        }
         return admin;
     }
 

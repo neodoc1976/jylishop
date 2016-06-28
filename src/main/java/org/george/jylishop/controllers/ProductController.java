@@ -2,6 +2,7 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.george.jylishop.utils.NameComparator;
@@ -51,29 +52,37 @@ public class ProductController {
 //            Collections.reverse(sorted);
             total.addObject("catalogue", sorted);
         }
-            return total;
+        return total;
     }
 
-        @RequestMapping({"/products/{id}"})
-        public ModelAndView getProduct ( @PathVariable int id){
-            Product selectedProduct = base.getProductById(id);
+    @RequestMapping({"/products/{id}"})
+    public ModelAndView getProduct(@PathVariable int id) {
+        Product selectedProduct = base.getProductById(id);
 
-            if (selectedProduct instanceof OpalescenseGel) {
-                ModelAndView view = new ModelAndView("gel-product");
-                view.addObject("opalescenseInfo", selectedProduct);
-                return view;
-            }
-
-            if (selectedProduct instanceof Hemostatic) {
-                ModelAndView view = new ModelAndView("hemo-product");
-                view.addObject("hemoInfo", selectedProduct);
-                return view;
-            }
-
-            ModelAndView view = new ModelAndView("error");
-            view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
+        if (selectedProduct instanceof OpalescenseGel) {
+            ModelAndView view = new ModelAndView("gel-product");
+            view.addObject("opalescenseInfo", selectedProduct);
             return view;
         }
 
+        if (selectedProduct instanceof Hemostatic) {
+            ModelAndView view = new ModelAndView("hemo-product");
+            view.addObject("hemoInfo", selectedProduct);
+            return view;
+        }
 
+        ModelAndView view = new ModelAndView("error");
+        view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
+        return view;
     }
+
+    @RequestMapping({"/manufacturer/{id}"})
+    public ModelAndView variesManufacturer(@PathVariable int id) {
+        Manufacturer manufacturer=base.getManufacturerById(id);
+        ModelAndView view = new ModelAndView("man_description");
+        view.addObject("manufacturer",manufacturer);
+        return view;
+    }
+
+
+}
