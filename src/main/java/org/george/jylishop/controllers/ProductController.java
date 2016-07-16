@@ -48,9 +48,11 @@ public class ProductController {
 
         }
         if (sort != null && sort.equals("title")) {
-//             NameComparator comparator = new NameComparator();
             List<Product> sorted = base.getCatalogueOrderByTitle();
-//              sorted.sort(comparator);
+            total.addObject("catalogue", sorted);
+        }
+        if (sort != null && sort.equals("title_reverse")) {
+            List<Product> sorted = base.getCatalogueOrderByTitleReverse();
             total.addObject("catalogue", sorted);
         }
         if (sort!=null && sort.equals("by_name")){

@@ -168,6 +168,16 @@ public class DataBase {
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
+    public List<Product> getCatalogueOrderByTitleReverse() {
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
+                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "FROM \"Product\" p " +
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY title DESC  ";
+        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
+        return list;
+    }
 
     public List<Product> getCatalogueOrderByPriceAsc() {
 

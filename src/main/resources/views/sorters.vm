@@ -1,18 +1,22 @@
-##<br/>
-##<br/>
-##SORT BY:
-##<br/>
-##<p>
-##PRICE<a href="?sort=pricedesc"> Descend</p>
-##    OR
-##    <a href="?sort=priceasc"> Ascend <br/>
-##
-##        PRODUCT<a href="?sort=title"> Name Alphabetically
-##            OR
-##            <a href="?sort=title"> Name Reverse <br/>
-##
-##                MANUFACTURER<a href="?sort=by_name"> Alphabetically
-##                    OR
-##                    <a href="?sort=reverse_by_name"> Reverse
-##
-##                        </p>
+<br/>
+<br/>
+<div class="multiplier">
+    SORT BY:
+    <br/>
+    product Price
+    <button><a href="?sort=pricedesc"> Desc.</a></button>
+    <button><a href="?sort=priceasc"> Asc.</a> </button>
+    <br/>
+
+    product Name
+    <button><a href="?sort=title">Alphabetically</a> </button>
+    <button><a href="?sort=title_reverse"> Reverse</a> </button>
+    <br/>
+
+    product Manufacturer
+    <button><a href="?sort=by_name">Alphabetically</a> </button>
+    <button> <a href="?sort=reverse_by_name">Reverse</a> </button>
+    <br/>
+</div>
+
+
