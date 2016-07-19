@@ -1,4 +1,9 @@
 #include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
@@ -18,14 +23,38 @@
     <p><b>Price:</b><br/>
         <input type="text" size="10" name="price" value="$recall.price">
     </p>
-    <p><b>Picture:</b><br/>
-        <input type="text" size="10" name="picture" value="$recall.picture">
-    </p>
+    <p><select name="picture">
+        <option disabled>Select picture</option>
+        #foreach ($p in $pictures)
+            <option
+                #if ($recall.picture == $p)
+                        selected
+                #end
+            > $p
+            </option>
+
+        #end
+    </select></p>
+
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5">$recall.description</textarea>
+
     </p>
+    <p><select name="manufacturerId">
+        <option disabled>Select manufacturer</option>
+        #foreach ($m in $manufacturers)
+            <option
+                #if ($recall.manufacturer.id == $m.id)
+                        selected
+                #end
+                        value="$m.id"> $m.name
+            </option>
+
+        #end
+    </select></p>
     <p><input type="submit" value="submit">
     </p>
+
     #include("views/footer.vm")
 
 </html>

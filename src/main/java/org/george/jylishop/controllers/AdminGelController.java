@@ -1,9 +1,12 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.db.PictureService;
+import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminGelController {
     @Autowired
     DataBase base;
+    @Autowired
+    PictureService pictureService;
+
 
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-gel");
+        view.addObject("manufacturers",base.getAllManufacturers());
+        view.addObject("pictures",pictureService.getAllPictures());
         return view;
     }
 
@@ -31,11 +39,13 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
                                  @RequestParam String description,
-                                 @RequestParam String picture)
+                                 @RequestParam String picture,
+                                 @RequestParam int manufacturerId)
     {
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
         post.addObject("catalogue", base.getCatalogue());
+
 
         added.setTitle(title);
         added.setDescription(description);
@@ -43,6 +53,7 @@ public class AdminGelController {
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
         added.setPicture(picture);
+        added.setManufacturer(base.getManufacturerById(manufacturerId));
         base.addProduct(added);
         return post;
     }
@@ -54,7 +65,8 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam double reactantPercent,
                                  @RequestParam String description,
-                                 @RequestParam String picture) {
+                                 @RequestParam String picture,
+                                 @RequestParam int manufacturerId) {
 
         Product selectedProduct = base.getProductById(id);
 
@@ -72,6 +84,8 @@ public class AdminGelController {
         updated.setReactantPercent(reactantPercent);
         updated.setPrice(price);
         updated.setPicture(picture);
+        Manufacturer manufacturer= base.getManufacturerById(manufacturerId);
+        updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
         post.addObject("catalogue", base.getCatalogue());
         return post;

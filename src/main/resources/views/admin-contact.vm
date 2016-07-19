@@ -1,4 +1,9 @@
 #include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
 <style>
     center {
         margin: auto;

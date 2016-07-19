@@ -2,7 +2,9 @@ package org.george.jylishop.controllers;
 
 
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.db.PictureService;
 import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminHemoController {
     @Autowired
     DataBase base;
+    @Autowired
+    PictureService pictureService;
 
 
     @RequestMapping(value = "/admin/hemos/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-hemo");
+        view.addObject("manufacturers",base.getAllManufacturers());
+        view.addObject("pictures",pictureService.getAllPictures());
         return view;
     }
 
@@ -33,11 +39,13 @@ public class AdminHemoController {
                                  @RequestParam Double price,
                                  @RequestParam String substance,
                                  @RequestParam String description,
-                                 @RequestParam String picture) {
+                                 @RequestParam String picture,
+                                 @RequestParam int manufacturerId) {
 
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
         post.addObject("catalogue", base.getCatalogue());
+
 
         newcomer.setTitle(title);
         newcomer.setDescription(description);
@@ -45,6 +53,7 @@ public class AdminHemoController {
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
         newcomer.setPicture(picture);
+        newcomer.setManufacturer(base.getManufacturerById(manufacturerId));
         base.addProduct(newcomer);
         return post;
 
@@ -58,7 +67,8 @@ public class AdminHemoController {
                                  @RequestParam Double price,
                                  @RequestParam String hemostaticSubstance,
                                  @RequestParam String description,
-                                 @RequestParam String picture) {
+                                 @RequestParam String picture,
+                                 @RequestParam int manufacturerId) {
 
         ModelAndView post = new ModelAndView("admin-total");
         Product selectedProduct = base.getProductById(id);
@@ -76,6 +86,8 @@ public class AdminHemoController {
         updated.setHemostaticSubstance(hemostaticSubstance);
         updated.setPrice(price);
         updated.setPicture(picture);
+        Manufacturer manufacturer=base.getManufacturerById(manufacturerId);
+        updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
         post.addObject("catalogue", base.getCatalogue());
         return post;

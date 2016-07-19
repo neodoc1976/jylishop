@@ -1,4 +1,9 @@
 #include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
 <form action="/admin/contact" method="post">
     <p><b>NEW CONTACT </b></p><br/>
     <p/>

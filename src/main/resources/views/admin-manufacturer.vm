@@ -1,0 +1,38 @@
+#include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
+<style>
+    center {
+        margin: auto;
+    }
+</style>
+<center>
+    <table cellpadding="20" cellspacing="0" border="3">
+        <center> MANUFACTURER</center>
+        </br>
+        </br>
+        </br>
+        <tr>
+            <th> Id </th>
+            <th> Manufacturer name</th>
+            <th> Manufacturer logo</th>
+            <th> Delete manufacturer</th>
+
+        </tr>
+
+        #foreach ($m in $manufacturers)
+
+            <tr>
+                <td>$m.id</td>
+                <td>$m.name</td>
+                <td><img src="/resources/logo/$m.logo" width="140" alt="File not found"></td>
+                <td><a href="/admin/manufacturer/$m.id/delete">Delete this</a></td>
+            </tr>
+        #end
+
+    </table>
+</center>
+#include("views/footer.vm")

@@ -10,7 +10,7 @@
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
-    <mvc:resources mapping="/resources/**" location="classpath:/static/"/>
+    <mvc:resources mapping="/static/**" location="classpath:/static/"/>
 
     <!-- Register the annotated components in the container eg : annotated controllers -->
     <context:component-scan base-package="org.george.jylishop.*"/>

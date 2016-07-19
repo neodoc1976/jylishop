@@ -23,6 +23,6 @@
 <br/>
 <br/>
 <center>
-<img src="/resources/$opalescenseInfo.picture" alt="File not found">
+<img src="/resources/pictures/$opalescenseInfo.picture" alt="File not found">
 </center>
 #include("views/footer.vm")

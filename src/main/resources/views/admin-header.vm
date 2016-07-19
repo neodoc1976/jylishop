@@ -14,23 +14,21 @@
 
 
     <body>
-    <a href="/admin/gels/add">ADD New OPASLESCENCE Gel</a></br>
+
+
+    <a href="/admin/contact">CONTACT edit page</a></br>
+    </br>
+    <a href="/admin/manufacturer">MANUFACTURER edit page</a></br>
+    </br>
+    <a href="/admin">PRODUCT edit page</a></br>
     </br>
 
-    <a href="/admin/hemos/add">ADD New HEMOSTATIC </a></br>
-    </br>
-
-    <a href="/admin/contact">EDIT CONTACT</a>
     </div>
     </br>
     </br>
     </br>
     <center>
-  <a href="/total" > <img src="/resources/jylishop.png" alt="My_vse_proybaly"></a>
+  <a href="/total" > <img src="/static/jylishop.png" alt="My_vse_proybaly"></a>
 
 </center>
-    </body>
-</br>
-</br>
-</br>
-</html>
+

@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.db.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
@@ -8,6 +9,7 @@ import org.george.jylishop.domain.Product;
 import org.george.jylishop.utils.NameComparator;
 import org.george.jylishop.utils.PriceCompartor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,10 @@ import java.util.List;
 public class ProductController {
     @Autowired
     DataBase base;
+    @Autowired
+    PictureService pictureService;
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {

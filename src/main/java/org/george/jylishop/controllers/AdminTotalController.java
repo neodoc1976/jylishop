@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
+import org.george.jylishop.db.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
@@ -21,6 +22,8 @@ import java.util.List;
 public class AdminTotalController {
     @Autowired
     DataBase base;
+    @Autowired
+    PictureService pictureService;
 
 
 
@@ -61,12 +64,17 @@ public class AdminTotalController {
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("admin-update-gel");
             view.addObject("recall", selectedProduct);
+            view.addObject("manufacturers",base.getAllManufacturers());
+            view.addObject("pictures",pictureService.getAllPictures());
             return view;
         }
 
         if (selectedProduct instanceof Hemostatic) {
             ModelAndView view = new ModelAndView("admin-update-hemo");
             view.addObject("recall", selectedProduct);
+            view.addObject("manufacturers",base.getAllManufacturers());
+            view.addObject("pictures",pictureService.getAllPictures());
+
             return view;
         }
 

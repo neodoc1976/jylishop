@@ -22,6 +22,8 @@ public class ProductRowMapper implements RowMapper<Product> {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setId(resultSet.getInt("manufacturer"));
         manufacturer.setName(resultSet.getString("name"));
+        manufacturer.setDescription(resultSet.getString("description"));
+        manufacturer.setLogo(resultSet.getString("logo"));
 
         if (type.equals(Product.HEMO_TYPE)) {
             Hemostatic product = new Hemostatic();

@@ -1,21 +1,9 @@
 #include ("views/header.vm")
-<style xmlns="http://www.w3.org/1999/html">
-    .type {
-        font-family: "Agency FB", sans-serif;
-        font-size: 170%;
-
-    }
-
-    .indent {
-        margin-left: 65px;
-    }
-
-</style>
 <br/>
 <br/>
 <div class=type>
     <div class="indent"
-    <b><img src="/resources/$manufacturer.logo" alt="File not found">
+    <b><img src="/resources/logo/$manufacturer.logo" alt="File not found">
         <br/>
         <br/>
 

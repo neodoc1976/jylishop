@@ -50,7 +50,7 @@ public class AdminGelControllerTest {
 
         int a= base.getCatalogue().size();
 
-        ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, picture);
+        ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, picture,0);
 
 //        int b = base.getCatalogue().size();
 
@@ -92,7 +92,7 @@ public class AdminGelControllerTest {
 
         when(base.getProductById(id)).thenReturn(product);
 
-        ModelAndView view1 = gelController.postForm(title, volume, price,reactantPercent, description, picture);
+        ModelAndView view1 = gelController.postForm(title, volume, price,reactantPercent, description, picture,0);
         assertEquals(view1.getViewName(), "error");
         assertNotNull(view1.getModel().get("message"));
     }
@@ -135,7 +135,7 @@ public class AdminGelControllerTest {
         volume = 0.4;
 
 
-        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture);
+        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture, 0);
 
         assertEquals(view.getViewName(),"admin-total");
         assertEquals(product.getTitle(),title);
@@ -159,7 +159,7 @@ public class AdminGelControllerTest {
 
         when(base.getProductById(id)).thenReturn(null);
 
-        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture);
+        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture,0);
         assertEquals(view.getViewName(),"error");
         assertNotNull(view.getModel().get("message"));
 

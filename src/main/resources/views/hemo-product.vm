@@ -24,6 +24,6 @@
 <br/>
 <br/>
 <center>
-<img src="/resources/$hemoInfo.picture" alt="File not found">
+<img src="/resources/pictures/$hemoInfo.picture" alt="File not found">
 </center>
 #include("views/footer.vm")

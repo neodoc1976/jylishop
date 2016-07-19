@@ -1,115 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<style type="text/css">
-    .upper {
-        margin: 0px 0px 75px 430px;
-
-    }
-
-    .upperadd {
-        margin-left: 340px;
-        margin-bottom: 50px;
-
-
-    }
-
-    .upperaddtext {
-        font-family: "Lucida Bright", sans-serif;
-
-    }
-    .borderer{
-        border: 2px solid black;
-    }
-
-    body {
-        background-color: #DCDCDC; /* Цвет фона веб-страницы */
-    }
-
-    h1 {
-        background-color: #BDB76B; /* Цвет фона под заголовком */
-
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    .letter {
-        color: #B22222;
-        font-size: 300%; /* Размер шрифта */
-        font-family: "Lucida Handwriting", sans-serif;
-    }
-    .letter1{
-        font-family: "Agency FB",sans-serif;
-    }
-
-    .multiplier {
-
-        font-size: 150%;
-    }
-
-    y {
-        color: #FF4500; /* Y */
-    }
-
-    l {
-        color: #FFA500; /* L */
-    }
-
-    v {
-        color: #00FF00; /* I */
-    }
-
-    z {
-        color: #87CEFA; /* S */
-    }
-
-    h {
-        color: #00008b; /* H */
-    }
-
-    o {
-        color: #9400D3; /* O */
-    }
-
-    r {
-        color: #FF00FF; /* P */
-    }
-
-    .otherletter {
-        font-size: 200%;
-        font-family: "Lucida Handwriting", sans-serif;
-
-    }
-
-    .distanser1 {
-        margin: 0px 0px 0px 300px;
-    }
-
-
-</style>
+<link rel="stylesheet" href="/static/style.css" type="text/css"/>
 
 <head>
     <meta charset="UTF-8">
     <title>JYLISHOP</title>
     <head>
-        <link rel="shortcut icon" href="/resources/favicon.ico" type="image/ico">
+        <link rel="shortcut icon" href="/static/favicon.ico" type="image/ico">
     </head>
 </head>
 <div class="borderer">
 <h1>
-    <div class="upper"><span class="letter">J</span><span class="otherletter"><y>Y
-        <l>L
-            <v>I
-                <z><span class="multiplier">S</z>
-                <h>H
-                    <o>O
-                        <r>P
-    </y>
-        </l></v></o></r></span>
-    </div>
-
-    <br/>
+   <center> <img src="/static/jylishopMainLogo.PNG" alt="File not found"><br/></center>
     <div class="upperadd">
         <div class="upperaddtext">
             <y> Buy Quality Products In Our Online Store!</y>
@@ -121,12 +23,7 @@
 
 </h1>
 </div>
-<style>
-    body{
-        margin: 0px 0px 0px 0px;
-    }
 
-</style>
 
 
 <body>
