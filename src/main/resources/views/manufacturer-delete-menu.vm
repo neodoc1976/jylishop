@@ -1,0 +1,64 @@
+#include("views/header.vm")
+<center>
+    $message
+</center>
+<br/>
+<br/>
+<table cellpadding="25" cellspacing="0" border="5">
+    <tr>
+        <br/>
+        <center><b>Product from this manufacturer</b></center>
+        <br/>
+        <th> Product<br/>ID</th>
+        <th>Product name<br/></th>
+        <th>Price<br/></th>
+        <th> Picture</th>
+        <th> Manufacturer</th>
+
+
+    </tr>
+
+    #foreach ($p in $products)
+
+        <tr>
+
+            <td>$p.id</td>
+            <td>$p.title</td>
+            <td> $p.price $</td>
+            <td><img src="/resources/pictures/$p.picture" width="200" alt="File not found"></td>
+            <td>$p.manufacturer.name</td>
+
+        </tr>
+    #end
+
+</table>
+<br/>
+<br/>
+<div class="indent">
+    <div class="type">
+        AVALAIBLE OPTIONS
+        <br/>
+        <br/>
+        <a href="/admin/manufacturer/$id/force_delete">1.Delete the manufacturer and all products related</a>
+        <br/>
+        <br/>
+        <a href="/admin/manufacturer">2.Leave everything as is and return to the Manufacturer menu</a>
+        <br/>
+        <br/>
+        3.Remove producer. Products former manufacturer of products will be a new manufacturer
+        <br/>
+        <form action="/admin/manufacturer/$id/replace-with/" method="post">
+        <p><select name="newId">
+            <option disabled selected>Select manufacturers</option>
+            #foreach ($m in $man)
+                <option value="$m.id"> $m.name </option>
+            #end
+        </select></p>
+        <p><input type="submit" value="submit">
+        </p>
+            </form>
+        </br>
+    </div>
+</div>
+
+#include("views/footer.vm")

@@ -1,0 +1,8 @@
+#include("views/admin-header.vm")
+<p><select name="manufacturers">
+    <option disabled selected>Select manufacturers</option>
+    #foreach ($m in $manufacturers)
+        <option > $m.name </option>
+    #end
+</select></p>
+#include("views/footer.vm")

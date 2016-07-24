@@ -6,6 +6,8 @@ import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -174,11 +176,11 @@ public class DataBase {
         jdbcTemplate.update(sql, product.getId());
     }
 
-    public void deleteManufacturer(Manufacturer manufacturer){
+    public void deleteManufacturer(Manufacturer manufacturer) {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "DELETE FROM \"Manufacturer\" WHERE id=?";
-        jdbcTemplate.update(sql,manufacturer.getId());
+        jdbcTemplate.update(sql, manufacturer.getId());
     }
 
     public List<Product> getCatalogueOrderByTitle() {
@@ -283,6 +285,25 @@ public class DataBase {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT logo, id , name , description FROM \"Manufacturer\" ";
         return jdbcTemplate.query(sql, new ManufacturerRowMapper());
+    }
+
+    public List<Product> getProductListByManufacturer(int id) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE m.id=?";
+        List<Product> list = jdbcTemplate.query(sql, new Object[]{id}, new ProductRowMapper());
+        return list;
+
+    }
+
+    public void deleteProductListByManufacturer(int id) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "DELETE FROM \"Product\" WHERE manufacturer=?";
+        jdbcTemplate.update(sql, id);
+    }
+    public void changeManufacturerForProducts(int newId,int oldId){
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+        String sql = "UPDATE \"Product\"  SET Manufacturer=? WHERE Manufacturer=? ";
+        jdbcTemplate.update(sql,newId,oldId);
     }
 
 
