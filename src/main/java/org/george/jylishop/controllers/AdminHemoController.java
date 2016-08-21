@@ -2,7 +2,7 @@ package org.george.jylishop.controllers;
 
 
 import org.george.jylishop.db.DataBase;
-import org.george.jylishop.db.PictureService;
+import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 /**
  * Created by Yulya on 21.05.2016.
@@ -39,22 +42,28 @@ public class AdminHemoController {
                                  @RequestParam Double price,
                                  @RequestParam String substance,
                                  @RequestParam String description,
-                                 @RequestParam String picture,
-                                 @RequestParam int manufacturerId) {
+                                 @RequestParam (required = false)String picture,
+                                 @RequestParam int manufacturerId,
+                                 @RequestParam ("photo")MultipartFile photo) throws IOException {
 
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
-        post.addObject("catalogue", base.getCatalogue());
-
+        if (photo.isEmpty()) {
+            newcomer.setPicture(picture);
+        }
+        else{
+            newcomer.setPicture(photo.getOriginalFilename());
+            pictureService.saveProductPhoto(photo.getInputStream(),photo.getOriginalFilename());
+        }
 
         newcomer.setTitle(title);
         newcomer.setDescription(description);
         newcomer.setVolume(volume);
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
-        newcomer.setPicture(picture);
         newcomer.setManufacturer(base.getManufacturerById(manufacturerId));
         base.addProduct(newcomer);
+        post.addObject("catalogue", base.getCatalogue());
         return post;
 
     }

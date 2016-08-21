@@ -1,0 +1,39 @@
+#include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<form action="/admin/manufacturer/$recall.id/update" method="post">
+    <p><b>EDIT Manufacturers</b></p><br/>
+    <p/>
+    <p><b>Name:</b><br/>
+        <input type="text" size="40" name="name" value="$recall.name">
+    </p>
+
+    <p><select name="logo">
+        <option disabled>Select logo</option>
+        #foreach ($l in $logos)
+            <option
+                #if ($recall.logo == $l)
+                        selected
+                #end
+            > $l
+            </option>
+
+        #end
+    </select></p>
+
+    <p><b>Description:</b><br/>
+        <textarea name="description" cols="50" rows="5">$recall.description</textarea>
+
+    </p>
+
+    <p><input type="submit" value="submit">
+    </p>
+    #include("views/footer.vm")
+
+</html>

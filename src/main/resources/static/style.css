@@ -72,6 +72,8 @@ center {
     font-size: 250%;
     color: black;
 }
+
+
 .type {
     font-family: "Agency FB", sans-serif;
     font-size: 170%;
@@ -80,4 +82,10 @@ center {
 
 .indent {
     margin-left: 65px;
+}
+.indent2 {
+    margin-left: 130px;
+}
+.meny {
+    margin: 50px 50px 50px 50px;
 }

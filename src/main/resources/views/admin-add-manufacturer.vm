@@ -4,7 +4,8 @@
 </br>
 </br>
 </html>
-<form action="/admin/manufacturer" method="post">
+<form enctype="multipart/form-data" action="/admin/manufacturer" method="post">
+
     <p><b>NEW Manufacturer</b></p><br/>
 
     <p/>
@@ -14,12 +15,14 @@
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5"></textarea>
     </p>
+    <p><b>Upload your image</b></p>
+    <p><input type="file" name="photo" accept="image/*,image/jpeg">
 
     <p><b>Logo:</b><br/>
         <select name="logo">
             <option disabled selected>Select logo</option>
             #foreach ($l in $logos)
-                <option > $l </option>
+                <option> $l</option>
             #end
         </select>
     </p>
@@ -28,4 +31,4 @@
     </p>
 
 
-    #include("views/footer.vm")
+#include("views/footer.vm")

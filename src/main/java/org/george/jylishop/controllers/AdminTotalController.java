@@ -1,7 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
-import org.george.jylishop.db.PictureService;
+import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
@@ -27,7 +27,7 @@ public class AdminTotalController {
 
 
 
-    @RequestMapping({"/admin","/aaa","/фвьшт"})
+    @RequestMapping({"/admin"})
     public ModelAndView adminList(@RequestParam(required = false) String sort) {
         ModelAndView admin = new ModelAndView("admin-total");
         admin.addObject("catalogue", base.getCatalogue());

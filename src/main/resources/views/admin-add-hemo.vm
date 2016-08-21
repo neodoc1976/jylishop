@@ -4,7 +4,7 @@
 </br>
 </br>
 </html>
-<form action="/admin/hemos" method="post">
+<form enctype="multipart/form-data" action="/admin/hemos" method="post">
     <p><b>NEW Hemostatic</b></p><br/>
 
     <p/>
@@ -23,6 +23,8 @@
     <p><b>Price:</b><br/>
         <input type="text" size="10" name="price">
     </p>
+    <p><b>Upload your image</b></p>
+    <p><input type="file" name="photo" accept="image/*,image/jpeg">
     <p><b>Picture:</b><br/>
     <select name="picture">
         <option disabled selected>Select picture</option>

@@ -169,6 +169,15 @@ public class DataBase {
         }
     }
 
+    public void updateManufacturer(Manufacturer manufacturer) {
+        String sql = "UPDATE \"Manufacturer\" SET name=?,logo=?,description=? WHERE id=?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(sql, manufacturer.getName(),
+                manufacturer.getLogo(),
+                manufacturer.getDescription(),
+                manufacturer.getId());
+    }
+
     public void deleteProduct(Product product) {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -300,11 +309,29 @@ public class DataBase {
         String sql = "DELETE FROM \"Product\" WHERE manufacturer=?";
         jdbcTemplate.update(sql, id);
     }
-    public void changeManufacturerForProducts(int newId,int oldId){
-        JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+
+    public void changeManufacturerForProducts(int newId, int oldId) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "UPDATE \"Product\"  SET Manufacturer=? WHERE Manufacturer=? ";
-        jdbcTemplate.update(sql,newId,oldId);
+        jdbcTemplate.update(sql, newId, oldId);
     }
 
+    public int getProductsCountForManufacturer(int id) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = ("SELECT count (*) FROM \"Product\" p WHERE  p.manufacturer=?;");
+        int i = jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
+        return i;
+
+    }
+    public List<Product> getOnlyGels() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type='opal_gel';;";
+        return jdbcTemplate.query(sql, new ProductRowMapper());
+    }
+    public List<Product> getOnlyHemos() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type='hemostatic';";
+        return jdbcTemplate.query(sql, new ProductRowMapper());
+    }
 
 }

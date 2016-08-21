@@ -1,13 +1,11 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
-import org.george.jylishop.db.PictureService;
+import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
-import org.george.jylishop.utils.NameComparator;
-import org.george.jylishop.utils.PriceCompartor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Collections;
 
 import java.util.List;
 
@@ -61,11 +57,11 @@ public class ProductController {
             List<Product> sorted = base.getCatalogueOrderByTitleReverse();
             total.addObject("catalogue", sorted);
         }
-        if (sort!=null && sort.equals("by_name")){
+        if (sort != null && sort.equals("by_name")) {
             List<Product> sorted = base.getCatalogueOrderByManufacturer();
-            total.addObject("catalogue",sorted);
+            total.addObject("catalogue", sorted);
         }
-        if (sort!=null && sort.equals("reverse_by_name")) {
+        if (sort != null && sort.equals("reverse_by_name")) {
             List<Product> sorted = base.getCatalogueOrderByManufacturerReverse();
             total.addObject("catalogue", sorted);
         }
@@ -96,11 +92,38 @@ public class ProductController {
 
     @RequestMapping({"/manufacturer/{id}"})
     public ModelAndView variesManufacturer(@PathVariable int id) {
-        Manufacturer manufacturer=base.getManufacturerById(id);
+        Manufacturer manufacturer = base.getManufacturerById(id);
         ModelAndView view = new ModelAndView("man_description");
-        view.addObject("manufacturer",manufacturer);
+        view.addObject("manufacturer", manufacturer);
+        view.addObject("count", base.getProductsCountForManufacturer(id));
         return view;
     }
 
+    @RequestMapping({"/manufacturer/{id}/its_products"})
+    public ModelAndView productsOfManufacturer(@PathVariable int id) {
+        List<Product> list = base.getProductListByManufacturer(id);
+        ModelAndView view = new ModelAndView("total");
+        view.addObject("catalogue", list);
+        return view;
+
+
+    }
+
+    @RequestMapping({"/products/only_gels"})
+    public ModelAndView onlyGels() {
+        List<Product> list = base.getOnlyGels();
+        ModelAndView view = new ModelAndView("total");
+        view.addObject("catalogue", list);
+        return view;
+    }
+
+    @RequestMapping({"/products/only_hemos"})
+    public ModelAndView onlyHemos() {
+        List<Product> list = base.getOnlyHemos();
+        ModelAndView view = new ModelAndView("total");
+        view.addObject("catalogue", list);
+        return view;
+
+    }
 
 }

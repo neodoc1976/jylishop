@@ -17,6 +17,13 @@
     <button><a href="?sort=by_name">Alphabetically</a> </button>
     <button> <a href="?sort=reverse_by_name">Reverse</a> </button>
     <br/>
+
+    <button><a href="/products/only_gels">Only GELS</a> </button>
+    <br/>
+
+    <button><a href="/products/only_hemos">Only HEMOSTATIC</a> </button>
+    <br/>
+
 </div>
 
 

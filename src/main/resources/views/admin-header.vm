@@ -2,18 +2,8 @@
 
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<style>
-    center {
-        margin: auto;
-    }
-    .meny {
-        margin: 50px 50px 50px 50px;
-    }
-</style>
-<div class="meny"
 
-    <body>
-
+<body>
 
     <a href="/admin/contact">CONTACT edit page</a></br>
     </br>
@@ -21,13 +11,9 @@
     </br>
     <a href="/admin">PRODUCT edit page</a></br>
     </br>
+    <a href="/total">Return to the MAIN page</a>
 
-    </div>
-    </br>
-    </br>
-    </br>
-    <center>
-  <a href="/total" > <img src="/static/jylishop.png" alt="My_vse_proybaly"></a>
 
-</center>
+
+
 

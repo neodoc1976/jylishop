@@ -1,18 +1,20 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.db.DataBase;
-import org.george.jylishop.db.PictureService;
+import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 /**
  * Created by Yulya on 03.05.2016.
@@ -39,22 +41,29 @@ public class AdminGelController {
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
                                  @RequestParam String description,
-                                 @RequestParam String picture,
-                                 @RequestParam int manufacturerId)
-    {
+                                 @RequestParam (required = false) String picture,
+                                 @RequestParam int manufacturerId,
+                                 @RequestParam ("photo") MultipartFile photo) throws IOException {
+
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
-        post.addObject("catalogue", base.getCatalogue());
 
+        if (photo.isEmpty()){
+            added.setPicture(picture);
+        }
+        else{
+            added.setPicture(photo.getOriginalFilename());
+            pictureService.saveProductPhoto(photo.getInputStream(),photo.getOriginalFilename());
+        }
 
         added.setTitle(title);
         added.setDescription(description);
         added.setVolume(volume);
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
-        added.setPicture(picture);
         added.setManufacturer(base.getManufacturerById(manufacturerId));
         base.addProduct(added);
+        post.addObject("catalogue", base.getCatalogue());
         return post;
     }
 

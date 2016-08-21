@@ -7,7 +7,12 @@
         <br/>
         <br/>
 
-    </b> $manufacturer.description
+        $manufacturer.description
+        <br/>
+        <br/>
+        <br/>
+        Number of products from this manufacturer in our shop is: $count ( <a href="/manufacturer/$manufacturer.id/its_products">See these products</a>)
+
 </div>
 </div>
 #include("views/footer.vm")

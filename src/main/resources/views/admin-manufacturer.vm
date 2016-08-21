@@ -1,7 +1,9 @@
 #include("views/admin-header.vm")
+</br>
+</br>
+</br>
 <a href="/admin/manufacturer/add">ADD New Manufacturer</a></br>
 </body>
-</br>
 </br>
 </br>
 </html>
@@ -20,7 +22,9 @@
             <th> Id </th>
             <th> Manufacturer name</th>
             <th> Manufacturer logo</th>
+            <th> Counter products</th>
             <th> Delete manufacturer</th>
+            <th> Edit manufacturer</th>
 
         </tr>
 
@@ -30,7 +34,9 @@
                 <td>$m.id</td>
                 <td>$m.name</td>
                 <td><img src="/resources/logo/$m.logo" width="140" alt="File not found"></td>
+                <td> </td>
                 <td><a href="/admin/manufacturer/$m.id/delete">Delete this</a></td>
+                <td><a href="/admin/manufacturer/$m.id/update">Edit this</a></td>
             </tr>
         #end
 
