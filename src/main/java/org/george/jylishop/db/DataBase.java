@@ -192,69 +192,65 @@ public class DataBase {
         jdbcTemplate.update(sql, manufacturer.getId());
     }
 
-    public List<Product> getCatalogueOrderByTitle() {
+    public List<Product> getCatalogueOrderByTitleByAlphabet() {
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY title  ";
-        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
-        return list;
+        return getCatalogueOrderByTitle(" ORDER BY title");
     }
 
     public List<Product> getCatalogueOrderByTitleReverse() {
 
+        return getCatalogueOrderByTitle(" ORDER BY title DESC");
+    }
+
+    private List<Product> getCatalogueOrderByTitle(String sort_type) {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY title DESC  ";
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
 
     public List<Product> getCatalogueOrderByPriceAsc() {
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY price";
-        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
-        return list;
+        return getCatalogueOrderByPrice(" ORDER BY price");
     }
 
     public List<Product> getCatalogueOrderByPriceDesc() {
 
+        return getCatalogueOrderByPrice(" ORDER BY price DESC");
+    }
+
+    private List<Product> getCatalogueOrderByPrice(String sort_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY price DESC ";
-        List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
-        return list;
-    }
-
-    public List<Product> getCatalogueOrderByManufacturer() {
-
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY m.name ";
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
 
     }
+
+    public List<Product> getCatalogueOrderByManufacturerByAlphabet() {
+
+        return getCatalogueOrderByManufacturer(" ORDER BY m.name");
+    } //Do not forget to put a space at the beginning of String
 
     public List<Product> getCatalogueOrderByManufacturerReverse() {
 
+        return getCatalogueOrderByManufacturer(" ORDER BY m.name DESC");
+
+    }
+
+    private List<Product> getCatalogueOrderByManufacturer(String sort_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
+        String sql = ("SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY m.name DESC ";
+                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type);
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
 
@@ -323,14 +319,21 @@ public class DataBase {
         return i;
 
     }
+
     public List<Product> getOnlyGels() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type='opal_gel';;";
-        return jdbcTemplate.query(sql, new ProductRowMapper());
+
+        return getOnlyOneTypeOfProduct("'opal_gel'");
+
     }
+
     public List<Product> getOnlyHemos() {
+
+        return getOnlyOneTypeOfProduct("'hemostatic'");
+    }
+
+    private List<Product> getOnlyOneTypeOfProduct(String product_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type='hemostatic';";
+        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type=" + product_type;
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 

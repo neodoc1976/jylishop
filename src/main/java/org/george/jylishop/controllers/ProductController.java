@@ -50,7 +50,7 @@ public class ProductController {
 
         }
         if (sort != null && sort.equals("title")) {
-            List<Product> sorted = base.getCatalogueOrderByTitle();
+            List<Product> sorted = base.getCatalogueOrderByTitleByAlphabet();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("title_reverse")) {
@@ -58,7 +58,7 @@ public class ProductController {
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("by_name")) {
-            List<Product> sorted = base.getCatalogueOrderByManufacturer();
+            List<Product> sorted = base.getCatalogueOrderByManufacturerByAlphabet();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("reverse_by_name")) {

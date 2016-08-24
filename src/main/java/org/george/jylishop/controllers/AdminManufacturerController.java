@@ -27,10 +27,12 @@ public class AdminManufacturerController {
     PictureService pictureService;
 
     @RequestMapping("/admin/manufacturer")
-    public ModelAndView contactMethod() {
+    public ModelAndView allManufacturer() {
+        Manufacturer manufacturer=new Manufacturer();
         ModelAndView model = new ModelAndView("admin-manufacturer");
         model.addObject("manufacturers", base.getAllManufacturers());
         model.addObject("logos", pictureService.getAllLogo());
+
 
         return model;
     }
