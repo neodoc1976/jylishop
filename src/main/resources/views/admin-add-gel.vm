@@ -32,6 +32,8 @@
         </select></p>
 ##            <input type="text" size="10" name="picture">
 ##        </p>
+        <p><b>Upload your description(txt.files)</b></p>
+        <p><input type="file" name="description_text" accept="text/plain">
         <p><b>Description:</b><br/>
             <textarea name="description" cols="50" rows="5"></textarea>
         </p>

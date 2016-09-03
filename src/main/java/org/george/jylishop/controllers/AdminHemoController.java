@@ -6,6 +6,7 @@ import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.TextFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,8 @@ public class AdminHemoController {
     DataBase base;
     @Autowired
     PictureService pictureService;
+    @Autowired
+    TextFileService textFileService;
 
 
     @RequestMapping(value = "/admin/hemos/add", method = RequestMethod.GET)
@@ -41,13 +44,16 @@ public class AdminHemoController {
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
                                  @RequestParam String substance,
-                                 @RequestParam String description,
+                                 @RequestParam (required = false)String description,
                                  @RequestParam (required = false)String picture,
                                  @RequestParam int manufacturerId,
-                                 @RequestParam ("photo")MultipartFile photo) throws IOException {
+                                 @RequestParam ("photo")MultipartFile photo,
+                                 @RequestParam ("description_text") MultipartFile description_text)
+                                throws IOException {
 
         ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
+
         if (photo.isEmpty()) {
             newcomer.setPicture(picture);
         }
@@ -55,9 +61,19 @@ public class AdminHemoController {
             newcomer.setPicture(photo.getOriginalFilename());
             pictureService.saveProductPhoto(photo.getInputStream(),photo.getOriginalFilename());
         }
+        if (description_text.isEmpty()) {
+            newcomer.setDescription(description);
+
+        }
+
+        else {
+
+            newcomer.setDescription(textFileService.readDescription(description_text.getInputStream()));
+        }
+
+
 
         newcomer.setTitle(title);
-        newcomer.setDescription(description);
         newcomer.setVolume(volume);
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);

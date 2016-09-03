@@ -15,10 +15,12 @@
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5"></textarea>
     </p>
-    <p><b>Upload your image</b></p>
+    <p><b>Upload your logo</p>
     <p><input type="file" name="photo" accept="image/*,image/jpeg">
-
-    <p><b>Logo:</b><br/>
+        <br/> <br/>
+        OR
+        <br/>
+    <p>Select logo from list:</b><br/>
         <select name="logo">
             <option disabled selected>Select logo</option>
             #foreach ($l in $logos)
@@ -31,4 +33,4 @@
     </p>
 
 
-#include("views/footer.vm")
+    #include("views/footer.vm")

@@ -315,8 +315,7 @@ public class DataBase {
     public int getProductsCountForManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = ("SELECT count (*) FROM \"Product\" p WHERE  p.manufacturer=?;");
-        int i = jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
-        return i;
+        return  jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
 
     }
 

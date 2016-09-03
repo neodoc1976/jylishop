@@ -23,27 +23,29 @@
     <p><b>Price:</b><br/>
         <input type="text" size="10" name="price">
     </p>
-    <p><b>Upload your image</b></p>
-    <p><input type="file" name="photo" accept="image/*,image/jpeg">
-    <p><b>Picture:</b><br/>
-    <select name="picture">
+    <p><b>Upload your picture
+        <input type="file" name="photo" accept="image/*,image/jpeg"> <br/><br/> OR<br/> <br/> Select picture from
+        list: </b><select name="picture">
         <option disabled selected>Select picture</option>
         #foreach ($p in $pictures)
-            <option > $p </option>
+            <option> $p</option>
         #end
     </select>
-##        <input type="text" size="10" name="picture">
-    </p>
+    ##        <input type="text" size="10" name="picture"></p>
+
+    <p><b>Upload your description(txt.files)</b></p>
+    <p><input type="file" name="description_text" accept="text/plain">
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5"></textarea>
     </p>
     <p><select name="manufacturerId">
         <option disabled selected>Select manufacturer</option>
         #foreach ($m in $manufacturers)
-            <option value="$m.id"> $m.name </option>
+            <option value="$m.id"> $m.name</option>
         #end
     </select></p>
     <p><input type="submit" value="submit">
     </p>
 
-#include("views/footer.vm")
+    #include("views/footer.vm")
+

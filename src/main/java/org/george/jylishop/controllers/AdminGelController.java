@@ -5,6 +5,7 @@ import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.TextFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,8 @@ public class AdminGelController {
     DataBase base;
     @Autowired
     PictureService pictureService;
+    @Autowired
+    TextFileService textFileService;
 
 
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
@@ -40,10 +43,11 @@ public class AdminGelController {
                                  @RequestParam Double volume,
                                  @RequestParam Double price,
                                  @RequestParam Double reactantPercent,
-                                 @RequestParam String description,
+                                 @RequestParam (required = false)String description,
                                  @RequestParam (required = false) String picture,
                                  @RequestParam int manufacturerId,
-                                 @RequestParam ("photo") MultipartFile photo) throws IOException {
+                                 @RequestParam ("photo") MultipartFile photo,
+                                 @RequestParam ("description_text") MultipartFile description_text) throws IOException {
 
         ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
@@ -55,9 +59,16 @@ public class AdminGelController {
             added.setPicture(photo.getOriginalFilename());
             pictureService.saveProductPhoto(photo.getInputStream(),photo.getOriginalFilename());
         }
+        if (description_text.isEmpty()){
+            added.setDescription(description);
+        }
+        else {
+            added.setDescription(textFileService.readDescription(description_text.getInputStream()));
+
+
+        }
 
         added.setTitle(title);
-        added.setDescription(description);
         added.setVolume(volume);
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);

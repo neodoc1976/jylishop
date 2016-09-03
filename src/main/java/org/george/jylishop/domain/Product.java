@@ -62,4 +62,5 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
+
 }
