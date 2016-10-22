@@ -7,6 +7,12 @@
 <br/>
 
 
+<button><b><a href="/spring_security_login"> Log In</a> </b></button>
+<button><b><a href="/j_spring_security_logout"> Log Out</a> </b></button>
+
+
+
+
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
         <br/>
