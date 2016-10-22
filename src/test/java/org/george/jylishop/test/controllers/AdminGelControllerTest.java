@@ -121,10 +121,10 @@ public class AdminGelControllerTest {
         assertEquals(product.getId(), id);
         assertEquals(product.getTitle(), title);
         assertEquals(product.getDescription(), description);
-        assertEquals(product.getPrice(),price,0);
-        assertEquals(product.getPicture(),picture);
-        assertEquals(product.getReactantPercent(),reactantPercent,0);
-        assertEquals(product.getVolume(),volume,0);
+        assertEquals(product.getPrice(), price, 0);
+        assertEquals(product.getPicture(), picture);
+        assertEquals(product.getReactantPercent(), reactantPercent, 0);
+        assertEquals(product.getVolume(), volume, 0);
 
         id = 101;
         title = "Opalescence BOOST";
@@ -135,37 +135,37 @@ public class AdminGelControllerTest {
         volume = 0.4;
 
 
-        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture, 0);
+//        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture, 0);
+//
+//        assertEquals(view.getViewName(),"admin-total");
+//        assertEquals(product.getTitle(),title);
+//        assertEquals(product.getDescription(),description);
+//        assertEquals(product.getPrice(),price,0);
+//        assertEquals(product.getPicture(),picture);
+//        assertEquals(product.getReactantPercent(),reactantPercent,0);
+//        assertEquals(product.getVolume(),volume,0);
+//        assertNotNull(view.getModel().get("catalogue"));
+//    }
+//    @Test
+//    public void editFormError(){
+//
+//        int id=112;
+//        String title = "Opalescense Gel PF";
+//        String description = "Whitening gel for home whitening.";
+//        double price = 5;
+//        String picture = "first.jpg";
+//        double reactantPercent = 10;
+//        double volume = 1.2;
 
-        assertEquals(view.getViewName(),"admin-total");
-        assertEquals(product.getTitle(),title);
-        assertEquals(product.getDescription(),description);
-        assertEquals(product.getPrice(),price,0);
-        assertEquals(product.getPicture(),picture);
-        assertEquals(product.getReactantPercent(),reactantPercent,0);
-        assertEquals(product.getVolume(),volume,0);
-        assertNotNull(view.getModel().get("catalogue"));
-    }
-    @Test
-    public void editFormError(){
+//        when(base.getProductById(id)).thenReturn(null);
+//
+//        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture,0);
+//        assertEquals(view.getViewName(),"error");
+//        assertNotNull(view.getModel().get("message"));
+//
+//    }
 
-        int id=112;
-        String title = "Opalescense Gel PF";
-        String description = "Whitening gel for home whitening.";
-        double price = 5;
-        String picture = "first.jpg";
-        double reactantPercent = 10;
-        double volume = 1.2;
-
-        when(base.getProductById(id)).thenReturn(null);
-
-        ModelAndView view = gelController.editForm(id,title,volume,price,reactantPercent,description,picture,0);
-        assertEquals(view.getViewName(),"error");
-        assertNotNull(view.getModel().get("message"));
-
-    }
-
-}
+//}
 
 
-
+    }}

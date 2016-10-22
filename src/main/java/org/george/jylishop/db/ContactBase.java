@@ -1,13 +1,11 @@
 package org.george.jylishop.db;
 
 import org.george.jylishop.domain.Contact;
-import org.george.jylishop.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,7 +64,7 @@ public class ContactBase {
                     contact.getTelephone(),
                     contact.getLocation(),
                     contact.getName(),
-                    Contact.Contact_Type);
+                    Contact.CONTACT_TYPE);
 
     }
 

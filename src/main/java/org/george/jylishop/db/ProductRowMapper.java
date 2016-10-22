@@ -25,7 +25,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         manufacturer.setDescription(resultSet.getString("description"));
         manufacturer.setLogo(resultSet.getString("logo"));
 
-        if (type.equals(Product.HEMO_TYPE)) {
+        if (type.equals(Product.Type.HEMO.getDataBaseString())) {
             Hemostatic product = new Hemostatic();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));
@@ -34,11 +34,12 @@ public class ProductRowMapper implements RowMapper<Product> {
             product.setDescription(resultSet.getString("description"));
             product.setVolume(resultSet.getDouble("volume"));
             product.setHemostaticSubstance(resultSet.getString("hemostatic_substance"));
+            product.setQuantity(resultSet.getInt("quantity"));
             product.setManufacturer(manufacturer);
             return product;
         }
 
-        if (type.equals(Product.GEL_TYPE)) {
+        if (type.equals(Product.Type.GEL.getDataBaseString())) {
             OpalescenseGel product = new OpalescenseGel();
             product.setId(resultSet.getInt("id"));
             product.setPrice(resultSet.getDouble("price"));
@@ -47,6 +48,7 @@ public class ProductRowMapper implements RowMapper<Product> {
             product.setDescription(resultSet.getString("description"));
             product.setVolume(resultSet.getDouble("volume"));
             product.setReactantPercent(resultSet.getDouble("reactant_percent"));
+            product.setQuantity(resultSet.getInt("quantity"));
             product.setManufacturer(manufacturer);
             return product;
         }

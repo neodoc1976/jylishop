@@ -16,7 +16,7 @@ public class ContactRowMapper implements RowMapper<Contact>{
 
         String type = resultSet.getString("data_type");
 
-        if (type.equals(Contact.Contact_Type)) {
+        if (type.equals(Contact.CONTACT_TYPE)) {
 
             Contact contact=new Contact();
             contact.setId(resultSet.getInt("id"));

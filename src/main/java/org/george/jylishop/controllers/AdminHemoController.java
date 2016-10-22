@@ -84,7 +84,7 @@ public class AdminHemoController {
 
     }
 
-
+ // Updating
     @RequestMapping(value = "/admin/hemos/{id}/update", method = RequestMethod.POST)
     public ModelAndView editForm(@PathVariable int id,
                                  @RequestParam String title,
@@ -93,6 +93,7 @@ public class AdminHemoController {
                                  @RequestParam String hemostaticSubstance,
                                  @RequestParam String description,
                                  @RequestParam String picture,
+                                 @RequestParam int quantity,
                                  @RequestParam int manufacturerId) {
 
         ModelAndView post = new ModelAndView("admin-total");
@@ -112,6 +113,7 @@ public class AdminHemoController {
         updated.setPrice(price);
         updated.setPicture(picture);
         Manufacturer manufacturer=base.getManufacturerById(manufacturerId);
+        updated.setQuantity(quantity);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
         post.addObject("catalogue", base.getCatalogue());

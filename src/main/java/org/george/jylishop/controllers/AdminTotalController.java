@@ -55,7 +55,7 @@ public class AdminTotalController {
         return delete;
 
     }
-
+// Viewing updating form
     @RequestMapping(value = "/admin/product/{id}/update", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable int id) {
         Product selectedProduct=null;
@@ -82,5 +82,6 @@ public class AdminTotalController {
         view.addObject("message", "Sorry, the product with the ID does not exist");
         return view;
     }
+
 
 }

@@ -11,7 +11,10 @@
     <p/>
     <p><b>Name:</b><br/>
         <input type="text" size="40" name="name">
+
     </p>
+    <p><b>Upload your description(txt.files)</b></p>
+    <p><input type="file" name="description_file" accept="text/plain">
     <p><b>Description:</b><br/>
         <textarea name="description" cols="50" rows="5"></textarea>
     </p>

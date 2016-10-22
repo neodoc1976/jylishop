@@ -78,7 +78,7 @@ public class DataBase {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id " +
                 "WHERE p.id=?";
@@ -89,20 +89,21 @@ public class DataBase {
     public void addProduct(Product product) {
         if (product instanceof Hemostatic) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume, hemostatic_substance, product_type,manufacturer) " +
-                    "VALUES (?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume, hemostatic_substance, product_type,manufacturer,quantity) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
                     product.getDescription(),
                     product.getPicture(),
                     ((Hemostatic) product).getVolume(),
                     ((Hemostatic) product).getHemostaticSubstance(),
-                    Product.HEMO_TYPE,
+                    Product.Type.HEMO.getDataBaseString(),
                     product.getManufacturer().getId());
+                    product.getQuantity();
         }
         if (product instanceof OpalescenseGel) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume,reactant_percent , product_type,manufacturer) " +
+            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume,reactant_percent , product_type,manufacturer,quantity) " +
                     "VALUES (?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
@@ -110,8 +111,10 @@ public class DataBase {
                     product.getPicture(),
                     ((OpalescenseGel) product).getVolume(),
                     ((OpalescenseGel) product).getReactantPercent(),
-                    Product.GEL_TYPE,
+                    Product.Type.GEL.getDataBaseString(),
                     product.getManufacturer().getId());
+                    product.getQuantity();
+
         }
     }
 
@@ -139,7 +142,7 @@ public class DataBase {
         if (product instanceof Hemostatic) {
 
             String sql = "UPDATE \"Product\" " +
-                    "SET title = ?, price = ?,description =?,picture=?,volume=?,hemostatic_substance=?,manufacturer=? " +
+                    "SET title = ?, price = ?,description =?,picture=?,volume=?,hemostatic_substance=?,manufacturer=?,quantity=? " +
                     "WHERE id=?";
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             jdbcTemplate.update(sql, product.getTitle(),
@@ -149,12 +152,13 @@ public class DataBase {
                     ((Hemostatic) product).getVolume(),
                     ((Hemostatic) product).getHemostaticSubstance(),
                     product.getManufacturer().getId(),
+                    product.getQuantity(),
                     product.getId());
         }
         if (product instanceof OpalescenseGel) {
 
             String sql = "UPDATE \"Product\" " +
-                    "SET title = ?, price = ?,description =?,picture=?,volume=?,reactant_percent=?,manufacturer=? " +
+                    "SET title = ?, price = ?,description =?,picture=?,volume=?,reactant_percent=?,manufacturer=?,quantity=? " +
                     "WHERE id=?";
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             jdbcTemplate.update(sql, product.getTitle(),
@@ -164,6 +168,7 @@ public class DataBase {
                     ((OpalescenseGel) product).getVolume(),
                     ((OpalescenseGel) product).getReactantPercent(),
                     product.getManufacturer().getId(),
+                    product.getQuantity(),
                     product.getId());
 
         }
@@ -206,7 +211,7 @@ public class DataBase {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
@@ -226,7 +231,7 @@ public class DataBase {
     private List<Product> getCatalogueOrderByPrice(String sort_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
@@ -248,7 +253,7 @@ public class DataBase {
     private List<Product> getCatalogueOrderByManufacturer(String sort_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = ("SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,p.quantity,m.description,m.logo " +
                 "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type);
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
@@ -260,7 +265,7 @@ public class DataBase {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
                 "FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY p.id ";
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
@@ -271,7 +276,7 @@ public class DataBase {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id,p.product_type, p.title , p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,m.description,m.logo " +
+                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
                 " FROM \"Product\" p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id ";
 
@@ -315,7 +320,7 @@ public class DataBase {
     public int getProductsCountForManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = ("SELECT count (*) FROM \"Product\" p WHERE  p.manufacturer=?;");
-        return  jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
 
     }
 
@@ -335,5 +340,6 @@ public class DataBase {
         String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type=" + product_type;
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
+
 
 }

@@ -34,7 +34,7 @@ public class AdminContactController {
             @RequestParam String telephone,
             @RequestParam String location) {
 
-        ModelAndView view = new ModelAndView("contact");
+        ModelAndView view = new ModelAndView("admin-contact");
 
         Contact fresh= base.getContactById(id);
 
@@ -44,7 +44,7 @@ public class AdminContactController {
         fresh.setTelephone(telephone);
         fresh.setLocation(location);
         base.updateContact(fresh);
-        view.addObject("ci", fresh);
+        view.addObject("ci", base.getContact());
 
         return view;
     }
@@ -91,13 +91,15 @@ public class AdminContactController {
     {
         ModelAndView post = new ModelAndView("admin-contact");
         Contact added = new Contact();
-        post.addObject("ci", base.getContact());
+
 
         added.setName(name);
         added.setEmail(email);
         added.setAddress(address);
         added.setTelephone(telephone);
         added.setLocation(location);
+
+        post.addObject("ci", base.getContact());
         base.addContact(added);
         return post;
     }

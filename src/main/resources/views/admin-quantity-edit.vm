@@ -1,0 +1,37 @@
+#include("views/admin-header.vm")
+
+</body>
+</br>
+</br>
+</br>
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<form action="/admin/hemos/$recall.id/update" method="post">
+
+
+    <p/>
+    <p><b>Title:</b><br/>
+
+        <input type="text" size="40" name="title" value="$recall.title">
+    </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include("views/footer.vm")

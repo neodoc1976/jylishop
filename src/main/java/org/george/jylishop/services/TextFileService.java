@@ -9,11 +9,9 @@ import java.io.*;
  */
 @Service
 public class TextFileService {
-    public static final String ROOT = "..\\static\\";
-    public static final String DESCRIPTION = ROOT + "textfiles\\descriptions\\";
 
 
-    public String readDescription(InputStream is) throws FileNotFoundException, IOException {
+    public String readDescription(InputStream is) throws  IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 

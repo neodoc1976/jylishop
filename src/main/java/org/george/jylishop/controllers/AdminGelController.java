@@ -77,7 +77,7 @@ public class AdminGelController {
         post.addObject("catalogue", base.getCatalogue());
         return post;
     }
-
+//Updating
     @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.POST)
     public ModelAndView editForm(@PathVariable int id,
                                  @RequestParam String title,
@@ -86,6 +86,7 @@ public class AdminGelController {
                                  @RequestParam double reactantPercent,
                                  @RequestParam String description,
                                  @RequestParam String picture,
+                                 @RequestParam int quantity,
                                  @RequestParam int manufacturerId) {
 
         Product selectedProduct = base.getProductById(id);
@@ -104,6 +105,7 @@ public class AdminGelController {
         updated.setReactantPercent(reactantPercent);
         updated.setPrice(price);
         updated.setPicture(picture);
+        updated.setQuantity(quantity);
         Manufacturer manufacturer= base.getManufacturerById(manufacturerId);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);

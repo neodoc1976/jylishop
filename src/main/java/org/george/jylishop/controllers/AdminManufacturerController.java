@@ -4,6 +4,7 @@ import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.TextFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +26,12 @@ public class AdminManufacturerController {
     DataBase base;
     @Autowired
     PictureService pictureService;
+    @Autowired
+    TextFileService textFileService;
 
     @RequestMapping("/admin/manufacturer")
     public ModelAndView allManufacturer() {
-        Manufacturer manufacturer=new Manufacturer();
+        Manufacturer manufacturer = new Manufacturer();
         ModelAndView model = new ModelAndView("admin-manufacturer");
         model.addObject("manufacturers", base.getAllManufacturers());
         model.addObject("logos", pictureService.getAllLogo());
@@ -40,7 +43,8 @@ public class AdminManufacturerController {
 
     @RequestMapping(value = "/admin/manufacturer", method = RequestMethod.POST)
     public ModelAndView postForm(@RequestParam String name,
-                                 @RequestParam String description,
+                                 @RequestParam(required = false) String description,
+                                 @RequestParam("description_file") MultipartFile description_file,
                                  @RequestParam(required = false) String logo,
                                  @RequestParam("photo") MultipartFile photo) throws IOException {
         ModelAndView post = new ModelAndView("admin-manufacturer");
@@ -52,8 +56,14 @@ public class AdminManufacturerController {
             pictureService.saveLogoPhoto(photo.getInputStream(), photo.getOriginalFilename());
         }
 
+        if (description_file.isEmpty()) {
+            neoteric.setDescription(description);
+
+        } else {
+            neoteric.setDescription(textFileService.readDescription(description_file.getInputStream()));
+        }
+
         neoteric.setName(name);
-        neoteric.setDescription(description);
         base.addManufacturer(neoteric);
 
         post.addObject("manufacturers", base.getAllManufacturers());
