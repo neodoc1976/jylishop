@@ -1,0 +1,17 @@
+
+#include ("views/header.vm")
+
+<form action="/registration" method="post">
+
+    <p><b>Username: </b><br/>
+        <input type="text" size="40" name="username">
+    </p>
+    <p><b>Password: </b><br/>
+        <input type="text" size="40" name="password">
+    </p>
+    <p><input type="submit" value="submit">
+    </p>
+
+
+
+#include("views/footer.vm")

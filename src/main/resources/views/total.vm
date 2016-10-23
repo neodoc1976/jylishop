@@ -18,8 +18,8 @@
         <br/>
         <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
-        <th>Product name<br/></th>
-        <th>Price<br/></th>
+        <th> Product name<br/></th>
+        <th> Price<br/></th>
         <th> Picture </th>
         <th> Quantity </th>
         <th> Manufacturer</th>
