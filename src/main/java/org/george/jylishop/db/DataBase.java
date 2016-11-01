@@ -98,13 +98,13 @@ public class DataBase {
                     ((Hemostatic) product).getVolume(),
                     ((Hemostatic) product).getHemostaticSubstance(),
                     Product.Type.HEMO.getDataBaseString(),
-                    product.getManufacturer().getId());
-                    product.getQuantity();
+                    product.getManufacturer().getId(),
+                    product.getQuantity());
         }
         if (product instanceof OpalescenseGel) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume,reactant_percent , product_type,manufacturer,quantity) " +
-                    "VALUES (?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+                    "VALUES (?,?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
                     product.getDescription(),
@@ -112,8 +112,8 @@ public class DataBase {
                     ((OpalescenseGel) product).getVolume(),
                     ((OpalescenseGel) product).getReactantPercent(),
                     Product.Type.GEL.getDataBaseString(),
-                    product.getManufacturer().getId());
-                    product.getQuantity();
+                    product.getManufacturer().getId(),
+                    product.getQuantity());
 
         }
     }
@@ -340,6 +340,8 @@ public class DataBase {
         String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type=" + product_type;
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
+
+
 
 
 }

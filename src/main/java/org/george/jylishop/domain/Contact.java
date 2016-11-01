@@ -1,14 +1,23 @@
 package org.george.jylishop.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Yulya on 02.05.2016.
  */
+@Entity
+@Table
 public class Contact {
     private String name;
     private String email;
     private String telephone;
     private String address;
     private String location;
+    @Id
+    @GeneratedValue
     private int id;
     public final static String CONTACT_TYPE ="contact_type" ;//додаткове поле-маркер для точної ідентифікації класу даних при виклику з бази.
 

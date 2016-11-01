@@ -1,6 +1,6 @@
 package org.george.jylishop.controllers;
 
-import org.george.jylishop.db.ContactBase;
+import org.george.jylishop.dao.ContactDao;
 import org.george.jylishop.domain.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminContactController {
     @Autowired
-    ContactBase base;
+    ContactDao base;
 
     @RequestMapping(value = "/admin/contact/{id}/update", method = RequestMethod.GET)
     public ModelAndView getForm(@PathVariable int id) {
@@ -26,7 +26,7 @@ public class AdminContactController {
     }
 
     @RequestMapping(value = "/admin/contact/{id}/update", method = RequestMethod.POST)
-    public ModelAndView editForm(
+    public String editForm(
             @PathVariable int id,
             @RequestParam String name,
             @RequestParam String email,
@@ -34,7 +34,7 @@ public class AdminContactController {
             @RequestParam String telephone,
             @RequestParam String location) {
 
-        ModelAndView view = new ModelAndView("admin-contact");
+//        ModelAndView view = new ModelAndView("admin-contact");
 
         Contact fresh= base.getContactById(id);
 
@@ -44,12 +44,13 @@ public class AdminContactController {
         fresh.setTelephone(telephone);
         fresh.setLocation(location);
         base.updateContact(fresh);
-        view.addObject("ci", base.getContact());
+//        view.addObject("ci", base.getContact());
 
-        return view;
+//        return view;
+        return "redirect:/admin/contact";
     }
 
-    @RequestMapping("/admin/contact")
+    @RequestMapping(value="/admin/contact",method= RequestMethod.GET)
     public ModelAndView contactMethod() {
         ModelAndView model = new ModelAndView("admin-contact");
         model.addObject("ci", base.getContact());
@@ -70,8 +71,8 @@ public class AdminContactController {
 
 //
         base.deleteContact(selectedContact);
-        delete.addObject("ci", base.getContact());
-        return delete;
+//        delete.addObject("ci", base.getContact());
+        return new ModelAndView("redirect:/admin/contact");
 
 
     }
@@ -82,14 +83,14 @@ public class AdminContactController {
     }
 
     @RequestMapping(value = "/admin/contact", method = RequestMethod.POST)
-    public ModelAndView postForm(@RequestParam String name,
-                                 @RequestParam String email,
-                                 @RequestParam String address,
-                                 @RequestParam String telephone,
-                                 @RequestParam String location
+    public String postForm(@RequestParam String name,
+                           @RequestParam String email,
+                           @RequestParam String address,
+                           @RequestParam String telephone,
+                           @RequestParam String location
                                 )
     {
-        ModelAndView post = new ModelAndView("admin-contact");
+//        ModelAndView post = new ModelAndView("admin-contact");
         Contact added = new Contact();
 
 
@@ -99,9 +100,9 @@ public class AdminContactController {
         added.setTelephone(telephone);
         added.setLocation(location);
 
-        post.addObject("ci", base.getContact());
+//        post.addObject("ci", base.getContact());
         base.addContact(added);
-        return post;
+        return  "redirect:/admin/contact";
     }
 
 }

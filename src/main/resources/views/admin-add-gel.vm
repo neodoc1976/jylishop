@@ -37,6 +37,10 @@
         <p><b>Description:</b><br/>
             <textarea name="description" cols="50" rows="5"></textarea>
         </p>
+        <p><b>Quantity:</b><br/>
+            <input type="text" size="10" name="quantity">
+        </p>
+
         <p><select name="manufacturerId">
             <option disabled selected>Select manufacturer</option>
             #foreach ($m in $manufacturers)

@@ -39,17 +39,18 @@ public class AdminGelController {
     }
 
     @RequestMapping(value = "/admin/gels", method = RequestMethod.POST)
-    public ModelAndView postForm(@RequestParam String title,
-                                 @RequestParam Double volume,
-                                 @RequestParam Double price,
-                                 @RequestParam Double reactantPercent,
-                                 @RequestParam (required = false)String description,
-                                 @RequestParam (required = false) String picture,
-                                 @RequestParam int manufacturerId,
-                                 @RequestParam ("photo") MultipartFile photo,
-                                 @RequestParam ("description_text") MultipartFile description_text) throws IOException {
+    public String postForm(@RequestParam String title,
+                           @RequestParam Double volume,
+                           @RequestParam Double price,
+                           @RequestParam Double reactantPercent,
+                           @RequestParam (required = false)String description,
+                           @RequestParam (required = false) String picture,
+                           @RequestParam int manufacturerId,
+                           @RequestParam int quantity,
+                           @RequestParam ("photo") MultipartFile photo,
+                           @RequestParam ("description_text") MultipartFile description_text) throws IOException {
 
-        ModelAndView post = new ModelAndView("admin-total");
+//        ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel added = new OpalescenseGel();
 
         if (photo.isEmpty()){
@@ -73,9 +74,10 @@ public class AdminGelController {
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
         added.setManufacturer(base.getManufacturerById(manufacturerId));
+        added.setQuantity(quantity);
         base.addProduct(added);
-        post.addObject("catalogue", base.getCatalogue());
-        return post;
+//        post.addObject("catalogue", base.getCatalogue());
+        return  "redirect:/admin";
     }
 //Updating
     @RequestMapping(value = "/admin/gels/{id}/update", method = RequestMethod.POST)
@@ -97,7 +99,7 @@ public class AdminGelController {
             return view;
         }
 
-        ModelAndView post = new ModelAndView("admin-total");
+//        ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel updated = (OpalescenseGel) selectedProduct;// Casting
         updated.setTitle(title);
         updated.setDescription(description);
@@ -109,8 +111,8 @@ public class AdminGelController {
         Manufacturer manufacturer= base.getManufacturerById(manufacturerId);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
-        post.addObject("catalogue", base.getCatalogue());
-        return post;
+//        post.addObject("catalogue", base.getCatalogue());
+       return new ModelAndView ("redirect:/admin");
     }
 
 }

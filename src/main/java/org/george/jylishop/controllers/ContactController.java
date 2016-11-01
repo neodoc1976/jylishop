@@ -1,7 +1,6 @@
 package org.george.jylishop.controllers;
 
-import org.george.jylishop.db.ContactBase;
-import org.george.jylishop.domain.Contact;
+import org.george.jylishop.dao.ContactDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ContactController {
     @Autowired
-    ContactBase base;
+    ContactDao base;
 
     @RequestMapping("/contact")
     public ModelAndView contactMethod() {

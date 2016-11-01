@@ -1,7 +1,7 @@
 package org.george.jylishop.test.controllers;
 
 import org.george.jylishop.controllers.AdminContactController;
-import org.george.jylishop.db.ContactBase;
+import org.george.jylishop.dao.ContactDao;
 import org.george.jylishop.domain.Contact;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class AdminContactControllerTest {
 
     @Mock
-    private ContactBase base;
+    private ContactDao base;
 
     @InjectMocks
     AdminContactController controller;

@@ -51,8 +51,9 @@ public class AdminTotalController {
 
 //        base.getCatalogue().remove(selectedProduct);
         base.deleteProduct(selectedProduct);
-        delete.addObject("catalogue", base.getCatalogue());
-        return delete;
+//        delete.addObject("catalogue", base.getCatalogue());
+//        return delete;
+        return new ModelAndView("redirect:/admin");
 
     }
 // Viewing updating form
@@ -82,6 +83,7 @@ public class AdminTotalController {
         view.addObject("message", "Sorry, the product with the ID does not exist");
         return view;
     }
+
 
 
 }

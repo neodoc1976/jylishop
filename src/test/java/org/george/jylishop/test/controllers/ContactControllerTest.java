@@ -1,21 +1,16 @@
 package org.george.jylishop.test.controllers;
 
 import org.george.jylishop.controllers.ContactController;
-import org.george.jylishop.db.ContactBase;
+import org.george.jylishop.dao.ContactDao;
 import org.george.jylishop.domain.Contact;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
-import org.junit.Assert;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +24,7 @@ public class ContactControllerTest {
     private ContactController controller;
 
     @Mock
-    private ContactBase base;
+    private ContactDao base;
 
     @Test
     public void contactTest(){

@@ -40,18 +40,19 @@ public class AdminHemoController {
     }
 
     @RequestMapping(value = "/admin/hemos", method = RequestMethod.POST)
-    public ModelAndView postForm(@RequestParam String title,
-                                 @RequestParam Double volume,
-                                 @RequestParam Double price,
-                                 @RequestParam String substance,
-                                 @RequestParam (required = false)String description,
-                                 @RequestParam (required = false)String picture,
-                                 @RequestParam int manufacturerId,
-                                 @RequestParam ("photo")MultipartFile photo,
-                                 @RequestParam ("description_text") MultipartFile description_text)
+    public String postForm(@RequestParam String title,
+                           @RequestParam Double volume,
+                           @RequestParam Double price,
+                           @RequestParam String substance,
+                           @RequestParam (required = false)String description,
+                           @RequestParam (required = false)String picture,
+                           @RequestParam int manufacturerId,
+                           @RequestParam int quantity,
+                           @RequestParam ("photo")MultipartFile photo,
+                           @RequestParam ("description_text") MultipartFile description_text)
                                 throws IOException {
 
-        ModelAndView post = new ModelAndView("admin-total");
+//        ModelAndView post = new ModelAndView("admin-total");
         Hemostatic newcomer = new Hemostatic();
 
         if (photo.isEmpty()) {
@@ -72,15 +73,15 @@ public class AdminHemoController {
         }
 
 
-
         newcomer.setTitle(title);
         newcomer.setVolume(volume);
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
         newcomer.setManufacturer(base.getManufacturerById(manufacturerId));
+        newcomer.setQuantity(quantity);
         base.addProduct(newcomer);
-        post.addObject("catalogue", base.getCatalogue());
-        return post;
+//        post.addObject("catalogue", base.getCatalogue());
+        return  "redirect:/admin";
 
     }
 
@@ -96,7 +97,7 @@ public class AdminHemoController {
                                  @RequestParam int quantity,
                                  @RequestParam int manufacturerId) {
 
-        ModelAndView post = new ModelAndView("admin-total");
+//        ModelAndView post = new ModelAndView("admin-total");
         Product selectedProduct = base.getProductById(id);
 
         if (selectedProduct == null) {
@@ -116,8 +117,8 @@ public class AdminHemoController {
         updated.setQuantity(quantity);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
-        post.addObject("catalogue", base.getCatalogue());
-        return post;
+//        post.addObject("catalogue", base.getCatalogue());
+        return new ModelAndView("redirect:/admin");
     }
 
 }
