@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 
+import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
@@ -29,12 +30,14 @@ public class AdminHemoController {
     PictureService pictureService;
     @Autowired
     TextFileService textFileService;
+    @Autowired
+    ManufacturerDao manufacturerDao;
 
 
     @RequestMapping(value = "/admin/hemos/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-hemo");
-        view.addObject("manufacturers",base.getAllManufacturers());
+        view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
         view.addObject("pictures",pictureService.getAllPictures());
         return view;
     }
@@ -77,7 +80,7 @@ public class AdminHemoController {
         newcomer.setVolume(volume);
         newcomer.setHemostaticSubstance(substance);
         newcomer.setPrice(price);
-        newcomer.setManufacturer(base.getManufacturerById(manufacturerId));
+        newcomer.setManufacturer(manufacturerDao.getManufacturerById(manufacturerId));
         newcomer.setQuantity(quantity);
         base.addProduct(newcomer);
 //        post.addObject("catalogue", base.getCatalogue());
@@ -113,7 +116,7 @@ public class AdminHemoController {
         updated.setHemostaticSubstance(hemostaticSubstance);
         updated.setPrice(price);
         updated.setPicture(picture);
-        Manufacturer manufacturer=base.getManufacturerById(manufacturerId);
+        Manufacturer manufacturer = manufacturerDao.getManufacturerById(manufacturerId);
         updated.setQuantity(quantity);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);

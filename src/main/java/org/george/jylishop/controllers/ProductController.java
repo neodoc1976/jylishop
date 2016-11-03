@@ -1,5 +1,6 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
@@ -28,6 +29,8 @@ public class ProductController {
     PictureService pictureService;
     @Autowired
     ResourceLoader resourceLoader;
+    @Autowired
+    ManufacturerDao manufacturerDao;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
@@ -35,19 +38,15 @@ public class ProductController {
         total.addObject("catalogue", base.getCatalogue());
 
         if (sort != null && sort.equals("priceasc")) {
-//            PriceCompartor compartor = new PriceCompartor();
+
             List<Product> sorted = base.getCatalogueOrderByPriceAsc();
-//            sorted.sort(compartor);
             total.addObject("catalogue", sorted);
         }
 
         if (sort != null && sort.equals("pricedesc")) {
-//            PriceCompartor compartor = new PriceCompartor();
-            List<Product> sorted = base.getCatalogueOrderByPriceDesc();
-//            sorted.sort(compartor);
-//            Collections.reverse(sorted);
-            total.addObject("catalogue", sorted);
 
+            List<Product> sorted = base.getCatalogueOrderByPriceDesc();
+            total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("title")) {
             List<Product> sorted = base.getCatalogueOrderByTitleByAlphabet();
@@ -92,7 +91,7 @@ public class ProductController {
 
     @RequestMapping({"/manufacturer/{id}"})
     public ModelAndView variesManufacturer(@PathVariable int id) {
-        Manufacturer manufacturer = base.getManufacturerById(id);
+        Manufacturer manufacturer = manufacturerDao.getManufacturerById(id);
         ModelAndView view = new ModelAndView("man_description");
         view.addObject("manufacturer", manufacturer);
         view.addObject("count", base.getProductsCountForManufacturer(id));
@@ -105,7 +104,6 @@ public class ProductController {
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;
-
 
     }
 

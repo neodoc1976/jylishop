@@ -1,6 +1,5 @@
 package org.george.jylishop.dao;
 
-import org.george.jylishop.domain.Contact;
 import org.george.jylishop.domain.Manufacturer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,42 +9,47 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/*** Created by Yulya on 27.05.2016.
+/**
+ * Created by Yulya on 03.11.2016.
  */
 @Component
-public class ContactDao {
+public class ManufacturerDao {
     @Autowired
     SessionFactory sessionFactory;
 
     @Transactional
-    public List<Contact> getContact() {
+    public void addManufacturer(Manufacturer manufacturer){
+
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Contact", Contact.class).list();
+        session.save(manufacturer);
     }
 
     @Transactional
-    public Contact getContactById(int id) {
+    public void updateManufacturer(Manufacturer manufacturer){
+
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Contact.class, id);
+        session.update(manufacturer);
     }
 
     @Transactional
-    public void updateContact(Contact contact) {
+    public void deleteManufacturer(Manufacturer manufacturer){
+
         Session session = sessionFactory.getCurrentSession();
-        session.update(contact);
+        session.delete(manufacturer);
+
     }
 
     @Transactional
-    public void deleteContact(Contact contact) {
+    public Manufacturer getManufacturerById(int id){
+
         Session session = sessionFactory.getCurrentSession();
-        session.delete(contact);
+        return session.get(Manufacturer.class, id);
+
     }
 
     @Transactional
-    public void addContact(Contact contact) {
+    public List<Manufacturer> getAllManufacturers(){
         Session session = sessionFactory.getCurrentSession();
-        session.save(contact);
+        return session.createQuery("from Manufacturer",Manufacturer.class).list();
     }
-
-
 }

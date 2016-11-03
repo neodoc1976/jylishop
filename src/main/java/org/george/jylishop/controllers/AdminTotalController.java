@@ -1,5 +1,6 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
@@ -24,6 +25,8 @@ public class AdminTotalController {
     DataBase base;
     @Autowired
     PictureService pictureService;
+    @Autowired
+    ManufacturerDao manufacturerDao;
 
 
 
@@ -49,14 +52,12 @@ public class AdminTotalController {
             return view;
         }
 
-//        base.getCatalogue().remove(selectedProduct);
         base.deleteProduct(selectedProduct);
-//        delete.addObject("catalogue", base.getCatalogue());
-//        return delete;
+
         return new ModelAndView("redirect:/admin");
 
     }
-// Viewing updating form
+
     @RequestMapping(value = "/admin/product/{id}/update", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable int id) {
         Product selectedProduct=null;
@@ -65,7 +66,7 @@ public class AdminTotalController {
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("admin-update-gel");
             view.addObject("recall", selectedProduct);
-            view.addObject("manufacturers",base.getAllManufacturers());
+            view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
             view.addObject("pictures",pictureService.getAllPictures());
             return view;
         }
@@ -73,7 +74,7 @@ public class AdminTotalController {
         if (selectedProduct instanceof Hemostatic) {
             ModelAndView view = new ModelAndView("admin-update-hemo");
             view.addObject("recall", selectedProduct);
-            view.addObject("manufacturers",base.getAllManufacturers());
+            view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
             view.addObject("pictures",pictureService.getAllPictures());
 
             return view;

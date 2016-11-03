@@ -1,5 +1,6 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
@@ -28,25 +29,25 @@ public class AdminManufacturerController {
     PictureService pictureService;
     @Autowired
     TextFileService textFileService;
+    @Autowired
+    ManufacturerDao manufacturerDao;
 
     @RequestMapping("/admin/manufacturer")
     public ModelAndView allManufacturer() {
-        Manufacturer manufacturer = new Manufacturer();
         ModelAndView model = new ModelAndView("admin-manufacturer");
-        model.addObject("manufacturers", base.getAllManufacturers());
+        model.addObject("manufacturers", manufacturerDao.getAllManufacturers());
         model.addObject("logos", pictureService.getAllLogo());
-
 
         return model;
     }
 
 
     @RequestMapping(value = "/admin/manufacturer", method = RequestMethod.POST)
-    public ModelAndView postForm(@RequestParam String name,
-                                 @RequestParam(required = false) String description,
-                                 @RequestParam("description_file") MultipartFile description_file,
-                                 @RequestParam(required = false) String logo,
-                                 @RequestParam("photo") MultipartFile photo) throws IOException {
+    public String postForm(@RequestParam String name,
+                           @RequestParam(required = false) String description,
+                           @RequestParam("description_file") MultipartFile description_file,
+                           @RequestParam(required = false) String logo,
+                           @RequestParam("photo") MultipartFile photo) throws IOException {
         ModelAndView post = new ModelAndView("admin-manufacturer");
         Manufacturer neoteric = new Manufacturer();
         if (photo.isEmpty()) {
@@ -64,44 +65,47 @@ public class AdminManufacturerController {
         }
 
         neoteric.setName(name);
-        base.addManufacturer(neoteric);
+        manufacturerDao.addManufacturer(neoteric);
 
-        post.addObject("manufacturers", base.getAllManufacturers());
-        post.addObject("logos", pictureService.getAllLogo());
-        return post;
+//        post.addObject("manufacturers", base.getAllManufacturers());
+//        post.addObject("logos", pictureService.getAllLogo());
+        return "redirect:/admin/manufacturer";
     }
 
     @RequestMapping(value = "/admin/manufacturer/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-manufacturer");
-        view.addObject("manufacturers", base.getAllManufacturers());
+        view.addObject("manufacturers", manufacturerDao.getAllManufacturers());
         view.addObject("logos", pictureService.getAllLogo());
         return view;
     }
 
     @RequestMapping(value = "/admin/manufacturer/{id}/update", method = RequestMethod.POST)
-    public ModelAndView updateForm(@PathVariable int id,
-                                   @RequestParam String name,
-                                   @RequestParam String logo,
-                                   @RequestParam String description) {
+    public String updateForm(@PathVariable int id,
+                             @RequestParam String name,
+                             @RequestParam String logo,
+                             @RequestParam String description) {
         ModelAndView view = new ModelAndView("admin-manufacturer");
-        Manufacturer updated = base.getManufacturerById(id);
+        Manufacturer updated = manufacturerDao.getManufacturerById(id);
         updated.setName(name);
         updated.setLogo(logo);
         updated.setDescription(description);
-        base.updateManufacturer(updated);
-        view.addObject("manufacturers", base.getAllManufacturers());
-        view.addObject("logos", pictureService.getAllLogo());
-        return view;
+        manufacturerDao.updateManufacturer(updated);
+        return "redirect:/admin/manufacturer";
+
+
+//        view.addObject("manufacturers", base.getAllManufacturers());
+//        view.addObject("logos", pictureService.getAllLogo());
+//        return view;
     }
 
     @RequestMapping(value = "/admin/manufacturer/{id}/update", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable int id) {
         Manufacturer selectedManufacturer = new Manufacturer();
-        selectedManufacturer = base.getManufacturerById(id);
+        selectedManufacturer = manufacturerDao.getManufacturerById(id);
         ModelAndView view = new ModelAndView("admin-update-manufacturer");
         view.addObject("recall", selectedManufacturer);
-        view.addObject("manufacturers", base.getAllManufacturers());
+        view.addObject("manufacturers", manufacturerDao.getAllManufacturers());
         view.addObject("logos", pictureService.getAllLogo());
         return view;
     }
@@ -110,7 +114,7 @@ public class AdminManufacturerController {
     @RequestMapping(value = "/admin/manufacturer/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteForm(@PathVariable int id) {
         ModelAndView delete = new ModelAndView("admin-manufacturer");
-        Manufacturer manufacturer = base.getManufacturerById(id);
+        Manufacturer manufacturer = manufacturerDao.getManufacturerById(id);
 
 
         List<Product> list = base.getProductListByManufacturer(id);
@@ -119,12 +123,12 @@ public class AdminManufacturerController {
             ModelAndView view = new ModelAndView("manufacturer-delete-menu");
             view.addObject("message", "You can not remove the manufacturer, because the database are products of this manufacturer");
             view.addObject("products", list);
-            view.addObject("man", base.getAllManufacturers());
+            view.addObject("man", manufacturerDao.getAllManufacturers());
             return view;
         } else {
 
-            base.deleteManufacturer(manufacturer);
-            delete.addObject("manufacturers", base.getAllManufacturers());
+            manufacturerDao.deleteManufacturer(manufacturer);
+            delete.addObject("manufacturers", manufacturerDao.getAllManufacturers());
             delete.addObject("logos", pictureService.getAllLogo());
             return delete;
         }
@@ -135,7 +139,7 @@ public class AdminManufacturerController {
     public ModelAndView deleteListForm(@PathVariable Integer id) {
         ModelAndView deleteList = new ModelAndView("manufacturer-delete-menu");
         base.deleteProductListByManufacturer(id);
-        base.deleteManufacturer(base.getManufacturerById(id));
+        manufacturerDao.deleteManufacturer(manufacturerDao.getManufacturerById(id));
         deleteList.addObject("id", id);
         deleteList.addObject("message", "All products of the selected manufacturer and the manufacturer has been removed");
         return deleteList;
@@ -147,7 +151,7 @@ public class AdminManufacturerController {
                                    @RequestParam int newId) {
         ModelAndView change = new ModelAndView("manufacturer-delete-menu");
         base.changeManufacturerForProducts(newId, oldId);
-        base.deleteManufacturer(base.getManufacturerById(oldId));
+        manufacturerDao.deleteManufacturer(manufacturerDao.getManufacturerById(oldId));
         change.addObject("message", "Manufacturer was changed");
         change.addObject("oldId", oldId);
         change.addObject("newId", newId);

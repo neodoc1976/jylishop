@@ -118,16 +118,16 @@ public class DataBase {
         }
     }
 
-    public void addManufacturer(Manufacturer manufacturer) {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "INSERT INTO \"Manufacturer\" (name,logo,description) " +
-                "VALUES (?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
-        jdbcTemplate.update(sql,
-                manufacturer.getName(),
-                manufacturer.getLogo(),
-                manufacturer.getDescription());
-
-    }
+//    public void addManufacturer(Manufacturer manufacturer) {
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        String sql = "INSERT INTO \"Manufacturer\" (name,logo,description) " +
+//                "VALUES (?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
+//        jdbcTemplate.update(sql,
+//                manufacturer.getName(),
+//                manufacturer.getLogo(),
+//                manufacturer.getDescription());
+//
+//    }
 
     public void updateProduct(Product product) {
 
@@ -174,14 +174,14 @@ public class DataBase {
         }
     }
 
-    public void updateManufacturer(Manufacturer manufacturer) {
-        String sql = "UPDATE \"Manufacturer\" SET name=?,logo=?,description=? WHERE id=?";
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.update(sql, manufacturer.getName(),
-                manufacturer.getLogo(),
-                manufacturer.getDescription(),
-                manufacturer.getId());
-    }
+//    public void updateManufacturer(Manufacturer manufacturer) {
+//        String sql = "UPDATE \"Manufacturer\" SET name=?,logo=?,description=? WHERE id=?";
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        jdbcTemplate.update(sql, manufacturer.getName(),
+//                manufacturer.getLogo(),
+//                manufacturer.getDescription(),
+//                manufacturer.getId());
+//    }
 
     public void deleteProduct(Product product) {
 
@@ -190,12 +190,12 @@ public class DataBase {
         jdbcTemplate.update(sql, product.getId());
     }
 
-    public void deleteManufacturer(Manufacturer manufacturer) {
-
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "DELETE FROM \"Manufacturer\" WHERE id=?";
-        jdbcTemplate.update(sql, manufacturer.getId());
-    }
+//    public void deleteManufacturer(Manufacturer manufacturer) {
+//
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        String sql = "DELETE FROM \"Manufacturer\" WHERE id=?";
+//        jdbcTemplate.update(sql, manufacturer.getId());
+//    }
 
     public List<Product> getCatalogueOrderByTitleByAlphabet() {
 
@@ -283,19 +283,19 @@ public class DataBase {
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 
-    public Manufacturer getManufacturerById(int id) {
+//    public Manufacturer getManufacturerById(int id) {
+//
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        String sql = "SELECT logo, id , name , description  FROM \"Manufacturer\"  WHERE id=?";
+//        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ManufacturerRowMapper());
+//
+//    }
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT logo, id , name , description  FROM \"Manufacturer\"  WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ManufacturerRowMapper());
-
-    }
-
-    public List<Manufacturer> getAllManufacturers() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT logo, id , name , description FROM \"Manufacturer\" ";
-        return jdbcTemplate.query(sql, new ManufacturerRowMapper());
-    }
+//    public List<Manufacturer> getAllManufacturers() {
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        String sql = "SELECT logo, id , name , description FROM \"Manufacturer\" ";
+//        return jdbcTemplate.query(sql, new ManufacturerRowMapper());
+//    }
 
     public List<Product> getProductListByManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

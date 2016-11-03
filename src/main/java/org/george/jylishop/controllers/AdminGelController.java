@@ -1,5 +1,6 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
@@ -28,12 +29,15 @@ public class AdminGelController {
     PictureService pictureService;
     @Autowired
     TextFileService textFileService;
+    @Autowired
+    ManufacturerDao manufacturerDao;
+
 
 
     @RequestMapping(value = "/admin/gels/add", method = RequestMethod.GET)
     public ModelAndView getForm() {
         ModelAndView view = new ModelAndView("admin-add-gel");
-        view.addObject("manufacturers",base.getAllManufacturers());
+        view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
         view.addObject("pictures",pictureService.getAllPictures());
         return view;
     }
@@ -73,7 +77,7 @@ public class AdminGelController {
         added.setVolume(volume);
         added.setReactantPercent(reactantPercent);
         added.setPrice(price);
-        added.setManufacturer(base.getManufacturerById(manufacturerId));
+        added.setManufacturer(manufacturerDao.getManufacturerById(manufacturerId));
         added.setQuantity(quantity);
         base.addProduct(added);
 //        post.addObject("catalogue", base.getCatalogue());
@@ -108,7 +112,7 @@ public class AdminGelController {
         updated.setPrice(price);
         updated.setPicture(picture);
         updated.setQuantity(quantity);
-        Manufacturer manufacturer= base.getManufacturerById(manufacturerId);
+        Manufacturer manufacturer = manufacturerDao.getManufacturerById(manufacturerId);
         updated.setManufacturer(manufacturer);
         base.updateProduct(updated);
 //        post.addObject("catalogue", base.getCatalogue());

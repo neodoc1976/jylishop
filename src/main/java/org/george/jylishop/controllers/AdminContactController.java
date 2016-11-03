@@ -34,8 +34,6 @@ public class AdminContactController {
             @RequestParam String telephone,
             @RequestParam String location) {
 
-//        ModelAndView view = new ModelAndView("admin-contact");
-
         Contact fresh= base.getContactById(id);
 
         fresh.setName(name);
@@ -44,9 +42,6 @@ public class AdminContactController {
         fresh.setTelephone(telephone);
         fresh.setLocation(location);
         base.updateContact(fresh);
-//        view.addObject("ci", base.getContact());
-
-//        return view;
         return "redirect:/admin/contact";
     }
 
@@ -60,18 +55,14 @@ public class AdminContactController {
     }
     @RequestMapping(value = "/admin/contact/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteForm(@PathVariable int id) {
-        ModelAndView delete = new ModelAndView("admin-contact");
         Contact selectedContact = base.getContactById(id);
-
         if (selectedContact == null) {
             ModelAndView view = new ModelAndView("error");
             view.addObject("message", "Sorry, the contact with the ID does not exist");
             return view;
         }
 
-//
         base.deleteContact(selectedContact);
-//        delete.addObject("ci", base.getContact());
         return new ModelAndView("redirect:/admin/contact");
 
 
@@ -90,7 +81,7 @@ public class AdminContactController {
                            @RequestParam String location
                                 )
     {
-//        ModelAndView post = new ModelAndView("admin-contact");
+
         Contact added = new Contact();
 
 
@@ -100,7 +91,7 @@ public class AdminContactController {
         added.setTelephone(telephone);
         added.setLocation(location);
 
-//        post.addObject("ci", base.getContact());
+
         base.addContact(added);
         return  "redirect:/admin/contact";
     }
