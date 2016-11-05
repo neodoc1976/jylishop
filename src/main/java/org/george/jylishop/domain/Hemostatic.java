@@ -1,8 +1,14 @@
 package org.george.jylishop.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by Yulya on 16.05.2016.
+ *
  */
+@Entity
+@Table
 public class Hemostatic extends Product {
     private String hemostaticSubstance;
     private double volume;

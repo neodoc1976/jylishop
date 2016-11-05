@@ -48,7 +48,7 @@ public class AdminGelControllerTest {
 
 //        when(base.getProductById(id)).thenReturn(null); // Ця логіка працювала коли base була Mock (мщмент "навчання")
 
-        int a= base.getCatalogue().size();
+//        int a= base.getCatalogue().size();
 //
 //        ModelAndView view = gelController.postForm(title, volume, price, reactantPercent, description, picture,0);
 

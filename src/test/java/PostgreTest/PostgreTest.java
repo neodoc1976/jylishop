@@ -46,7 +46,7 @@ public class PostgreTest {
             statement = connection.createStatement();
             //Выполним запрос
             ResultSet result1 = statement.executeQuery(
-                    "SELECT * FROM \"Product\"");
+                    "SELECT * FROM Product_Old");
             //result это указатель на первую строку с выборки
             //чтобы вывести данные мы будем использовать
             //метод next() , с помощью которого переходим к следующему элементу

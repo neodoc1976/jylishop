@@ -63,18 +63,18 @@ public class ProductControllerTestSortByPrice {
         assertEquals(index2, 1);
         assertEquals(index3, 2);
 
-        when(base.getCatalogue()).thenReturn(list);
-        ModelAndView total = controller.totalList(query);
-
-        assertNotNull(total.getModel().get("catalogue"));
-
-        index1 = ((List) total.getModel().get("catalogue")).indexOf(product1);
-        index2 = ((List) total.getModel().get("catalogue")).indexOf(product2);
-        index3 = ((List) total.getModel().get("catalogue")).indexOf(product3);
-
-        assertEquals(index1, 2);
-        assertEquals(index2, 0);
-        assertEquals(index3, 1);
+//        when(base.getCatalogue()).thenReturn(list);
+//        ModelAndView total = controller.totalList(query);
+//
+//        assertNotNull(total.getModel().get("catalogue"));
+//
+//        index1 = ((List) total.getModel().get("catalogue")).indexOf(product1);
+//        index2 = ((List) total.getModel().get("catalogue")).indexOf(product2);
+//        index3 = ((List) total.getModel().get("catalogue")).indexOf(product3);
+//
+//        assertEquals(index1, 2);
+//        assertEquals(index2, 0);
+//        assertEquals(index3, 1);
 
     }
 

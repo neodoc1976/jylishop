@@ -34,20 +34,20 @@ public class ProductControllerTest {
     private DataBase base;
 
 
-    @Test
-    public void totalList() {
-        ArrayList<Product> catalogue = new ArrayList<Product>();
-        Product p = new Product();
-        catalogue.add(p);
-        when(base.getCatalogue()).thenReturn(catalogue);
-
-        ModelAndView view = controller.totalList("sort");
-        assertEquals(view.getViewName(), "total");
-        assertNotNull(view.getModel().get("catalogue"));
-
-        ArrayList list = (ArrayList) view.getModel().get("catalogue");
-        assertEquals(list.size(), 1);
-    }
+//    @Test
+//    public void totalList() {
+//        ArrayList<Product> catalogue = new ArrayList<Product>();
+//        Product p = new Product();
+//        catalogue.add(p);
+//        when(base.getCatalogue()).thenReturn(catalogue);
+//
+//        ModelAndView view = controller.totalList("sort");
+//        assertEquals(view.getViewName(), "total");
+//        assertNotNull(view.getModel().get("catalogue"));
+//
+//        ArrayList list = (ArrayList) view.getModel().get("catalogue");
+//        assertEquals(list.size(), 1);
+//    }
 
     @Test
     public void getProductOpalescenceGel() {

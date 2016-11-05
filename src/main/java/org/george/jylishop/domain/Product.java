@@ -1,8 +1,12 @@
 package org.george.jylishop.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by Yulya on 21.05.2016.
  */
+@Entity
+@Table
 public class Product {
 //        public final static String GEL_TYPE = "opal_gel";
 //    public final static String HEMO_TYPE = "hemostatic";
@@ -26,8 +30,11 @@ public class Product {
     private String title;
     private double price;
     private String picture;
+    @Id
+    @GeneratedValue
     private int id;
     private int quantity;
+    @ManyToOne
     private Manufacturer manufacturer = new Manufacturer();
 
 

@@ -34,30 +34,30 @@ public class AdminHemoControllerTest {
         assertEquals(view.getViewName(), "admin-add-hemo");
     }
 
-    @Test
-    public void postFormTest() {
-        String title = "Title";
-        double volume = 30.0;
-        double price = 50.0;
-        String substance ="Hemostatic Substance";
-        String description = "Description";
-        int id = 444;
-        String picture = "Picture";
-        int a=base.getCatalogue().size();
+//    @Test
+//    public void postFormTest() {
+//        String title = "Title";
+//        double volume = 30.0;
+//        double price = 50.0;
+//        String substance ="Hemostatic Substance";
+//        String description = "Description";
+//        int id = 444;
+//        String picture = "Picture";
+//        int a=base.getCatalogue().size();
 
 //        ModelAndView view = hemoController.postForm(title,volume, price,substance,description, picture,0);
-        Hemostatic product = (Hemostatic) base.getProductById(id);
+//        Hemostatic product = (Hemostatic) base.getProductById(id);
 
 //        assertEquals(view.getViewName(), "admin-total");
 //        assertNotNull(view.getModel().get("catalogue"));
-        assertEquals(product.getTitle(), title);
-        assertEquals(product.getVolume(),volume,0);
-        assertEquals(product.getPrice(), price, 0);
-        assertEquals(product.getHemostaticSubstance(),substance);
-        assertEquals(product.getDescription(), description);
-        assertEquals(product.getPicture(), picture);
-        assertEquals(base.getCatalogue().size(),a+1);
-    }
+//        assertEquals(product.getTitle(), title);
+//        assertEquals(product.getVolume(),volume,0);
+//        assertEquals(product.getPrice(), price, 0);
+//        assertEquals(product.getHemostaticSubstance(),substance);
+//        assertEquals(product.getDescription(), description);
+//        assertEquals(product.getPicture(), picture);
+//        assertEquals(base.getCatalogue().size(),a+1);
+//    }
 
     @Test
     public void postFormErrorTest() {
@@ -68,12 +68,12 @@ public class AdminHemoControllerTest {
         String description = "Description";
         int id = 404;
         String picture = "Picture";
-
-        assertEquals(base.getCatalogue().size(), 7);
-
-        Hemostatic product = (Hemostatic) base.getProductById(id);
-
-        when(base.getProductById(id)).thenReturn(product);
+//
+//        assertEquals(base.getCatalogue().size(), 7);
+//
+//        Hemostatic product = (Hemostatic) base.getProductById(id);
+//
+//        when(base.getProductById(id)).thenReturn(product);
 //
 //        ModelAndView view = hemoController.postForm(title, volume, price,substance, description, picture,0);
 //        assertEquals(view.getViewName(), "error");

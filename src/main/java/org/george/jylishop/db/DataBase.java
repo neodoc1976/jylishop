@@ -74,22 +74,19 @@ public class DataBase {
 //        return list;
 //    }
     public Product getProductById(int id) {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
+                "FROM Product_Old p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id " +
                 "WHERE p.id=?";
-
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductRowMapper());
     }
 
     public void addProduct(Product product) {
         if (product instanceof Hemostatic) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume, hemostatic_substance, product_type,manufacturer,quantity) " +
+            String sql = "INSERT INTO Product_Old (title, price, description, picture, volume, hemostatic_substance, product_type,manufacturer,quantity) " +
                     "VALUES (?,?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
@@ -101,9 +98,10 @@ public class DataBase {
                     product.getManufacturer().getId(),
                     product.getQuantity());
         }
+
         if (product instanceof OpalescenseGel) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            String sql = "INSERT INTO \"Product\" (title, price, description, picture, volume,reactant_percent , product_type,manufacturer,quantity) " +
+            String sql = "INSERT INTO Product_Old (title, price, description, picture, volume,reactant_percent , product_type,manufacturer,quantity) " +
                     "VALUES (?,?,?,?,?,?,?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
             jdbcTemplate.update(sql, product.getTitle(),
                     product.getPrice(),
@@ -114,34 +112,23 @@ public class DataBase {
                     Product.Type.GEL.getDataBaseString(),
                     product.getManufacturer().getId(),
                     product.getQuantity());
-
         }
     }
 
-//    public void addManufacturer(Manufacturer manufacturer) {
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        String sql = "INSERT INTO \"Manufacturer\" (name,logo,description) " +
-//                "VALUES (?,?,?)"; // Назва колонок в таблиці бази та відповідні їх значення впід VALUES
-//        jdbcTemplate.update(sql,
-//                manufacturer.getName(),
-//                manufacturer.getLogo(),
-//                manufacturer.getDescription());
-//
-//    }
-
     public void updateProduct(Product product) {
-
         Product productInBase = getProductById(product.getId());
 
         if (productInBase == null) {
             return;
         }
+
         if (!product.getClass().equals(productInBase.getClass())) {
             return;
         }
+
         if (product instanceof Hemostatic) {
 
-            String sql = "UPDATE \"Product\" " +
+            String sql = "UPDATE Product_Old " +
                     "SET title = ?, price = ?,description =?,picture=?,volume=?,hemostatic_substance=?,manufacturer=?,quantity=? " +
                     "WHERE id=?";
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -155,9 +142,9 @@ public class DataBase {
                     product.getQuantity(),
                     product.getId());
         }
-        if (product instanceof OpalescenseGel) {
 
-            String sql = "UPDATE \"Product\" " +
+        if (product instanceof OpalescenseGel) {
+            String sql = "UPDATE Product_Old " +
                     "SET title = ?, price = ?,description =?,picture=?,volume=?,reactant_percent=?,manufacturer=?,quantity=? " +
                     "WHERE id=?";
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -170,61 +157,38 @@ public class DataBase {
                     product.getManufacturer().getId(),
                     product.getQuantity(),
                     product.getId());
-
         }
     }
 
-//    public void updateManufacturer(Manufacturer manufacturer) {
-//        String sql = "UPDATE \"Manufacturer\" SET name=?,logo=?,description=? WHERE id=?";
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        jdbcTemplate.update(sql, manufacturer.getName(),
-//                manufacturer.getLogo(),
-//                manufacturer.getDescription(),
-//                manufacturer.getId());
-//    }
-
     public void deleteProduct(Product product) {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "DELETE  FROM \"Product\" WHERE id=?";
+        String sql = "DELETE  FROM Product_Old WHERE id=?";
         jdbcTemplate.update(sql, product.getId());
     }
 
-//    public void deleteManufacturer(Manufacturer manufacturer) {
-//
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        String sql = "DELETE FROM \"Manufacturer\" WHERE id=?";
-//        jdbcTemplate.update(sql, manufacturer.getId());
-//    }
-
     public List<Product> getCatalogueOrderByTitleByAlphabet() {
-
         return getCatalogueOrderByTitle(" ORDER BY title");
     }
 
     public List<Product> getCatalogueOrderByTitleReverse() {
-
         return getCatalogueOrderByTitle(" ORDER BY title DESC");
     }
 
     private List<Product> getCatalogueOrderByTitle(String sort_type) {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
+                "FROM Product_Old p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
 
     public List<Product> getCatalogueOrderByPriceAsc() {
-
         return getCatalogueOrderByPrice(" ORDER BY price");
     }
 
     public List<Product> getCatalogueOrderByPriceDesc() {
-
         return getCatalogueOrderByPrice(" ORDER BY price DESC");
     }
 
@@ -232,112 +196,85 @@ public class DataBase {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
+                "FROM Product_Old p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type;
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
-
     }
 
     public List<Product> getCatalogueOrderByManufacturerByAlphabet() {
-
         return getCatalogueOrderByManufacturer(" ORDER BY m.name");
     } //Do not forget to put a space at the beginning of String
 
     public List<Product> getCatalogueOrderByManufacturerReverse() {
-
         return getCatalogueOrderByManufacturer(" ORDER BY m.name DESC");
-
     }
 
     private List<Product> getCatalogueOrderByManufacturer(String sort_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = ("SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,m.name,p.manufacturer,p.quantity,m.description,m.logo " +
-                "FROM \"Product\" p " +
+                "FROM Product_Old p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id" + sort_type);
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
-
     }
 
     public List<Product> getCatalogueOrderById() {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT p.id, p.title ,p.product_type, p.price , p.description , p.picture , p.volume," +
                 "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
-                "FROM \"Product\" p " +
+                "FROM Product_Old p " +
                 "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id  ORDER BY p.id ";
         List<Product> list = jdbcTemplate.query(sql, new ProductRowMapper());
         return list;
     }
 
-    public List<Product> getCatalogue() {
-
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT p.id,p.product_type, p.title , p.price , p.description , p.picture , p.volume," +
-                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
-                " FROM \"Product\" p " +
-                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id ";
-
-        return jdbcTemplate.query(sql, new ProductRowMapper());
-    }
-
-//    public Manufacturer getManufacturerById(int id) {
-//
+//    public List<Product> getCatalogue() {
 //        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        String sql = "SELECT logo, id , name , description  FROM \"Manufacturer\"  WHERE id=?";
-//        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ManufacturerRowMapper());
-//
-//    }
-
-//    public List<Manufacturer> getAllManufacturers() {
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        String sql = "SELECT logo, id , name , description FROM \"Manufacturer\" ";
-//        return jdbcTemplate.query(sql, new ManufacturerRowMapper());
+//        String sql = "SELECT p.id,p.product_type, p.title , p.price , p.description , p.picture , p.volume," +
+//                "p.reactant_percent, p.hemostatic_substance,p.quantity,m.name,p.manufacturer,m.description,m.logo " +
+//                " FROM Product_Old p " +
+//                "INNER JOIN \"Manufacturer\" m ON p.manufacturer = m.id ";
+//        return jdbcTemplate.query(sql, new ProductRowMapper());
 //    }
 
     public List<Product> getProductListByManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE m.id=?";
+        String sql = "SELECT*FROM Product_Old p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE m.id=?";
         List<Product> list = jdbcTemplate.query(sql, new Object[]{id}, new ProductRowMapper());
         return list;
-
     }
 
     public void deleteProductListByManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "DELETE FROM \"Product\" WHERE manufacturer=?";
+        String sql = "DELETE FROM Product_Old WHERE manufacturer=?";
         jdbcTemplate.update(sql, id);
     }
 
     public void changeManufacturerForProducts(int newId, int oldId) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "UPDATE \"Product\"  SET Manufacturer=? WHERE Manufacturer=? ";
+        String sql = "UPDATE Product_Old  SET Manufacturer=? WHERE Manufacturer=? ";
         jdbcTemplate.update(sql, newId, oldId);
     }
 
     public int getProductsCountForManufacturer(int id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = ("SELECT count (*) FROM \"Product\" p WHERE  p.manufacturer=?;");
+        String sql = ("SELECT count (*) FROM Product_Old p WHERE  p.manufacturer=?;");
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, Integer.class);
-
     }
 
     public List<Product> getOnlyGels() {
-
         return getOnlyOneTypeOfProduct("'opal_gel'");
-
     }
 
     public List<Product> getOnlyHemos() {
-
         return getOnlyOneTypeOfProduct("'hemostatic'");
     }
 
     private List<Product> getOnlyOneTypeOfProduct(String product_type) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT*FROM \"Product\" p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type=" + product_type;
+        String sql = "SELECT*FROM Product_Old p INNER JOIN \"Manufacturer\" m ON  m.id=p.manufacturer WHERE p.product_type=" + product_type;
         return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 

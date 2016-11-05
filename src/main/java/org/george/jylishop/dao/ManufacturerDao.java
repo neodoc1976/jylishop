@@ -19,21 +19,18 @@ public class ManufacturerDao {
 
     @Transactional
     public void addManufacturer(Manufacturer manufacturer){
-
         Session session = sessionFactory.getCurrentSession();
         session.save(manufacturer);
     }
 
     @Transactional
     public void updateManufacturer(Manufacturer manufacturer){
-
         Session session = sessionFactory.getCurrentSession();
         session.update(manufacturer);
     }
 
     @Transactional
     public void deleteManufacturer(Manufacturer manufacturer){
-
         Session session = sessionFactory.getCurrentSession();
         session.delete(manufacturer);
 
@@ -41,7 +38,6 @@ public class ManufacturerDao {
 
     @Transactional
     public Manufacturer getManufacturerById(int id){
-
         Session session = sessionFactory.getCurrentSession();
         return session.get(Manufacturer.class, id);
 
@@ -52,4 +48,5 @@ public class ManufacturerDao {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Manufacturer",Manufacturer.class).list();
     }
+
 }

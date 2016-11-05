@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
+import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
@@ -27,13 +28,15 @@ public class AdminTotalController {
     PictureService pictureService;
     @Autowired
     ManufacturerDao manufacturerDao;
+    @Autowired
+    ProductDao productDao;
 
 
 
     @RequestMapping({"/admin"})
     public ModelAndView adminList(@RequestParam(required = false) String sort) {
         ModelAndView admin = new ModelAndView("admin-total");
-        admin.addObject("catalogue", base.getCatalogue());
+        admin.addObject("catalogue", productDao.getCatalogue());
         if (sort != null && sort.equals("orderbyid")){
             List<Product> sorted = base.getCatalogueOrderById();
             admin.addObject("catalogue",sorted);
