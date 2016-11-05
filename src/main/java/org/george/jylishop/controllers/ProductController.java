@@ -42,29 +42,29 @@ public class ProductController {
 
         if (sort != null && sort.equals("priceasc")) {
 
-            List<Product> sorted = base.getCatalogueOrderByPriceAsc();
+            List<Product> sorted = productDao.getCatalogueOrderByPriceAsc();
             total.addObject("catalogue", sorted);
         }
 
         if (sort != null && sort.equals("pricedesc")) {
 
-            List<Product> sorted = base.getCatalogueOrderByPriceDesc();
+            List<Product> sorted = productDao.getCatalogueOrderByPriceDesc();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("title")) {
-            List<Product> sorted = base.getCatalogueOrderByTitleByAlphabet();
+            List<Product> sorted = productDao.getCatalogueOrderByTitleByAlphabet();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("title_reverse")) {
-            List<Product> sorted = base.getCatalogueOrderByTitleReverse();
+            List<Product> sorted = productDao.getCatalogueOrderByTitleReverse();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("by_name")) {
-            List<Product> sorted = base.getCatalogueOrderByManufacturerByAlphabet();
+            List<Product> sorted = productDao.getCatalogueOrderByManufacturerByAlphabet();
             total.addObject("catalogue", sorted);
         }
         if (sort != null && sort.equals("reverse_by_name")) {
-            List<Product> sorted = base.getCatalogueOrderByManufacturerReverse();
+            List<Product> sorted = productDao.getCatalogueOrderByManufacturerReverse();
             total.addObject("catalogue", sorted);
         }
 
@@ -73,7 +73,7 @@ public class ProductController {
 
     @RequestMapping({"/products/{id}"})
     public ModelAndView getProduct(@PathVariable int id) {
-        Product selectedProduct = base.getProductById(id);
+        Product selectedProduct = productDao.getProductById(id);
 
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
@@ -103,7 +103,7 @@ public class ProductController {
 
     @RequestMapping({"/manufacturer/{id}/its_products"})
     public ModelAndView productsOfManufacturer(@PathVariable int id) {
-        List<Product> list = base.getProductListByManufacturer(id);
+        List<Product> list = productDao.getProductListByManufacturer(id);
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;
@@ -112,7 +112,7 @@ public class ProductController {
 
     @RequestMapping({"/products/only_gels"})
     public ModelAndView onlyGels() {
-        List<Product> list = base.getOnlyGels();
+        List<OpalescenseGel> list = productDao.getOnlyGels();
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;
@@ -120,7 +120,7 @@ public class ProductController {
 
     @RequestMapping({"/products/only_hemos"})
     public ModelAndView onlyHemos() {
-        List<Product> list = base.getOnlyHemos();
+        List<Hemostatic> list = productDao.getOnlyHemos();
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;

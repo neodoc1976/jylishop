@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
+import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
@@ -31,6 +32,8 @@ public class AdminGelController {
     TextFileService textFileService;
     @Autowired
     ManufacturerDao manufacturerDao;
+    @Autowired
+    ProductDao productDao;
 
 
 
@@ -79,7 +82,7 @@ public class AdminGelController {
         added.setPrice(price);
         added.setManufacturer(manufacturerDao.getManufacturerById(manufacturerId));
         added.setQuantity(quantity);
-        base.addProduct(added);
+        productDao.addProduct(added);
 //        post.addObject("catalogue", base.getCatalogue());
         return  "redirect:/admin";
     }
@@ -95,7 +98,7 @@ public class AdminGelController {
                                  @RequestParam int quantity,
                                  @RequestParam int manufacturerId) {
 
-        Product selectedProduct = base.getProductById(id);
+        Product selectedProduct = productDao.getProductById(id);
 
         if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");
@@ -114,7 +117,7 @@ public class AdminGelController {
         updated.setQuantity(quantity);
         Manufacturer manufacturer = manufacturerDao.getManufacturerById(manufacturerId);
         updated.setManufacturer(manufacturer);
-        base.updateProduct(updated);
+        productDao.updateProduct(updated);
 //        post.addObject("catalogue", base.getCatalogue());
        return new ModelAndView ("redirect:/admin");
     }

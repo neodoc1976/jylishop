@@ -1,5 +1,8 @@
 package org.george.jylishop.dao;
 
+import org.george.jylishop.domain.Hemostatic;
+import org.george.jylishop.domain.Manufacturer;
+import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,11 +22,104 @@ public class ProductDao {
     SessionFactory sessionFactory;
 
     @Transactional
-    public List<Product> getCatalogue(){
+    public List<Product> getCatalogue() {
         Session session = sessionFactory.getCurrentSession();
-        session.createQuery("from Product",Product.class).list();
-        return null;
+        return session.createQuery("from Product", Product.class).list();
     }
-    
 
+    @Transactional
+    public Product getProductById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Product.class, id);
+    }
+
+    @Transactional
+    public void deleteProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(product);
+    }
+
+    @Transactional
+    private List<Product> getCatalogueOrderByPrice(String sort_type) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Product order by price " + sort_type, Product.class).list();
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByPriceAsc() {
+        return getCatalogueOrderByPrice("ASC");
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByPriceDesc() {
+        return getCatalogueOrderByPrice("DESC");
+    }
+
+    @Transactional
+    private List<Product> getCatalogueOrderByTitle(String sort_type) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Product order by title " + sort_type, Product.class).list();
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByTitleByAlphabet() {
+        return getCatalogueOrderByTitle("ASC");
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByTitleReverse() {
+        return getCatalogueOrderByTitle("DESC");
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderById() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Product order by id", Product.class).list();
+    }
+
+    @Transactional
+    public void addProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(product);
+    }
+
+    @Transactional
+    public void updateProduct(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+    }
+
+    @Transactional
+    private List<Product> getCatalogueOrderByManufacturer(String sort_type) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Product order by manufacturer.name " + sort_type, Product.class).list();
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByManufacturerByAlphabet() {
+        return getCatalogueOrderByManufacturer("ASC");
+    }
+
+    @Transactional
+    public List<Product> getCatalogueOrderByManufacturerReverse() {
+        return getCatalogueOrderByManufacturer("DESC");
+    }
+
+    @Transactional
+    public List<OpalescenseGel>  getOnlyGels(){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from OpalescenseGel",OpalescenseGel.class).list();
+    }
+
+    @Transactional
+    public List<Hemostatic> getOnlyHemos(){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Hemostatic",Hemostatic.class).list();
+    }
+
+    @Transactional
+    public List<Product> getProductListByManufacturer(int id){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Product where manufacturer.id = "+id,Product.class).list();
+    }
 }

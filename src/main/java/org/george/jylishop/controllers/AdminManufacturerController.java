@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
+import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
@@ -31,6 +32,8 @@ public class AdminManufacturerController {
     TextFileService textFileService;
     @Autowired
     ManufacturerDao manufacturerDao;
+    @Autowired
+    ProductDao productDao;
 
     @RequestMapping("/admin/manufacturer")
     public ModelAndView allManufacturer() {
@@ -117,7 +120,7 @@ public class AdminManufacturerController {
         Manufacturer manufacturer = manufacturerDao.getManufacturerById(id);
 
 
-        List<Product> list = base.getProductListByManufacturer(id);
+        List<Product> list = productDao.getProductListByManufacturer(id);
         if (list.size() != 0) {
 
             ModelAndView view = new ModelAndView("manufacturer-delete-menu");

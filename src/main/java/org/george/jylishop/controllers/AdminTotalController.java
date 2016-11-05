@@ -38,7 +38,7 @@ public class AdminTotalController {
         ModelAndView admin = new ModelAndView("admin-total");
         admin.addObject("catalogue", productDao.getCatalogue());
         if (sort != null && sort.equals("orderbyid")){
-            List<Product> sorted = base.getCatalogueOrderById();
+            List<Product> sorted = productDao.getCatalogueOrderById();
             admin.addObject("catalogue",sorted);
         }
         return admin;
@@ -47,7 +47,7 @@ public class AdminTotalController {
     @RequestMapping(value = "/admin/product/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteForm(@PathVariable int id) {
         ModelAndView delete = new ModelAndView("admin-total");
-        Product selectedProduct = base.getProductById(id);
+        Product selectedProduct = productDao.getProductById(id);
 
         if (selectedProduct == null) {
             ModelAndView view = new ModelAndView("error");
@@ -55,7 +55,7 @@ public class AdminTotalController {
             return view;
         }
 
-        base.deleteProduct(selectedProduct);
+        productDao.deleteProduct(selectedProduct);
 
         return new ModelAndView("redirect:/admin");
 
@@ -64,7 +64,7 @@ public class AdminTotalController {
     @RequestMapping(value = "/admin/product/{id}/update", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable int id) {
         Product selectedProduct=null;
-        selectedProduct = base.getProductById(id);
+        selectedProduct = productDao.getProductById(id);
 
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("admin-update-gel");
