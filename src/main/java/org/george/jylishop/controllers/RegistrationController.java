@@ -1,6 +1,5 @@
 package org.george.jylishop.controllers;
 
-import org.george.jylishop.db.DataBase;
 import org.george.jylishop.db.UserBase;
 import org.george.jylishop.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;

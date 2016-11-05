@@ -106,20 +106,50 @@ public class ProductDao {
     }
 
     @Transactional
-    public List<OpalescenseGel>  getOnlyGels(){
+    public List<OpalescenseGel> getOnlyGels() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from OpalescenseGel",OpalescenseGel.class).list();
+        return session.createQuery("from OpalescenseGel", OpalescenseGel.class).list();
     }
 
     @Transactional
-    public List<Hemostatic> getOnlyHemos(){
+    public List<Hemostatic> getOnlyHemos() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Hemostatic",Hemostatic.class).list();
+        return session.createQuery("from Hemostatic", Hemostatic.class).list();
     }
 
     @Transactional
-    public List<Product> getProductListByManufacturer(int id){
+    public List<Product> getProductListByManufacturer(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Product where manufacturer.id = "+id,Product.class).list();
+        return session
+                .createQuery("from Product where manufacturer.id = :id", Product.class)
+                .setParameter("id",id)
+                .list();
     }
+
+    @Transactional
+    public void deleteProductListByManufacturer(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session
+                .createQuery("delete Product where manufacturer.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Transactional
+    public long getProductsCountForManufacturer(int id){
+        Session session = sessionFactory.getCurrentSession();
+        return (long)session.createQuery("select count (*) from  Product where manufacturer.id=:id")
+                .setParameter("id",id)
+                .uniqueResult();
+    }
+
+    @Transactional
+    public void changeManufacturerForProducts(int newId, int oldId){
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("update  Product set manufacturer.id=:newId where manufacturer.id=:oldId")
+                .setParameter("newId",newId)
+                .setParameter("oldId",oldId)
+                .executeUpdate();
+    }
+
 }

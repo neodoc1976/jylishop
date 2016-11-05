@@ -2,12 +2,11 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ import java.util.List;
  */
 @Controller
 public class ProductController {
-    @Autowired
-    DataBase base;
     @Autowired
     PictureService pictureService;
     @Autowired
@@ -97,7 +94,7 @@ public class ProductController {
         Manufacturer manufacturer = manufacturerDao.getManufacturerById(id);
         ModelAndView view = new ModelAndView("man_description");
         view.addObject("manufacturer", manufacturer);
-        view.addObject("count", base.getProductsCountForManufacturer(id));
+        view.addObject("count", productDao.getProductsCountForManufacturer(id));
         return view;
     }
 

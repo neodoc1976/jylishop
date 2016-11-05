@@ -1,24 +1,6 @@
 package org.george.jylishop.test.controllers;
 
 
-
-import org.george.jylishop.controllers.AdminTotalController;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.domain.Product;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 //
 //@RunWith(MockitoJUnitRunner.class)
 //public class AdminTotalControllerTest {

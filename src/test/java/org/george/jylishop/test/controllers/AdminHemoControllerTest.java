@@ -1,20 +1,5 @@
 package org.george.jylishop.test.controllers;
 
-import org.george.jylishop.controllers.AdminHemoController;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.domain.Hemostatic;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.servlet.ModelAndView;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
-
 /**
  * Created by Yulya on 30.05.2016.
  */

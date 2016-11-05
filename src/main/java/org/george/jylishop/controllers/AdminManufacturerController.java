@@ -2,7 +2,6 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.db.DataBase;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
@@ -24,8 +23,6 @@ import java.util.List;
  */
 @Controller
 public class AdminManufacturerController {
-    @Autowired
-    DataBase base;
     @Autowired
     PictureService pictureService;
     @Autowired
@@ -141,7 +138,7 @@ public class AdminManufacturerController {
     @RequestMapping(value = "/admin/manufacturer/{id}/force_delete", method = RequestMethod.GET)
     public ModelAndView deleteListForm(@PathVariable Integer id) {
         ModelAndView deleteList = new ModelAndView("manufacturer-delete-menu");
-        base.deleteProductListByManufacturer(id);
+        productDao.deleteProductListByManufacturer(id);
         manufacturerDao.deleteManufacturer(manufacturerDao.getManufacturerById(id));
         deleteList.addObject("id", id);
         deleteList.addObject("message", "All products of the selected manufacturer and the manufacturer has been removed");
@@ -153,7 +150,7 @@ public class AdminManufacturerController {
     public ModelAndView changeForm(@PathVariable int oldId,
                                    @RequestParam int newId) {
         ModelAndView change = new ModelAndView("manufacturer-delete-menu");
-        base.changeManufacturerForProducts(newId, oldId);
+        productDao.changeManufacturerForProducts(newId, oldId);
         manufacturerDao.deleteManufacturer(manufacturerDao.getManufacturerById(oldId));
         change.addObject("message", "Manufacturer was changed");
         change.addObject("oldId", oldId);

@@ -1,27 +1,5 @@
 package org.george.jylishop.test.controllers;
 
-import org.george.jylishop.controllers.ProductController;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.domain.Hemostatic;
-import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.domain.Product;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
-
-import org.springframework.web.servlet.ModelAndView;
-
-
 /**
  * Created by Yulya on 28.05.2016.
  */

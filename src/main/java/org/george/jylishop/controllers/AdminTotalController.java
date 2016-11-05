@@ -2,11 +2,10 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +21,6 @@ import java.util.List;
  */
 @Controller
 public class AdminTotalController {
-    @Autowired
-    DataBase base;
     @Autowired
     PictureService pictureService;
     @Autowired
@@ -58,7 +55,6 @@ public class AdminTotalController {
         productDao.deleteProduct(selectedProduct);
 
         return new ModelAndView("redirect:/admin");
-
     }
 
     @RequestMapping(value = "/admin/product/{id}/update", method = RequestMethod.GET)

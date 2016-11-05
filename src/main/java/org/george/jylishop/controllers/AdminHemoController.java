@@ -3,11 +3,10 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.db.DataBase;
-import org.george.jylishop.services.PictureService;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.services.PictureService;
 import org.george.jylishop.services.TextFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +24,7 @@ import java.io.IOException;
  */
 @Controller
 public class AdminHemoController {
-    @Autowired
-    DataBase base;
+
     @Autowired
     PictureService pictureService;
     @Autowired
