@@ -1,16 +1,28 @@
 package org.george.jylishop.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Yulya on 23.10.2016.
  */
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Column(name = "username")
+    @Id
     private String username;
+
+    @Column(name = "password")
     private String password;
-    private boolean enabled;
-    private List<String> roles = new ArrayList<>();
+
+    @Column(name ="enabled")
+    private int enabled;
+
+    @OneToMany (cascade = CascadeType.ALL , mappedBy = "user")
+    private List<UserRole> roles = new ArrayList<>();
 
 
     public String getUsername() {
@@ -29,19 +41,19 @@ public class User {
         this.password = password;
     }
 
-    public boolean getEnabled() {
+    public int getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
 
-    public List<String> getRoles() {
+    public List<UserRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
 }

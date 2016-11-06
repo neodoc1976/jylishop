@@ -1,7 +1,8 @@
 package org.george.jylishop.controllers;
 
-import org.george.jylishop.db.UserBase;
+import org.george.jylishop.dao.UserDao;
 import org.george.jylishop.domain.User;
+import org.george.jylishop.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,8 @@ import java.util.List;
 @Controller
 public class RegistrationController {
     @Autowired
-    UserBase userBase;
+    UserDao userDao;
+
 
     @RequestMapping (value = "/registration", method = RequestMethod.GET)
 
@@ -32,12 +34,15 @@ public class RegistrationController {
                             @RequestParam String password) {
 
         User user = new User();
-        user.setEnabled(true);
+        user.setEnabled(1);//Because type in base "boolean" , but in User.class this type is integer
         user.setUsername(username);
         user.setPassword(password);
-        List <String> list=user.getRoles();
-        list.add("ROLE_USER");
-        userBase.storeNewUser(user);
+        List <UserRole> list=user.getRoles();
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        userRole.setUser(user);
+        list.add(userRole);
+        userDao.storeNewUser(user);
         return "redirect:/spring_security_login";
 
     }

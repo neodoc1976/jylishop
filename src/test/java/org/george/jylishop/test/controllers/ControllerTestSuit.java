@@ -1,4 +1,4 @@
-package org.george.jylishop.test.controllers;
+//package org.george.jylishop.test.controllers;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 /**
@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
 //        AdminTotalControllerTest.class,
 //        ProductControllerTestSortByPrice.class})
 //
-//public class ControllerTestSuit {
+//
 //
 //
 //}
