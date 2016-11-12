@@ -45,7 +45,7 @@
         #end
     </select></p>
     <p><b>Quantity:</b><br/>
-        <input type="text" size="10" name="quantity">
+        <input type="text" size="10" name="prodCountForUser">
     </p>
     <p><input type="submit" value="submit">
     </p>

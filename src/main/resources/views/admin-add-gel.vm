@@ -38,7 +38,7 @@
             <textarea name="description" cols="50" rows="5"></textarea>
         </p>
         <p><b>Quantity:</b><br/>
-            <input type="text" size="10" name="quantity">
+            <input type="text" size="10" name="prodCountForUser">
         </p>
 
         <p><select name="manufacturerId">

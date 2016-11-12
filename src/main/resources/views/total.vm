@@ -37,7 +37,7 @@
             <td><a href="/products/$product.id">$product.title</a></td>
             <td> $product.price $</td>
             <td>  <img src="/resources/pictures/$product.picture" width="200" alt="File not found"></td>
-            <td> $product.quantity pcs</td>
+            <td> $product.prodCountForUser pcs</td>
             <td><a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>
 
         </tr>

@@ -5,6 +5,7 @@ import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.domain.Purchase;
 import org.george.jylishop.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

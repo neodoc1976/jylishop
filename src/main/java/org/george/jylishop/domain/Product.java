@@ -8,23 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Product {
-//        public final static String GEL_TYPE = "opal_gel";
-//    public final static String HEMO_TYPE = "hemostatic";
-
-    public static enum Type {
-        GEL("opal_gel"), HEMO("hemostatic");
-
-        String dataBaseString;
-
-        Type(String dataBaseString) {
-            this.dataBaseString = dataBaseString;
-        }
-
-        public String getDataBaseString() {
-            return dataBaseString;
-        }
-    }
-
 
     private String description;
     private String title;

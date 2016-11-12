@@ -42,7 +42,7 @@
 
     </p>
     <p><b>Quantity:</b> <br/>
-        <input type="text" size="10" name="quantity" value="$recall.quantity">
+        <input type="text" size="10" name="prodCountForUser" value="$recall.prodCountForUser">
 
     <p><select name="manufacturerId">
         <option disabled>Select manufacturer</option>
