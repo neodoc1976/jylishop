@@ -1,28 +1,19 @@
 #include("views/header.vm")
 
-
-##$basket.id
-##$basket.user.username
-##
-##
-###foreach ($p in $basket.purchases)
-##<tr>
-##
-##    <td> $p.title , $p.id </td>
-##
-##
-##</tr>
-
-
-
-
-##
+<table cellpadding="25" cellspacing="0" border="5">
+<tr>
+    <br/>
+    <center><b>YOUR PURCHASES</b></center>
+    <th> Product name <br/></th>
+    <th> Quantity</th>
 
 #foreach ($p in $basket.keySet())
+    <tr>
 
-    $p.title
-    $basket.get($p)
+        <td> $p.title</td>
+        <td> $basket.get($p)</td>
 
+    </tr>
 #end
-
+</table>
 #include("views/footer.vm")
