@@ -52,7 +52,7 @@
                 </td>
                 <td><img src="/resources/pictures/$product.picture" width="140" alt="File not found"></td>
                 <td>$product.price</td>
-                <td><b>$product.prodCountForUser </td>
+                <td><b>$product.quantity </td>
                 <td>$product.manufacturer.name</td>
                 <td><img src="/resources/logo/$product.manufacturer.logo" width="140" alt="File not found"></td>
                 <td><a href="/admin/product/$product.id/delete">Delete this</a></td>

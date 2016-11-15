@@ -36,12 +36,10 @@ public class BasketDao {
     }
 
     @Transactional
-    public void updateBasket(Basket basket){
-        Session session =sessionFactory.getCurrentSession();
+    public void updateBasket(Basket basket) {
+        Session session = sessionFactory.getCurrentSession();
         session.update(basket);
 
     }
-
-
 
 }

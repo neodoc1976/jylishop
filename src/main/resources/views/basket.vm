@@ -1,19 +1,23 @@
 #include("views/header.vm")
 
-<table cellpadding="25" cellspacing="0" border="5">
+<table cellpadding="25" cellspacing="0" border="3">
 <tr>
     <br/>
-    <center><b>YOUR PURCHASES</b></center>
+    <br/>
+    <center><b>Your Basket</b></center>
+    <br/>
+
     <th> Product name <br/></th>
     <th> Quantity</th>
 
-#foreach ($p in $basket.keySet())
-    <tr>
+    #foreach ($p in $basket.keySet())
+        <tr>
 
-        <td> $p.title</td>
-        <td> $basket.get($p)</td>
+            <td><a href=/products/$p.id/remove_from_basket> <b>-</b></a> $p.title
+                <a href=/products/$p.id/add_to_basket><b>+</b></a></td>
+            <td> $basket.get($p)</td>
 
-    </tr>
-#end
+        </tr>
+    #end
 </table>
 #include("views/footer.vm")

@@ -65,11 +65,20 @@ public class BasketController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Basket basket = basketDao.getUserBasket(user.getUsername());
         List<Product> purchases = basket.getPurchases();
-        purchases.remove(selectedProduct);
+        for (Product p : purchases) {
+            int product_id=p.getId();
+            if (product_id==id){
+                purchases.remove(p);
+                break;
+            }
+        }
         basketDao.updateBasket(basket);
 
         return "redirect:/basket";
+
+
     }
+
 
 
 }
