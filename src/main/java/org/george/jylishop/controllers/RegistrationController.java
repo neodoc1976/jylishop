@@ -1,6 +1,8 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.BasketDao;
 import org.george.jylishop.dao.UserDao;
+import org.george.jylishop.domain.Basket;
 import org.george.jylishop.domain.User;
 import org.george.jylishop.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ import java.util.List;
 public class RegistrationController {
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    BasketDao basketDao;
+
 
 
     @RequestMapping (value = "/registration", method = RequestMethod.GET)
@@ -43,6 +49,11 @@ public class RegistrationController {
         userRole.setUser(user);
         list.add(userRole);
         userDao.storeNewUser(user);
+
+        Basket basket=new Basket();
+        basket.setUser(user);
+        basketDao.addBasket(basket);
+
         return "redirect:/spring_security_login";
 
     }

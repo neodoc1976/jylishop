@@ -1,0 +1,28 @@
+#include("views/header.vm")
+
+
+##$basket.id
+##$basket.user.username
+##
+##
+###foreach ($p in $basket.purchases)
+##<tr>
+##
+##    <td> $p.title , $p.id </td>
+##
+##
+##</tr>
+
+
+
+
+##
+
+#foreach ($p in $basket.keySet())
+
+    $p.title
+    $basket.get($p)
+
+#end
+
+#include("views/footer.vm")

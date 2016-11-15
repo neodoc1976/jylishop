@@ -11,17 +11,31 @@ import java.util.List;
 @Table
 public class Basket {
 
-
     @Id
     @GeneratedValue
-    int id;
-
+    private int id;
 
     @OneToOne
     User user;
 
-    @OneToMany
-    List<Purchase> purchases = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    List<Product> purchases = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Product> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Product> purchases) {
+        this.purchases = purchases;
+    }
 
     public User getUser() {
         return user;
@@ -31,19 +45,4 @@ public class Basket {
         this.user = user;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }
