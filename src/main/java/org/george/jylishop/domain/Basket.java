@@ -45,6 +45,19 @@ public class Basket {
         this.user = user;
     }
 
+    public int productInBasketCount(List<Product> purchases,int id) {
+
+        int product_count=0;
+        for (Product p : purchases
+                ) {
+            int product_id = p.getId();
+            if (product_id==id){
+                product_count=product_count+1;
+            }
+
+        }
+       return product_count;
+    }
 
 
 }

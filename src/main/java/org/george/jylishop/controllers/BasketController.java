@@ -53,21 +53,29 @@ public class BasketController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Basket basket = basketDao.getUserBasket(user.getUsername());
         List<Product> purchases = basket.getPurchases();
-        purchases.add(selectedProduct);
-        basketDao.updateBasket(basket);
+        Basket basket1 = new Basket();
+        int count = basket1.productInBasketCount(purchases, id);
+        if (selectedProduct.getQuantity() <= count) {
+
+            return "redirect:/basket";
+
+        } else {
+            purchases.add(selectedProduct);
+            basketDao.updateBasket(basket);
+        }
 
         return "redirect:/basket";
     }
 
     @RequestMapping("/products/{id}/remove_from_basket")
-    public String removeProductFromBasket (@PathVariable int id){
-        Product selectedProduct = productDao.getProductById(id);
+    public String removeProductFromBasket(@PathVariable int id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Basket basket = basketDao.getUserBasket(user.getUsername());
         List<Product> purchases = basket.getPurchases();
+
         for (Product p : purchases) {
-            int product_id=p.getId();
-            if (product_id==id){
+            int product_id = p.getId();
+            if (product_id == id) {
                 purchases.remove(p);
                 break;
             }
@@ -78,7 +86,6 @@ public class BasketController {
 
 
     }
-
 
 
 }
