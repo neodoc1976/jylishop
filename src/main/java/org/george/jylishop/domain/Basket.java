@@ -3,6 +3,7 @@ package org.george.jylishop.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yulya on 09.11.2016.
@@ -45,19 +46,21 @@ public class Basket {
         this.user = user;
     }
 
-    public int productInBasketCount(List<Product> purchases,int id) {
+    public int productInBasketCount(List<Product> purchases, int id) {
 
-        int product_count=0;
+        int product_count = 0;
         for (Product p : purchases
                 ) {
             int product_id = p.getId();
-            if (product_id==id){
-                product_count=product_count+1;
+            if (product_id == id) {
+                product_count = product_count + 1;
             }
 
         }
-       return product_count;
+        return product_count;
     }
+
+
 
 
 }

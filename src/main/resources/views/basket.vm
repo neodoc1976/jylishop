@@ -9,15 +9,27 @@
 
     <th> Product name <br/></th>
     <th> Quantity</th>
+    <th> Price</th>
+    <th> Cost</th>
+
+
 
     #foreach ($p in $basket.keySet())
+
         <tr>
 
-            <td><a href=/products/$p.id/remove_from_basket> <b>-</b></a> $p.title
+            <td bgcolor="#CC00FF"><a href=/products/$p.id/remove_from_basket> <b>-</b></a> $p.title
                 <a href=/products/$p.id/add_to_basket><b>+</b></a></td>
-            <td> $basket.get($p)</td>
+            <td bgcolor="#CC00FF"> $basket.get($p) &nbsp;&nbsp;pcs</td>
+            <td bgcolor="#CC00FF"> $p.price $</td>
+            <td bgcolor="#CC00FF"> #set( $cost = $basket.get($p)*$p.price )  $cost $  </td>
+
+
+
 
         </tr>
     #end
-</table>
+    <a href= /products/basket/buy> <b bgcolor="#CC00FF">BUY!</b> </a>
+
+
 #include("views/footer.vm")

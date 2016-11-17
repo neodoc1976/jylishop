@@ -10,6 +10,10 @@
 <button><b><a href="/spring_security_login"> Log In</a> </b></button>
 <button><b><a href="/j_spring_security_logout"> Log Out</a> </b></button>
 <button><b><a href="/registration"> Registration</a> </b></button>
+#if($user_name != 0)
+<button><bbgcolor="#CC00FF"><a href="/to_basket"> Your Basket , $user_name </a> </b></button>
+#end
+
 
 
 
@@ -35,7 +39,7 @@
 
             <td> $product.id </td>
             <td> <a href="/products/$product.id" >$product.title </a> [<a href=/products/$product.id/add_to_basket> add to basket</a>]</td>
-            <td> $product.price </td>
+            <td> $product.price $</td>
             <td> <img src="/resources/pictures/$product.picture" width="200" alt="File not found"></td>
             <td> $product.quantity pcs </td>
             <td> <a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>

@@ -44,7 +44,13 @@ public class BasketController {
         }
 
         model.addObject("basket", groupt_products);
+        model.addObject("user_name",basketDao.getUserBasket(user.getUsername()));
         return model;
+    }
+
+    @RequestMapping("/to_basket")
+    public String toBasket() {
+        return "redirect:/basket";
     }
 
     @RequestMapping("/products/{id}/add_to_basket")
@@ -85,6 +91,28 @@ public class BasketController {
         return "redirect:/basket";
 
 
+    }
+
+    @RequestMapping("/products/basket/buy")
+    public String buyMethod() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Basket basket = basketDao.getUserBasket(user.getUsername());
+        List<Product> purchases = basket.getPurchases();
+        Product changeable_product;
+        int quantity;
+        for (Product p : purchases) {
+            changeable_product = productDao.getProductById(p.getId());
+            quantity = changeable_product.getQuantity() - 1;
+            changeable_product.setQuantity(quantity);
+            productDao.updateProduct(changeable_product);
+        }
+        purchases.clear();
+        basket.setPurchases(purchases);
+        basketDao.updateBasket(basket);
+
+
+
+        return "redirect:/total";
     }
 
 

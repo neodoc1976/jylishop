@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Yulya on 12.11.2016.
@@ -19,6 +22,8 @@ public class BasketDao {
 
     @Autowired
     SessionFactory sessionFactory;
+    @Autowired
+    ProductDao productDao;
 
     @Transactional
     public Basket getUserBasket(String username) {
@@ -41,5 +46,7 @@ public class BasketDao {
         session.update(basket);
 
     }
+
+
 
 }
