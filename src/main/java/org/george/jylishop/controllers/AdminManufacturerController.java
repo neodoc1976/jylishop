@@ -67,8 +67,7 @@ public class AdminManufacturerController {
         neoteric.setName(name);
         manufacturerDao.addManufacturer(neoteric);
 
-//        post.addObject("manufacturers", base.getAllManufacturers());
-//        post.addObject("logos", pictureService.getAllLogo());
+
         return "redirect:/admin/manufacturer";
     }
 
@@ -94,9 +93,7 @@ public class AdminManufacturerController {
         return "redirect:/admin/manufacturer";
 
 
-//        view.addObject("manufacturers", base.getAllManufacturers());
-//        view.addObject("logos", pictureService.getAllLogo());
-//        return view;
+
     }
 
     @RequestMapping(value = "/admin/manufacturer/{id}/update", method = RequestMethod.GET)

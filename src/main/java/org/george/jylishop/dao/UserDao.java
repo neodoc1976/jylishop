@@ -28,6 +28,10 @@ public class UserDao {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
     }
-
+    @Transactional
+    public void updateCurrentUserInfo (User user){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(user);
+    }
 
 }

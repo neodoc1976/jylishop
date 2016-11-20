@@ -1,13 +1,17 @@
 package org.george.jylishop.controllers;
 
+import org.apache.velocity.tools.generic.NumberTool;
 import org.george.jylishop.dao.BasketDao;
 import org.george.jylishop.dao.ProductDao;
+import org.george.jylishop.dao.UserDao;
 import org.george.jylishop.domain.Basket;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.domain.User;
+import org.george.jylishop.domain.utils.ProductNameComparator;
+import org.george.jylishop.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +30,13 @@ public class BasketController {
     BasketDao basketDao;
     @Autowired
     ProductDao productDao;
+    @Autowired
+    UserDao userDao;
 
     @RequestMapping("/basket")
     public ModelAndView showBasket() {
         ModelAndView model = new ModelAndView("basket");
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Product> purchases = basketDao.getUserBasket(user.getUsername()).getPurchases();
+        List<Product> purchases = basketDao.getUserBasket(SecurityUtils.getCurrentUsername()).getPurchases();
         Map<Product, Integer> groupt_products = new HashMap<>();
         for (Product p : purchases) {
             Integer count = groupt_products.get(p);
@@ -42,22 +47,23 @@ public class BasketController {
                 groupt_products.put(p, 1);
             }
         }
+        Set<Product> keySet = groupt_products.keySet();
+        List<Product> list = new ArrayList<>(keySet);
 
+        list.sort(new ProductNameComparator());
+
+        model.addObject("list", list);
         model.addObject("basket", groupt_products);
-        model.addObject("user_name",basketDao.getUserBasket(user.getUsername()));
+        model.addObject("user_name", SecurityUtils.getCurrentUsername());
+        model.addObject("tool", new NumberTool());
         return model;
     }
 
-    @RequestMapping("/to_basket")
-    public String toBasket() {
-        return "redirect:/basket";
-    }
 
     @RequestMapping("/products/{id}/add_to_basket")
     public String addProductToBasket(@PathVariable int id) {
         Product selectedProduct = productDao.getProductById(id);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Basket basket = basketDao.getUserBasket(user.getUsername());
+        Basket basket = basketDao.getUserBasket(SecurityUtils.getCurrentUsername());
         List<Product> purchases = basket.getPurchases();
         Basket basket1 = new Basket();
         int count = basket1.productInBasketCount(purchases, id);
@@ -75,8 +81,7 @@ public class BasketController {
 
     @RequestMapping("/products/{id}/remove_from_basket")
     public String removeProductFromBasket(@PathVariable int id) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Basket basket = basketDao.getUserBasket(user.getUsername());
+        Basket basket = basketDao.getUserBasket(SecurityUtils.getCurrentUsername());
         List<Product> purchases = basket.getPurchases();
 
         for (Product p : purchases) {
@@ -94,25 +99,42 @@ public class BasketController {
     }
 
     @RequestMapping("/products/basket/buy")
-    public String buyMethod() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Basket basket = basketDao.getUserBasket(user.getUsername());
+    public ModelAndView buyMethod() {
+
+        Basket basket = basketDao.getUserBasket(SecurityUtils.getCurrentUsername());
         List<Product> purchases = basket.getPurchases();
-        Product changeable_product;
-        int quantity;
+        double totalCostOfBasket = 0;
         for (Product p : purchases) {
-            changeable_product = productDao.getProductById(p.getId());
-            quantity = changeable_product.getQuantity() - 1;
-            changeable_product.setQuantity(quantity);
-            productDao.updateProduct(changeable_product);
+            totalCostOfBasket = totalCostOfBasket + p.getPrice();
         }
-        purchases.clear();
-        basket.setPurchases(purchases);
-        basketDao.updateBasket(basket);
+
+        double userMoney = userDao.getUserInfo(SecurityUtils.getCurrentUsername()).getMoney();
+        if (totalCostOfBasket > userMoney) {
+
+            ModelAndView view = new ModelAndView("error");
+            view.addObject("message", "You Do Not Have Enough Money In Your Account");
+            return view;
+
+        } else {
+
+            Product changeableProduct;
+            int quantity;
+            for (Product p : purchases) {
+                changeableProduct = productDao.getProductById(p.getId());
+                quantity = changeableProduct.getQuantity() - 1;
+                changeableProduct.setQuantity(quantity);
+                productDao.updateProduct(changeableProduct);
+            }
+            User user = userDao.getUserInfo(SecurityUtils.getCurrentUsername());
+            user.setMoney(userMoney - totalCostOfBasket);
+            userDao.updateCurrentUserInfo(user);
+            purchases.clear();
+            basket.setPurchases(purchases);
+            basketDao.updateBasket(basket);
+        }
 
 
-
-        return "redirect:/total";
+        return new ModelAndView("redirect:/total");
     }
 
 

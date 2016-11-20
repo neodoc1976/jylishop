@@ -10,7 +10,8 @@
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/admin**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/contact**" access="ROLE_USER,ROLE_ADMIN"/>
-    </http>
+        <intercept-url pattern="/basket**" access="ROLE_USER"/>
+     </http>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider>

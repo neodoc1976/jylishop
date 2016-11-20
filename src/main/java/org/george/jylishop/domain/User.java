@@ -18,11 +18,13 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name ="enabled")
+    @Column(name = "enabled")
     private int enabled;
 
-    @OneToMany (cascade = CascadeType.ALL , mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> roles = new ArrayList<>();
+
+    private double money ;
 
 
     public String getUsername() {
@@ -55,5 +57,13 @@ public class User {
 
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 }
