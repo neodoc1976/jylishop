@@ -1,26 +1,36 @@
 #include("views/admin-header.vm")
-
+</br>
+#set ($our_bill=0)
+#foreach ($s in $statistic)
+    #set($our_bill=$our_bill+$s.earnings)
+    #end
+<center>OUR MONEY : $tool.format("#0.00",$our_bill) $</center>
+</br>
 <center>
+
     <table cellpadding="20" cellspacing="0" border="3">
-        <center> OUR MONEY</center>
         </br>
         </br>
         </br>
         <tr>
             <th> Transaction ID</th>
+            <th> Transaction time</th>
             <th> Earnings , $</th>
             <th> Buyer,name</th>
 
         </tr>
 
-
         #foreach ($s in $statistic)
             <tr>
                 <td>$s.id</td>
+                <td>$s.data </td>
                 <td> $s.earnings</td>
-                <td>  $s.user_name </br><a href="/admin/money/$s.user_name/user_statistic" >statistic</a> <a/></td>
+                <td>  $s.user_name </br><a href="/admin/money/$s.user_name/user_statistic">statistic</a> <a/></td>
+
             </tr>
         #end
     </table>
+
 </center>
+
 #include("views/footer.vm")

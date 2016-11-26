@@ -17,6 +17,10 @@ public class Money {
     private double earnings;
 
 
+
+    private String data;
+
+
     public int getId() {
         return id;
     }
@@ -41,7 +45,13 @@ public class Money {
         this.earnings = earnings;
     }
 
+    public String getData() {
+        return data;
+    }
 
+    public void setData(String data) {
+        this.data = data;
+    }
 
 
 

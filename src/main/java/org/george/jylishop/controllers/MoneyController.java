@@ -21,8 +21,7 @@ public class MoneyController {
         public ModelAndView getStatistic (){
         ModelAndView model = new ModelAndView("admin-money");
         model.addObject("statistic",moneyDao.getPurchasesHistory());
-
-
+        model.addObject("tool", new NumberTool());
         return model;
 
     }

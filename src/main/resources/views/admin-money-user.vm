@@ -5,7 +5,7 @@
 <center>
     <table cellpadding="20" cellspacing="0" border="3">
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 <center><b>$user_name</b></center>
             </td>
 
@@ -16,6 +16,7 @@
         </br>
         <tr>
             <th> Transaction ID</th>
+            <th> Transaction time</th>
             <th> Earnings , $ </th>
 
 
@@ -25,6 +26,7 @@
         #foreach ($h in $user_history)
             <tr>
                 <td>$h.id</td>
+                <td>$h.data</td>
                 <td> $h.earnings </td>
                 #set($total_cost=$total_cost+$h.earnings)
 
@@ -32,7 +34,7 @@
         #end
 
     <tr>
-        <td colspan="1">
+        <td colspan="2">
         <b>  Total </b>
         <td> $tool.format("#0.00",$total_cost)</td>
         </td>

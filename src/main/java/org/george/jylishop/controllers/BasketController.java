@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -141,6 +142,9 @@ public class BasketController {
             Money money=new Money();
             money.setEarnings(totalCostOfBasket);
             money.setUser_name(user.getUsername());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            money.setData(dateFormat.format(date));
             moneyDao.addNewEarnings(money);
 
 
