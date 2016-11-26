@@ -13,31 +13,32 @@
     <th> Cost</th>
 
 
-   #set($total_cost=0)
+    #set($total_cost=0)
     #foreach ($p in $list)
 
         <tr>
 
-            <td bgcolor="#CC00FF"><a href=/products/$p.id/remove_from_basket> <b>-</b></a> $p.title
+            <td bgcolor="#CC00FF"> $p.title
         #if( $p.quantity > $basket.get($p))
-            <a href=/products/$p.id/add_to_basket><b>+</b></a>
+
             #end
             </td>
-            <td bgcolor="#CC00FF"> $basket.get($p) &nbsp;&nbsp;pcs</td>
+            <td bgcolor="#CC00FF"><a href=/products/$p.id/remove_from_basket> <b>-</b></a> $basket.get($p) &nbsp;&nbsp;pcs<a
+                    href=/products/$p.id/add_to_basket><b>+</b></a></td>
             <td bgcolor="#CC00FF"> $p.price $</td>
-            <td bgcolor="#CC00FF"> #set( $cost = $basket.get($p)*$p.price ) $tool.format("#0.00",$cost) $ </td>
+            <td bgcolor="#CC00FF"> #set( $cost = $basket.get($p)*$p.price ) $tool.format("#0.00",$cost) $</td>
             #set($total_cost=$total_cost+$cost)
 
         </tr>
 
     #end
     <tr>
-        <td colspan="3"> Total Cost </td>
-        <td> $tool.format("#0.00",$total_cost) $ </td>
+        <td colspan="3"> Total Cost</td>
+        <td> $tool.format("#0.00",$total_cost) $</td>
 
     </tr>
-    </table>
+</table>
 
-    <center> <a href= /products/basket/buy> <b bgcolor="#CC00FF">BUY!</b> </a></center>
+<center><a href=/products/basket/buy> <b bgcolor="#CC00FF">BUY!</b> </a></center>
 
 #include("views/footer.vm")

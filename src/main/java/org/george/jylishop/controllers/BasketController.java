@@ -2,18 +2,14 @@ package org.george.jylishop.controllers;
 
 import org.apache.velocity.tools.generic.NumberTool;
 import org.george.jylishop.dao.BasketDao;
+import org.george.jylishop.dao.MoneyDao;
 import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.dao.UserDao;
-import org.george.jylishop.domain.Basket;
-import org.george.jylishop.domain.Manufacturer;
-import org.george.jylishop.domain.Product;
-import org.george.jylishop.domain.User;
+import org.george.jylishop.domain.*;
 import org.george.jylishop.domain.utils.ProductNameComparator;
 import org.george.jylishop.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +28,8 @@ public class BasketController {
     ProductDao productDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    MoneyDao moneyDao;
 
     @RequestMapping("/basket")
     public ModelAndView showBasket() {
@@ -61,22 +59,31 @@ public class BasketController {
 
 
     @RequestMapping("/products/{id}/add_to_basket")
-    public String addProductToBasket(@PathVariable int id) {
-        Product selectedProduct = productDao.getProductById(id);
-        Basket basket = basketDao.getUserBasket(SecurityUtils.getCurrentUsername());
-        List<Product> purchases = basket.getPurchases();
-        Basket basket1 = new Basket();
-        int count = basket1.productInBasketCount(purchases, id);
-        if (selectedProduct.getQuantity() <= count) {
+    public ModelAndView addProductToBasket(@PathVariable int id) {
+        if (SecurityUtils.getCurrentUsername() == null) {
 
-            return "redirect:/basket";
+            ModelAndView view = new ModelAndView("error");
+            view.addObject("message", "You Are Not Log In Or Registred.");
+            return view;
+
 
         } else {
-            purchases.add(selectedProduct);
-            basketDao.updateBasket(basket);
-        }
+            Product selectedProduct = productDao.getProductById(id);
+            Basket basket = basketDao.getUserBasket(SecurityUtils.getCurrentUsername());
+            List<Product> purchases = basket.getPurchases();
+            Basket basket1 = new Basket();
+            int count = basket1.productInBasketCount(purchases, id);
+            if (selectedProduct.getQuantity() <= count) {
 
-        return "redirect:/basket";
+                return new ModelAndView("redirect:/basket");
+
+            } else {
+                purchases.add(selectedProduct);
+                basketDao.updateBasket(basket);
+            }
+
+            return new ModelAndView("redirect:/basket");
+        }
     }
 
     @RequestMapping("/products/{id}/remove_from_basket")
@@ -131,6 +138,12 @@ public class BasketController {
             purchases.clear();
             basket.setPurchases(purchases);
             basketDao.updateBasket(basket);
+            Money money=new Money();
+            money.setEarnings(totalCostOfBasket);
+            money.setUser_name(user.getUsername());
+            moneyDao.addNewEarnings(money);
+
+
         }
 
 
