@@ -14,6 +14,7 @@
     ="#CC00FF"><a href="/basket"> Your Basket , $user_name </a> </b></button>
 <button><b><a href="/j_spring_security_logout"> Log Out</a> </b></button>
 #else
+
 <button><b><a href="/spring_security_login"> Log In</a> </b></button>
 <br/>
 <br/>
@@ -48,8 +49,8 @@ OR
         <tr>
 
             <td> $product.id</td>
-            <td><a href="/products/$product.id">$product.title </a> [<a href=/products/$product.id/add_to_basket> add to
-                basket</a>]
+            <td><a href="/products/$product.id"> $product.title  </a>  [<a href=/products/$product.id/add_to_basket> add to
+                basket </a> ]
             </td>
             <td>
                 $product.price $

@@ -2,7 +2,7 @@ package org.george.jylishop.controllers;
 
 import org.apache.velocity.tools.generic.NumberTool;
 import org.george.jylishop.dao.BasketDao;
-import org.george.jylishop.dao.MoneyDao;
+import org.george.jylishop.dao.PurchasesTransactionDao;
 import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.dao.UserDao;
 import org.george.jylishop.domain.*;
@@ -30,29 +30,21 @@ public class BasketController {
     @Autowired
     UserDao userDao;
     @Autowired
-    MoneyDao moneyDao;
+    PurchasesTransactionDao purchasesTransactionDao;
 
     @RequestMapping("/basket")
     public ModelAndView showBasket() {
         ModelAndView model = new ModelAndView("basket");
         List<Product> purchases = basketDao.getUserBasket(SecurityUtils.getCurrentUsername()).getPurchases();
-        Map<Product, Integer> groupt_products = new HashMap<>();
-        for (Product p : purchases) {
-            Integer count = groupt_products.get(p);
-            if (count != null) {
-                count = count + 1;
-                groupt_products.put(p, count);
-            } else {
-                groupt_products.put(p, 1);
-            }
-        }
-        Set<Product> keySet = groupt_products.keySet();
-        List<Product> list = new ArrayList<>(keySet);
 
+        PurchaseTransaction transaction = new PurchaseTransaction();
+        Map<Product, Integer> map = transaction.getGroupedProduct(purchases);
+        Set<Product> keySet = map.keySet();
+        List<Product> list = new ArrayList<>(keySet);
         list.sort(new ProductNameComparator());
 
         model.addObject("list", list);
-        model.addObject("basket", groupt_products);
+        model.addObject("basket", map);
         model.addObject("user_name", SecurityUtils.getCurrentUsername());
         model.addObject("tool", new NumberTool());
         return model;
@@ -120,7 +112,7 @@ public class BasketController {
         if (totalCostOfBasket > userMoney) {
 
             ModelAndView view = new ModelAndView("error");
-            view.addObject("message", "You Do Not Have Enough Money In Your Account");
+            view.addObject("message", "You Do Not Have Enough PurchaseTransaction In Your Account");
             return view;
 
         } else {
@@ -136,16 +128,17 @@ public class BasketController {
             User user = userDao.getUserInfo(SecurityUtils.getCurrentUsername());
             user.setMoney(userMoney - totalCostOfBasket);
             userDao.updateCurrentUserInfo(user);
-            purchases.clear();
             basket.setPurchases(purchases);
-            basketDao.updateBasket(basket);
-            Money money=new Money();
-            money.setEarnings(totalCostOfBasket);
-            money.setUser_name(user.getUsername());
+            PurchaseTransaction purchaseTransaction =new PurchaseTransaction();
+            purchaseTransaction.setEarnings(totalCostOfBasket);
+            purchaseTransaction.setUser(user);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
-            money.setData(dateFormat.format(date));
-            moneyDao.addNewEarnings(money);
+            purchaseTransaction.setDate(dateFormat.format(date));
+            purchaseTransaction.setPurchases(new ArrayList<>(purchases));
+            purchasesTransactionDao.addNewEarnings(purchaseTransaction);
+            purchases.clear();
+            basketDao.updateBasket(basket);
 
 
         }

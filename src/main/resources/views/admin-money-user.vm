@@ -5,12 +5,10 @@
 <center>
     <table cellpadding="20" cellspacing="0" border="3">
         <tr>
-            <td colspan="3">
+            <td colspan="4">
                 <center><b>$user_name</b></center>
             </td>
-
         </tr>
-
         </br>
         </br>
         </br>
@@ -18,31 +16,28 @@
             <th> Transaction ID</th>
             <th> Transaction time</th>
             <th> Earnings , $ </th>
-
-
+            <th>Quantuty of purchased products</th>
         </tr>
-
 
         #foreach ($h in $user_history)
             <tr>
                 <td>$h.id</td>
-                <td>$h.data</td>
-                <td> $h.earnings </td>
+                <td>$h.date</td>
+                <td>$tool.format("#0.00", $h.earnings) </td>
                 #set($total_cost=$total_cost+$h.earnings)
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $h.purchases.size()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/money/$h.id/user_statistic/invoices" >    See details  </a></td>
 
             </tr>
         #end
-
     <tr>
-        <td colspan="2">
+        <td colspan="3">
         <b>  Total </b>
         <td> $tool.format("#0.00",$total_cost)</td>
         </td>
-
     </tr>
+
     </table>
 </center>
-
 
 #include("views/footer.vm")
 

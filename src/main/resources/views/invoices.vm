@@ -1,0 +1,35 @@
+#include("views/admin-header.vm")
+</br>
+</br>
+</br>
+
+
+<center>
+<table cellpadding="25" cellspacing="0" border="5">
+    <tr>
+        <td colspan="4">Byer name: <b> $user_history.user.username</br>
+        </b> Transaction date: <b>$user_history.date</b></td>
+    </tr>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Sum </th>
+    </tr>
+<tr>
+    #foreach($key in $map.keySet())
+    <tr>
+        <th>   $key.title</th>
+  <th> $map.get($key)</th>
+    <th>  $key.price</th>
+        <th> #set ($sum=$map.get($key)*$key.price) $tool.format("#0.00",$sum) $</th>
+#end
+</tr>
+
+    <tr>
+        <td colspan="4">  Total <b>  $user_history.earnings $ </b></td>
+    </tr>
+</tr>
+    </table>
+</center>
+    #include("views/footer.vm")

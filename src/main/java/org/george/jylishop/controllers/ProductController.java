@@ -2,6 +2,7 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
+import org.george.jylishop.dao.UserDao;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
@@ -36,6 +37,8 @@ public class ProductController {
     ManufacturerDao manufacturerDao;
     @Autowired
     ProductDao productDao;
+    @Autowired
+    UserDao userDao;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
@@ -69,8 +72,8 @@ public class ProductController {
             List<Product> sorted = productDao.getCatalogueOrderByManufacturerReverse();
             total.addObject("catalogue", sorted);
         }
-
-            total.addObject("user_name", SecurityUtils.getCurrentUsername());
+            String username = SecurityUtils.getCurrentUsername() ;
+            total.addObject("user_name", username);
 
 
         return total;

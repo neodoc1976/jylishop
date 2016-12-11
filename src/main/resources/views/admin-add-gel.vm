@@ -4,7 +4,7 @@
 </br>
 </br>
 </html>
-    <form enctype="multipart/form-data" action="/admin/gels" method="post">
+    <form enctype="multipart/form-date" action="/admin/gels" method="post">
         <p><b>NEW Opalescense Gel</b></p><br/>
         <p/>
 ##        <p><b>ID</b><br/>

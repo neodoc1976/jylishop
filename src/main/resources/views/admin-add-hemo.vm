@@ -4,7 +4,7 @@
 </br>
 </br>
 </html>
-<form enctype="multipart/form-data" action="/admin/hemos" method="post">
+<form enctype="multipart/form-date" action="/admin/hemos" method="post">
     <p><b>NEW Hemostatic</b></p><br/>
 
     <p/>

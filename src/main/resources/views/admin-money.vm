@@ -23,9 +23,9 @@
         #foreach ($s in $statistic)
             <tr>
                 <td>$s.id</td>
-                <td>$s.data </td>
-                <td> $s.earnings</td>
-                <td>  $s.user_name </br><a href="/admin/money/$s.user_name/user_statistic">statistic</a> <a/></td>
+                <td>$s.date </td>
+                <td> $tool.format("#0.00",$s.earnings)</td>
+                <td>  $s.user.username </br><a href="/admin/money/$s.user.username/user_statistic">statistic</a> <a/></td>
 
             </tr>
         #end
