@@ -9,21 +9,22 @@
 
 
 #if ($user_name)
-Your Basket , $user_name <i class="fa fa-shopping-basket" aria-hidden="true"></i><button>
-    <bbgcolor
-    ="#CC00FF"><a href="/basket"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></a> </button> <br/>
-<button><b><a href="/j_spring_security_logout"> Log Out</a> </b></button>
-#else
-    <br/>
 
-<button><b><a href="/spring_security_login"> Log In</a> </b></button>
+<button>
+    <bbgcolor
+    ="#CC00FF"><a href="/basket">Your Basket,$user_name <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a></button> <br/>
+<button><b><a href="/j_spring_security_logout"> Log Out <i class="fa fa-lock fa-2x" aria-hidden="true"></i></a> </b></button>
+#else
+<br/>
+
+<button><b><a href="/spring_security_login"> Log In<i class="fa fa-unlock fa-2x" aria-hidden="true "></i></a> </b></button>
 <br/>
 <br/>
 OR
 <br/>
 <br/>
 
-<button><b><a href="/registration"> Registration</a> </b></button>
+<button><b><a href="/registration"> Registration<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> </b></button>
 #end
 
 
@@ -52,17 +53,16 @@ OR
 
 </script>
 
-
 <table cellpadding="25" cellspacing="0" border="5">
     <tr>
         <br/>
         <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
-        <th> Product name<br/><i class="fa fa-registered fa-2x" aria-hidden="true"></i><br/></th>
+        <th> Product name<br/><i class="fa fa-align-center fa-2x" aria-hidden="true"></i><br/></th>
         <th> Price <br/> <i class="fa fa-money fa-2x" aria-hidden="true"></i></th>
         <th> Picture<br/><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></th>
         <th> Quantity <br/> <i class="fa fa-database fa-2x" aria-hidden="true"></i></th>
-        <th> On Basket </th>
+        <th> On Basket<br/><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> </th>
         <th> Manufacturer <br/> <i class="fa fa-cogs fa-2x" aria-hidden="true"></i></th>
 
 
@@ -72,7 +72,9 @@ OR
 
         <tr>
 
-            <td onclick="toggleDescription('description_$velocityCount')"> <pre>     $product.id</pre> </br><i class="fa fa-info-circle" aria-hidden="true"></i> </td>
+            <td onclick="toggleDescription('description_$velocityCount')">
+                <pre> $product.id</pre></br>
+                <pre> <i class="fa fa-info-circle" aria-hidden="true"></i></pre></td>
             <td><a href="/products/$product.id"> $product.title </a>
 
             </td>
@@ -84,10 +86,13 @@ OR
                 $product.quantity pcs
             #else
                 Product not <br/>avalaible
-            #end</td>
+            #end
+            </td>
 
-<td> [<a href=/products/$product.id/add_to_basket> add
-    to basket </a> ]</td>
+            <td> <a href=/products/$product.id/add_to_basket>add
+                to basket</a>
+
+            </td>
             <td><a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>
         </tr>
 

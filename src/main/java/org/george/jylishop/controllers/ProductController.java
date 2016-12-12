@@ -1,12 +1,10 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.BasketDao;
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
 import org.george.jylishop.dao.UserDao;
-import org.george.jylishop.domain.Hemostatic;
-import org.george.jylishop.domain.Manufacturer;
-import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.domain.Product;
+import org.george.jylishop.domain.*;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -39,11 +40,23 @@ public class ProductController {
     ProductDao productDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    BasketDao basketDao;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
         ModelAndView total = new ModelAndView("total");
         total.addObject("catalogue", productDao.getCatalogue());
+
+        if (SecurityUtils.getCurrentUsername() != null) {
+            List<Product> purchases = basketDao.getUserBasket(SecurityUtils.getCurrentUsername()).getPurchases();
+            PurchaseTransaction transaction = new PurchaseTransaction();
+            Map<Product, Integer> map = transaction.getGroupedProduct(purchases);
+            Set<Product> keySet = map.keySet();
+            List<Product> list = new ArrayList<>(keySet);
+            total.addObject("list", list);
+            total.addObject("basket", map);
+        }
 
         if (sort != null && sort.equals("priceasc")) {
 
@@ -72,8 +85,8 @@ public class ProductController {
             List<Product> sorted = productDao.getCatalogueOrderByManufacturerReverse();
             total.addObject("catalogue", sorted);
         }
-            String username = SecurityUtils.getCurrentUsername() ;
-            total.addObject("user_name", username);
+        String username = SecurityUtils.getCurrentUsername();
+        total.addObject("user_name", username);
 
 
         return total;
@@ -134,10 +147,11 @@ public class ProductController {
         return view;
 
     }
-    @RequestMapping ({"/cloud"})
-    public ModelAndView showCloud(){
-       ModelAndView cloud = new ModelAndView("cloud");
-        return  cloud;
+
+    @RequestMapping({"/cloud"})
+    public ModelAndView showCloud() {
+        ModelAndView cloud = new ModelAndView("cloud");
+        return cloud;
     }
 
 }
