@@ -9,11 +9,12 @@
 
 
 #if ($user_name)
-<button>
+Your Basket , $user_name <i class="fa fa-shopping-basket" aria-hidden="true"></i><button>
     <bbgcolor
-    ="#CC00FF"><a href="/basket"> Your Basket , $user_name </a> </b></button>
+    ="#CC00FF"><a href="/basket"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></a> </button> <br/>
 <button><b><a href="/j_spring_security_logout"> Log Out</a> </b></button>
 #else
+    <br/>
 
 <button><b><a href="/spring_security_login"> Log In</a> </b></button>
 <br/>
@@ -26,8 +27,30 @@ OR
 #end
 
 
+<script language="JavaScript">
+
+    function toggleDescription(id) {
+        i = 1
+        while (i <= $catalogue.size()) {
+            ii = "description_" + i
+            if (ii != id)
+                document.getElementById(ii).style.display = "none"
+            i++
+        }
+
+        element = document.getElementById(id)
+
+        if (element.style.display == "none") {
+            element.style.display = ""
+        }
+        else {
+            element.style.display = "none"
+        }
 
 
+    }
+
+</script>
 
 
 <table cellpadding="25" cellspacing="0" border="5">
@@ -35,11 +58,12 @@ OR
         <br/>
         <center><b>PRODUCT</b></center>
         <th> Product<br/>ID</th>
-        <th> Product name <br/></th>
-        <th> Price<br/></th>
-        <th> Picture</th>
-        <th> Quantity</th>
-        <th> Manufacturer</th>
+        <th> Product name<br/><i class="fa fa-registered fa-2x" aria-hidden="true"></i><br/></th>
+        <th> Price <br/> <i class="fa fa-money fa-2x" aria-hidden="true"></i></th>
+        <th> Picture<br/><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></th>
+        <th> Quantity <br/> <i class="fa fa-database fa-2x" aria-hidden="true"></i></th>
+        <th> On Basket </th>
+        <th> Manufacturer <br/> <i class="fa fa-cogs fa-2x" aria-hidden="true"></i></th>
 
 
     </tr>
@@ -48,13 +72,12 @@ OR
 
         <tr>
 
-            <td> $product.id</td>
-            <td><a href="/products/$product.id"> $product.title  </a>  [<a href=/products/$product.id/add_to_basket> add to
-                basket </a> ]
+            <td onclick="toggleDescription('description_$velocityCount')"> <pre>     $product.id</pre> </br><i class="fa fa-info-circle" aria-hidden="true"></i> </td>
+            <td><a href="/products/$product.id"> $product.title </a>
+
             </td>
             <td>
                 $product.price $
-
             </td>
             <td><img src="/resources/pictures/$product.picture" width="200" alt="File not found"></td>
             <td>#if( $product.quantity!=0)
@@ -63,10 +86,17 @@ OR
                 Product not <br/>avalaible
             #end</td>
 
+<td> [<a href=/products/$product.id/add_to_basket> add
+    to basket </a> ]</td>
             <td><a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>
+        </tr>
+
+        <tr style="display: none" id="description_$velocityCount">
+            <td colspan="6"> $product.description</td>
 
         </tr>
     #end
 
 </table>
+
 #include("views/footer.vm")

@@ -134,5 +134,10 @@ public class ProductController {
         return view;
 
     }
+    @RequestMapping ({"/cloud"})
+    public ModelAndView showCloud(){
+       ModelAndView cloud = new ModelAndView("cloud");
+        return  cloud;
+    }
 
 }

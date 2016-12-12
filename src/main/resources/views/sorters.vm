@@ -3,19 +3,18 @@
 <div class="multiplier">
     SORT BY:
     <br/>
-    product Price
-    <button><a href="?sort=pricedesc"> Desc.</a></button>
-    <button><a href="?sort=priceasc"> Asc.</a> </button>
+    PRICE <button><a href="?sort=priceasc"><i class="fa fa-sort-numeric-asc fa-2x " aria-hidden="true"></i> </a> </button>
+    <button><a href="?sort=pricedesc"><i class="fa fa-sort-numeric-desc fa-2x" aria-hidden="true"></i></a></button>
     <br/>
 
-    product Name
-    <button><a href="?sort=title">Alphabetically</a> </button>
-    <button><a href="?sort=title_reverse"> Reverse</a> </button>
+    NAME
+    <button><a href="?sort=title"><i class="fa fa-sort-alpha-asc fa-2x" aria-hidden="true"></i></a> </button>
+    <button><a href="?sort=title_reverse"><i class="fa fa-sort-alpha-desc fa-2x" aria-hidden="true"></i></a> </button>
     <br/>
 
-    product Manufacturer
-    <button><a href="?sort=by_name">Alphabetically</a> </button>
-    <button> <a href="?sort=reverse_by_name">Reverse</a> </button>
+    MANUFACTURER
+    <button><a href="?sort=by_name"><i class="fa fa-sort-alpha-asc fa-2x" aria-hidden="true"></i></a> </button>
+    <button> <a href="?sort=reverse_by_name"><i class="fa fa-sort-alpha-desc fa-2x" aria-hidden="true"></i></a> </button>
     <br/>
 
     <button><a href="/products/only_gels">Only GELS</a> </button>
