@@ -1,0 +1,12 @@
+#include("views/header.vm")
+</br>
+</br>
+<div class="decoration">
+    #foreach ($cs in $comments)
+       Id $cs.id &#160; $cs.userName  &#160; &#160; ($cs.product.title) &#160; &#160; $cs.message &#160; &#160;
+        <red>$cs.date</red> &#160; &#160; <a href="/admin/comments/$cs.id/delete"> DELETE </a>
+        </br>
+        </br>
+    #end
+</div>
+#include("views/footer.vm")

@@ -1,9 +1,6 @@
 package org.george.jylishop.controllers;
 
-import org.george.jylishop.dao.BasketDao;
-import org.george.jylishop.dao.ManufacturerDao;
-import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.dao.UserDao;
+import org.george.jylishop.dao.*;
 import org.george.jylishop.domain.*;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.utils.SecurityUtils;
@@ -16,13 +13,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.print.Doc;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -42,6 +39,8 @@ public class ProductController {
     UserDao userDao;
     @Autowired
     BasketDao basketDao;
+    @Autowired
+    CommentDao commentDao;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
@@ -96,21 +95,42 @@ public class ProductController {
     public ModelAndView getProduct(@PathVariable int id) {
         Product selectedProduct = productDao.getProductById(id);
 
+        List<Comment> comments = commentDao.getCommentByProduct(selectedProduct);
+
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
             view.addObject("opalescenseInfo", selectedProduct);
+            view.addObject("comments", comments);
             return view;
         }
 
         if (selectedProduct instanceof Hemostatic) {
             ModelAndView view = new ModelAndView("hemo-product");
             view.addObject("hemoInfo", selectedProduct);
+            view.addObject("comments", comments);
             return view;
         }
 
         ModelAndView view = new ModelAndView("error");
         view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
         return view;
+    }
+
+    @RequestMapping(value = "/product/{id}/comment", method = RequestMethod.POST)
+    public ModelAndView addComment(@PathVariable int id,
+                                   @RequestParam String message,
+                                   @RequestParam String userName
+    ) {
+        Comment comment = new Comment();
+        Product selectedProduct = productDao.getProductById(id);
+        comment.setProduct(selectedProduct);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy ");
+        Date date = new Date();
+        comment.setDate(dateFormat.format(date));
+        comment.setMessage(message);
+        comment.setUserName(userName);
+        commentDao.addComment(comment);
+        return new ModelAndView("redirect:/products/{id}");
     }
 
     @RequestMapping({"/manufacturer/{id}"})
@@ -148,10 +168,5 @@ public class ProductController {
 
     }
 
-    @RequestMapping({"/cloud"})
-    public ModelAndView showCloud() {
-        ModelAndView cloud = new ModelAndView("cloud");
-        return cloud;
-    }
 
 }

@@ -1,7 +1,9 @@
 package org.george.jylishop.controllers;
 
+import org.george.jylishop.dao.CommentDao;
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
+import org.george.jylishop.domain.Comment;
 import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +30,8 @@ public class AdminTotalController {
     ManufacturerDao manufacturerDao;
     @Autowired
     ProductDao productDao;
+    @Autowired
+    CommentDao commentDao;
 
 
 
@@ -84,6 +89,12 @@ public class AdminTotalController {
         return view;
     }
 
-
+   @RequestMapping("/admin/comments")
+    public ModelAndView seeAllComments(){
+       ModelAndView view = new ModelAndView("admin-comments");
+       List<Comment> comments = commentDao.getAllComment();
+       view.addObject("comments",comments);
+       return view;
+   }
 
 }

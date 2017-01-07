@@ -72,7 +72,14 @@ center {
     font-size: 250%;
     color: black;
 }
-
+red {
+    color: red;
+}
+.decoration {
+    margin-left: 75px;
+    font-family: "Agency FB", sans-serif;
+    font-size: 150%;
+}
 
 .type {
     font-family: "Agency FB", sans-serif;

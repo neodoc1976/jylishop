@@ -3,7 +3,8 @@
     center {
         margin: auto;
     }
-    .type{
+
+    .type {
         font-family: "Agency FB", sans-serif;
         font-size: 170%;
         margin-left: 75px;
@@ -13,16 +14,39 @@
 <br/>
 <br/>
 <div class="type">
-<b>Product: </b> $opalescenseInfo.title<br/>
-<b>Description: </b>$opalescenseInfo.description<br/>
-<b>Volume of reagent: </b> $opalescenseInfo.reactantPercent %<br/>
-<b>Syringe volume: </b>$opalescenseInfo.volume ml<br/>
-<b>Price per one: </b>$opalescenseInfo.price $<br/>
+    <b>Product: </b> $opalescenseInfo.title<br/>
+    <b>Description: </b>$opalescenseInfo.description<br/>
+    <b>Volume of reagent: </b> $opalescenseInfo.reactantPercent %<br/>
+    <b>Syringe volume: </b>$opalescenseInfo.volume ml<br/>
+    <b>Price per one: </b>$opalescenseInfo.price $<br/>
 </div>
 <br/>
 <br/>
 <br/>
 <center>
-<img src="/resources/pictures/$opalescenseInfo.picture" alt="File not found">
+    <img src="/resources/pictures/$opalescenseInfo.picture" alt="File not found">
+
 </center>
+<br/>
+<br/>
+<div class="decoration">
+    #foreach ($c in $comments )
+        $c.date <br/>
+        $c.userName<br/>
+        $c.message<br/>
+        <br/>
+    #end
+    <form action="/product/$opalescenseInfo.id/comment" method="post">
+        <p>
+            <b>Enter your name:</b><br/>
+            <input type="text" size="10" name="userName">
+        </p>
+        <p><b>Your comment:</b><br/>
+            <textarea name="message" cols="50" rows="5"></textarea>
+        </p>
+        <p><input type="submit" value="submit">
+        </p>
+
+</div>
+
 #include("views/footer.vm")

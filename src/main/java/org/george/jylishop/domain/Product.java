@@ -1,6 +1,8 @@
 package org.george.jylishop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yulya on 21.05.2016.
@@ -13,6 +15,9 @@ public class Product {
     private String title;
     private double price;
     private String picture;
+
+
+
     @Id
     @GeneratedValue
     private int id;
@@ -103,6 +108,7 @@ public class Product {
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
+
 
 
 }
