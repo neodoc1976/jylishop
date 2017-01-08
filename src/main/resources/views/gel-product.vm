@@ -37,16 +37,19 @@
     #end
     <br/>
     #foreach ($c in $comments )
-        <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>
-            $c.userName</span> said at $c.date <br/>
+        #if ($c.userName == 'Anonymous user')<span style="color:ghostwhite"> <i class="fa fa-user"
+                                                                                aria-hidden="true"></i>$c.userName</span>
+        #else <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
+        #end
+        said at $c.date <br/>
         $c.message<br/>
         <br/>
     #end
     <form action="/product/$opalescenseInfo.id/comment" method="post">
-      <!--  <p>
-            <b>Enter your name:</b><br/>
-            <input type="text" size="10" name="userName">
-        </p> -->
+        <!--  <p>
+              <b>Enter your name:</b><br/>
+              <input type="text" size="10" name="userName">
+          </p> -->
         <p>
             <b>Your comment:</b><br/>
             <textarea name="message" cols="50" rows="5"></textarea>

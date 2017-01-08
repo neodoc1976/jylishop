@@ -121,6 +121,10 @@ public class ProductController {
                                    @RequestParam String message/*,
                                    @RequestParam String userName */
     ) {
+        if (message.isEmpty()){
+
+            return new ModelAndView("redirect:/products/{id}");
+        }
         Comment comment = new Comment();
         Product selectedProduct = productDao.getProductById(id);
         comment.setProduct(selectedProduct);
