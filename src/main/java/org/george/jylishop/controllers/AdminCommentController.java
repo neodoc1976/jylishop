@@ -20,7 +20,6 @@ public class AdminCommentController {
     public ModelAndView deleteComment(@PathVariable int id){
         commentDao.getCommentById(id);
         commentDao.deleteComment(commentDao.getCommentById(id));
-
         return new ModelAndView("redirect:/admin/comments");
     }
 }

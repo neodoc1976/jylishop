@@ -30,9 +30,15 @@
 <br/>
 <br/>
 <div class="decoration">
+#if ($comments.size()>0)
+Comments:
+    #else No comments for this product.Be to first to add.
+    #end
+<br/>
+    <br/>
     #foreach ($c in $comments )
         $c.date <br/>
-        $c.userName<br/>
+        $c.userName <i class="fa fa-comments-o" aria-hidden="true"></i><br/>
         $c.message<br/>
         <br/>
     #end
