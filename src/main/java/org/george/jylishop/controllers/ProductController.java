@@ -118,8 +118,8 @@ public class ProductController {
 
     @RequestMapping(value = "/product/{id}/comment", method = RequestMethod.POST)
     public ModelAndView addComment(@PathVariable int id,
-                                   @RequestParam String message,
-                                   @RequestParam String userName
+                                   @RequestParam String message/*,
+                                   @RequestParam String userName */
     ) {
         Comment comment = new Comment();
         Product selectedProduct = productDao.getProductById(id);
@@ -128,7 +128,11 @@ public class ProductController {
         Date date = new Date();
         comment.setDate(dateFormat.format(date));
         comment.setMessage(message);
-        comment.setUserName(userName);
+        if(SecurityUtils.getCurrentUsername()!=null){
+        comment.setUserName(SecurityUtils.getCurrentUsername());
+        }else {
+            comment.setUserName("Anonymous user");
+        }
         commentDao.addComment(comment);
         return new ModelAndView("redirect:/products/{id}");
     }

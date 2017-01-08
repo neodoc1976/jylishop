@@ -31,21 +31,21 @@
 <div class="decoration">
     #if ($comments.size()>0)
         Comments:
+        <br/>
     #else No comments for this product.Be to first to add.
     #end
     <br/>
-    <br/>
     #foreach ($c in $comments )
-        $c.date <br/>
-        $c.userName <i class="fa fa-comments-o" aria-hidden="true"></i><br/>
+    <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>
+        $c.userName</span> said at $c.date <br/>
         $c.message<br/>
         <br/>
     #end
     <form action="/product/$hemoInfo.id/comment" method="post">
-        <p>
+      <!--  <p>
             <b>Enter your name:</b><br/>
             <input type="text" size="10" name="userName">
-        </p>
+        </p> -->
         <p>
             <b>Your comment:</b><br/>
             <textarea name="message" cols="50" rows="5"></textarea>
