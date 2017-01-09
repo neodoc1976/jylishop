@@ -1,6 +1,8 @@
 package org.george.jylishop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yulya on 20.12.2016.
@@ -17,6 +19,9 @@ public class Comment {
     @ManyToOne
     private Product product;
     private String message;
+    private int positiveRating ;
+    private int negativeRating ;
+
 
     public int getId() {
         return id;
@@ -56,5 +61,21 @@ public class Comment {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getPositiveRating() {
+        return positiveRating;
+    }
+
+    public void setPositiveRating(int positiveRating) {
+        this.positiveRating = positiveRating;
+    }
+
+    public int getNegativeRating() {
+        return negativeRating;
+    }
+
+    public void setNegativeRating(int negativeRating) {
+        this.negativeRating = negativeRating;
     }
 }

@@ -37,12 +37,17 @@
     #end
     <br/>
     #foreach ($c in $comments )
-        #if ($c.userName == 'Anonymous user')<span style="color:ghostwhite"> <i class="fa fa-user"
-                                                                                aria-hidden="true"></i>$c.userName</span>
+        #if ($c.userName == 'Anonymous user')<span style="color:ghostwhite"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
         #else <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
         #end
-        said at $c.date <br/>
-        $c.message<br/>
+        said at $c.date <span style='padding-left:125px;'>
+        <a href="/product/comment/$c.id/positive_rating"><span style="color:red"> $c.positiveRating</span></a>
+        <span style='padding-left:25px;'>
+            <a href="/product/comment/$c.id/negative_rating"> <span style="color:blueviolet"> $c.negativeRating</span></span></span></a><br/>
+        $c.message
+        $c.id id of this comments
+
+        <br/>
         <br/>
     #end
     <form action="/product/$opalescenseInfo.id/comment" method="post">

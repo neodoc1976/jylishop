@@ -24,6 +24,11 @@ public class CommentDao {
         Session session = sessionFactory.getCurrentSession();
         session.save(comment);
     }
+    @Transactional
+    public void updateComment(Comment comment){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(comment);
+    }
 
     @Transactional
     public void deleteComment(Comment comment) {
@@ -60,4 +65,6 @@ public class CommentDao {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Comment", Comment.class).list();
     }
+
+
 }

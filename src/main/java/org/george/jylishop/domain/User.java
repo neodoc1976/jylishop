@@ -24,7 +24,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> roles = new ArrayList<>();
 
-    private double money ;
+    private double money;
 
 
     public String getUsername() {
@@ -66,4 +66,6 @@ public class User {
     public void setMoney(double money) {
         this.money = money;
     }
+
+
 }

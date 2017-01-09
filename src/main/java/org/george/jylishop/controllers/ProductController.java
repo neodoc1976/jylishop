@@ -87,10 +87,10 @@ public class ProductController {
             total.addObject("catalogue", sorted);
         }
         String username = SecurityUtils.getCurrentUsername();
-      if (username!=null){
-          List<UserRole> userRoles = userDao.getUserRolesAsList(username);
-          total.addObject("userRoles",userRoles);
-     }
+        if (username != null) {
+            List<UserRole> userRoles = userDao.getUserRolesAsList(username);
+            total.addObject("userRoles", userRoles);
+        }
         total.addObject("user_name", username);
 
         return total;
@@ -126,9 +126,9 @@ public class ProductController {
                                    @RequestParam String message/*,
                                    @RequestParam String userName */
     ) {
-        if (message.isEmpty()){
+        if (message.isEmpty()) {
 
-            return new ModelAndView ("redirect:/products/{id}");
+            return new ModelAndView("redirect:/products/{id}");
         }
         Comment comment = new Comment();
         Product selectedProduct = productDao.getProductById(id);
@@ -137,13 +137,31 @@ public class ProductController {
         Date date = new Date();
         comment.setDate(dateFormat.format(date));
         comment.setMessage(message);
-        if(SecurityUtils.getCurrentUsername()!=null){
-        comment.setUserName(SecurityUtils.getCurrentUsername());
-        }else {
+        if (SecurityUtils.getCurrentUsername() != null) {
+            comment.setUserName(SecurityUtils.getCurrentUsername());
+        } else {
             comment.setUserName("Anonymous user");
         }
         commentDao.addComment(comment);
         return new ModelAndView("redirect:/products/{id}");
+    }
+
+    @RequestMapping("/product/comment/{comment_id}/positive_rating")
+    public ModelAndView positiveRatingForComment
+            (@PathVariable int comment_id) {
+        Comment comment = commentDao.getCommentById(comment_id);
+        comment.setPositiveRating(comment.getPositiveRating() + 1);
+        commentDao.updateComment(comment);
+        return new ModelAndView("redirect:/products/"+comment.getProduct().getId());
+    }
+
+    @RequestMapping("/product/comment/{comment_id}/negative_rating")
+    public ModelAndView negativeRatingForComment
+            (@PathVariable int comment_id) {
+        Comment comment = commentDao.getCommentById(comment_id);
+        comment.setNegativeRating(comment.getNegativeRating() - 1);
+        commentDao.updateComment(comment);
+        return new ModelAndView("redirect:/products/"+comment.getProduct().getId());
     }
 
     @RequestMapping({"/manufacturer/{id}"})
