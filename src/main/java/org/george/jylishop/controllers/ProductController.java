@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.print.Doc;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -85,8 +87,11 @@ public class ProductController {
             total.addObject("catalogue", sorted);
         }
         String username = SecurityUtils.getCurrentUsername();
+      if (username!=null){
+          List<UserRole> userRoles = userDao.getUserRolesAsList(username);
+          total.addObject("userRoles",userRoles);
+     }
         total.addObject("user_name", username);
-
 
         return total;
     }
@@ -123,7 +128,7 @@ public class ProductController {
     ) {
         if (message.isEmpty()){
 
-            return new ModelAndView("redirect:/products/{id}");
+            return new ModelAndView ("redirect:/products/{id}");
         }
         Comment comment = new Comment();
         Product selectedProduct = productDao.getProductById(id);

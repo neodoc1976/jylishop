@@ -45,11 +45,13 @@
         $c.message<br/>
         <br/>
     #end
+
     <form action="/product/$hemoInfo.id/comment" method="post">
         <!--  <p>
               <b>Enter your name:</b><br/>
               <input type="text" size="10" name="userName">
           </p> -->
+
         <p>
             <b>Your comment:</b><br/>
             <textarea name="message" cols="50" rows="5"></textarea>

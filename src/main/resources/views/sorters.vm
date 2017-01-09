@@ -1,26 +1,22 @@
 <br/>
 <br/>
 <div class="multiplier">
-    SORT BY:
+
+
+    <span style='padding-left:25px;'> </span>   SORT BY:<span style='padding-left:425px;'> </span>
     <br/>
-    PRICE <button><a href="?sort=priceasc"><i class="fa fa-sort-numeric-asc fa-2x " aria-hidden="true"></i> </a> </button>
+    <span style='padding-left:125px;'> </span> PRICE <button><a href="?sort=priceasc"><i class="fa fa-sort-numeric-asc fa-2x " aria-hidden="true"></i> </a> </button>
     <button><a href="?sort=pricedesc"><i class="fa fa-sort-numeric-desc fa-2x" aria-hidden="true"></i></a></button>
     <br/>
 
-    NAME
+    <span style='padding-left:125px;'> </span>  NAME
     <button><a href="?sort=title"><i class="fa fa-sort-alpha-asc fa-2x" aria-hidden="true"></i></a> </button>
     <button><a href="?sort=title_reverse"><i class="fa fa-sort-alpha-desc fa-2x" aria-hidden="true"></i></a> </button>
     <br/>
 
-    MANUFACTURER
+    <span style='padding-left:125px;'> </span>  MANUFACTURER
     <button><a href="?sort=by_name"><i class="fa fa-sort-alpha-asc fa-2x" aria-hidden="true"></i></a> </button>
     <button> <a href="?sort=reverse_by_name"><i class="fa fa-sort-alpha-desc fa-2x" aria-hidden="true"></i></a> </button>
-    <br/>
-
-    <button><a href="/products/only_gels">Only GELS</a> </button>
-    <br/>
-
-    <button><a href="/products/only_hemos">Only HEMOSTATIC</a> </button>
     <br/>
 
 </div>

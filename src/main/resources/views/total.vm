@@ -1,34 +1,37 @@
 #include ("views/header.vm")
 #include ("views/sorters.vm")
-
-
-
 <br/>
 <br/>
-
-
-
-#if ($user_name)
-
-<button>
-    <bbgcolor
-    ="#CC00FF"><a href="/basket">Your Basket,$user_name <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a></button> <br/>
-<button><b><a href="/j_spring_security_logout"> Log Out <i class="fa fa-lock fa-2x" aria-hidden="true"></i></a> </b></button>
-#else
-<br/>
-
-<button><b><a href="/spring_security_login"> Log In<i class="fa fa-unlock fa-2x" aria-hidden="true "></i></a> </b></button>
-<br/>
-<br/>
-OR
-<br/>
-<br/>
-
-<button><b><a href="/registration"> Registration<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> </b></button>
+#foreach ($ur in $userRoles)
+    #if ($ur.role =='ROLE_ADMIN')
+    <span style='padding-left:10px;'>
+        <button><b><a href="/admin"> Admin side <i class="fa fa-beer fa-2x" aria-hidden="true"></i> </a> </b>
+    </button>
+    #end
 #end
-
-
-<script language="JavaScript">
+    <br/>
+#if ($user_name)
+    <span style='padding-left:10px;'> </span>
+    <button>
+    <bbgcolor
+    ="#CC00FF"><b><a href="/basket">Your Basket,$user_name <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a></b>
+</button> <br/>
+    <span style='padding-left:10px;'> </span>
+    <button><b><a href="/j_spring_security_logout"> Log Out <i class="fa fa-lock fa-2x" aria-hidden="true"></i></a> </b>
+</button>
+#else
+    <br/>
+    <span style='padding-left:10px;'> </span>
+    <button><b><a href="/spring_security_login"> Log In<i class="fa fa-unlock fa-2x" aria-hidden="true "></i></a> </b>
+</button>
+    <br/>
+    <span style='padding-left:10px;'> </span>OR
+    <br/>
+    <span style='padding-left:10px;'> </span>
+    <button><b><a href="/registration"> Registration<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> </b>
+</button>
+#end
+    <script language="JavaScript">
 
     function toggleDescription(id) {
         i = 1
@@ -38,7 +41,6 @@ OR
                 document.getElementById(ii).style.display = "none"
             i++
         }
-
         element = document.getElementById(id)
 
         if (element.style.display == "none") {
@@ -47,36 +49,35 @@ OR
         else {
             element.style.display = "none"
         }
-
-
     }
-
 </script>
-
-<table cellpadding="25" cellspacing="0" border="5">
+    <table cellpadding="25" cellspacing="0" border="5">
     <tr>
-        <br/>
         <center><b>PRODUCT</b></center>
+        <br/>
+        <center>
+            <button><a href="/products/only_gels">Only GELS</a></button>
+            <span style='padding-left:125px;'> </span>
+            <button><a href="/products/only_hemos">Only HEMOSTATIC</a></button>
+        </center>
+        <br/>
+        <br/>
         <th> Product<br/>ID</th>
         <th> Product name<br/><i class="fa fa-align-center fa-2x" aria-hidden="true"></i><br/></th>
         <th> Price <br/> <i class="fa fa-money fa-2x" aria-hidden="true"></i></th>
         <th> Picture<br/><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></th>
         <th> Quantity <br/> <i class="fa fa-database fa-2x" aria-hidden="true"></i></th>
-        <th> On Basket<br/><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> </th>
+        <th> On Basket<br/><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></th>
         <th> Manufacturer <br/> <i class="fa fa-cogs fa-2x" aria-hidden="true"></i></th>
-
-
     </tr>
-
-    #foreach ($product in $catalogue)
-
-        <tr>
-
+        #foreach ($product in $catalogue)
+            <tr>
             <td onclick="toggleDescription('description_$velocityCount')">
-                <pre> $product.id</pre></br>
-                <pre> <i class="fa fa-info-circle" aria-hidden="true"></i></pre></td>
+                <pre> $product.id</pre>
+                </br>
+                <pre> <i class="fa fa-info-circle" aria-hidden="true"></i></pre>
+            </td>
             <td><a href="/products/$product.id"> $product.title </a>
-
             </td>
             <td>
                 $product.price $
@@ -88,20 +89,14 @@ OR
                 Product not <br/>avalaible
             #end
             </td>
-
-            <td> <a href=/products/$product.id/add_to_basket>add
+            <td><a href=/products/$product.id/add_to_basket>add
                 to basket</a>
-
             </td>
             <td><a href="/manufacturer/$product.manufacturer.id">$product.manufacturer.name</td>
         </tr>
-
         <tr style="display: none" id="description_$velocityCount">
             <td colspan="6"> $product.description</td>
-
         </tr>
-    #end
-
+        #end
 </table>
-
 #include("views/footer.vm")

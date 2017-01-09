@@ -35,7 +35,7 @@ public class AdminTotalController {
 
 
 
-    @RequestMapping({"/admin"})
+    @RequestMapping({"/admin","/фвьшт"})
     public ModelAndView adminList(@RequestParam(required = false) String sort) {
         ModelAndView admin = new ModelAndView("admin-total");
         admin.addObject("catalogue", productDao.getCatalogue());
