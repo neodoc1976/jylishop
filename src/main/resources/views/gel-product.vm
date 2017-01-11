@@ -45,8 +45,6 @@
         <span style='padding-left:25px;'>
             <a href="/product/comment/$c.id/negative_rating"> <span style="color:blueviolet"> $c.negativeRating</span></span></span></a><br/>
         $c.message
-        $c.id id of this comments
-
         <br/>
         <br/>
     #end

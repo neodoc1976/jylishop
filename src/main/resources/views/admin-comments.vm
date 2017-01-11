@@ -1,12 +1,15 @@
-#include("views/header.vm")
-</br>
-</br>
-<div class="decoration">
+#include("views/admin-header.vm")
+</br></br>
+<center><b>COMMENT EDIT PAGE</b></center>
+</br></br>
+
     #foreach ($cs in $comments)
-       Id $cs.id &#160; $cs.userName  &#160; &#160; ($cs.product.title) &#160; &#160; $cs.message &#160; &#160;
-        <red>$cs.date</red> &#160; &#160; <a href="/admin/comments/$cs.id/delete"> DELETE </a>
+    <span style='padding-left:125px;'> </span>   Id $cs.id &#160; $cs.userName  &#160; &#160; ($cs.product.title) &#160; &#160;<span style="font-weight:bold"> $cs.message </span>  &#160; &#160;
+        <red>$cs.date</red> &#160; &#160; <span style="color:red"> $cs.positiveRating </span> &#160; &#160;
+    <span style="color:blueviolet"> $cs.negativeRating </span>&#160; &#160;&#160; &#160;&#160; &#160;
+    <button><a href="/admin/comments/$cs.id/delete"> DELETE </a></button>
         </br>
         </br>
     #end
-</div>
+
 #include("views/footer.vm")

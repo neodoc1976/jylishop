@@ -2,8 +2,10 @@ package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.*;
 import org.george.jylishop.domain.*;
+import org.george.jylishop.domain.utils.CommentComparator;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.utils.SecurityUtils;
+import org.hibernate.mapping.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -21,6 +23,10 @@ import javax.print.Doc;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -101,7 +107,7 @@ public class ProductController {
         Product selectedProduct = productDao.getProductById(id);
 
         List<Comment> comments = commentDao.getCommentByProduct(selectedProduct);
-
+        Collections.sort(comments,new CommentComparator());
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
             view.addObject("opalescenseInfo", selectedProduct);

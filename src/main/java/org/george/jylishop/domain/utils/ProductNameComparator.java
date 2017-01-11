@@ -1,5 +1,6 @@
 package org.george.jylishop.domain.utils;
 
+import org.george.jylishop.domain.Comment;
 import org.george.jylishop.domain.Product;
 
 import java.util.Comparator;
@@ -16,6 +17,8 @@ public class ProductNameComparator implements Comparator<Product> {
         return product1.getTitle().compareTo(product2.getTitle());
 
     }
+
+
 
 
 }
