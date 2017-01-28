@@ -88,4 +88,14 @@ public class AdminTotalController {
        return view;
    }
 
+    @RequestMapping(value = "/errors/404.html")
+    public ModelAndView handle404() {
+
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("errorCode", "400");
+        modelAndView.addObject("message", "Error 404 happens");
+
+        return modelAndView;
+    }
+
 }
