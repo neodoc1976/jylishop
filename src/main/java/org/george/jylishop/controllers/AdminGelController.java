@@ -96,14 +96,6 @@ public class AdminGelController {
                                  @RequestParam int manufacturerId) {
 
         Product selectedProduct = productDao.getProductById(id);
-
-        if (selectedProduct == null) {
-            ModelAndView view = new ModelAndView("error");
-            view.addObject("message", "Sorry, the product with the ID does not exist");
-            return view;
-        }
-
-//        ModelAndView post = new ModelAndView("admin-total");
         OpalescenseGel updated = (OpalescenseGel) selectedProduct;// Casting
         updated.setTitle(title);
         updated.setDescription(description);

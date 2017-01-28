@@ -13,10 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.print.Doc;
@@ -28,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
 
 /**
  * Created by Yulya on 20.05.2016.
@@ -104,14 +100,18 @@ public class ProductController {
 
     @RequestMapping({"/products/{id}"})
     public ModelAndView getProduct(@PathVariable int id) {
+
+
         Product selectedProduct = productDao.getProductById(id);
 
         List<Comment> comments = commentDao.getCommentByProduct(selectedProduct);
-        Collections.sort(comments,new CommentComparator());
+        Collections.sort(comments, new CommentComparator());
+        String username = SecurityUtils.getCurrentUsername();
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("gel-product");
             view.addObject("opalescenseInfo", selectedProduct);
             view.addObject("comments", comments);
+            view.addObject("user_name", username);
             return view;
         }
 
@@ -119,11 +119,12 @@ public class ProductController {
             ModelAndView view = new ModelAndView("hemo-product");
             view.addObject("hemoInfo", selectedProduct);
             view.addObject("comments", comments);
+            view.addObject("user_name", username);
             return view;
         }
 
         ModelAndView view = new ModelAndView("error");
-        view.addObject("message", " SORRY,PRODUCT IS NOT FOUND ");
+        view.addObject("message", " SORRY,UNKNOWN TYPE PRODUCT! ");
         return view;
     }
 
@@ -143,11 +144,7 @@ public class ProductController {
         Date date = new Date();
         comment.setDate(dateFormat.format(date));
         comment.setMessage(message);
-        if (SecurityUtils.getCurrentUsername() != null) {
-            comment.setUserName(SecurityUtils.getCurrentUsername());
-        } else {
-            comment.setUserName("Anonymous user");
-        }
+        comment.setUserName(SecurityUtils.getCurrentUsername());
         commentDao.addComment(comment);
         return new ModelAndView("redirect:/products/{id}");
     }
@@ -158,7 +155,7 @@ public class ProductController {
         Comment comment = commentDao.getCommentById(comment_id);
         comment.setPositiveRating(comment.getPositiveRating() + 1);
         commentDao.updateComment(comment);
-        return new ModelAndView("redirect:/products/"+comment.getProduct().getId());
+        return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
 
     @RequestMapping("/product/comment/{comment_id}/negative_rating")
@@ -167,7 +164,7 @@ public class ProductController {
         Comment comment = commentDao.getCommentById(comment_id);
         comment.setNegativeRating(comment.getNegativeRating() - 1);
         commentDao.updateComment(comment);
-        return new ModelAndView("redirect:/products/"+comment.getProduct().getId());
+        return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
 
     @RequestMapping({"/manufacturer/{id}"})
@@ -185,7 +182,6 @@ public class ProductController {
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;
-
     }
 
     @RequestMapping({"/products/only_gels"})
@@ -202,8 +198,10 @@ public class ProductController {
         ModelAndView view = new ModelAndView("total");
         view.addObject("catalogue", list);
         return view;
-
     }
 
 
 }
+
+
+

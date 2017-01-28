@@ -4,6 +4,7 @@ import org.george.jylishop.domain.Hemostatic;
 import org.george.jylishop.domain.Manufacturer;
 import org.george.jylishop.domain.OpalescenseGel;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.exceptoins.ProductIsNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Yulya on 05.11.2016.
@@ -30,7 +32,11 @@ public class ProductDao {
     @Transactional
     public Product getProductById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Product.class, id);
+        Product selectedProduct = session.get(Product.class, id);
+        if (selectedProduct == null) {
+            throw new ProductIsNotFoundException(id);
+        }
+        return selectedProduct;
     }
 
     @Transactional
@@ -122,7 +128,7 @@ public class ProductDao {
         Session session = sessionFactory.getCurrentSession();
         return session
                 .createQuery("from Product where manufacturer.id = :id", Product.class)
-                .setParameter("id",id)
+                .setParameter("id", id)
                 .list();
     }
 
@@ -136,19 +142,19 @@ public class ProductDao {
     }
 
     @Transactional
-    public long getProductsCountForManufacturer(int id){
+    public long getProductsCountForManufacturer(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return (long)session.createQuery("select count (*) from  Product where manufacturer.id=:id")
-                .setParameter("id",id)
+        return (long) session.createQuery("select count (*) from  Product where manufacturer.id=:id")
+                .setParameter("id", id)
                 .uniqueResult();
     }
 
     @Transactional
-    public void changeManufacturerForProducts(int newId, int oldId){
+    public void changeManufacturerForProducts(int newId, int oldId) {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery("update  Product set manufacturer.id=:newId where manufacturer.id=:oldId")
-                .setParameter("newId",newId)
-                .setParameter("oldId",oldId)
+                .setParameter("newId", newId)
+                .setParameter("oldId", oldId)
                 .executeUpdate();
     }
 

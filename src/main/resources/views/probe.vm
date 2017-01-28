@@ -1,8 +1,0 @@
-#include ("views/header.vm")
-
-
-
-
-
-
-#include("views/footer.vm")

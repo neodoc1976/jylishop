@@ -103,13 +103,6 @@ public class AdminHemoController {
 
 //        ModelAndView post = new ModelAndView("admin-total");
         Product selectedProduct = productDao.getProductById(id);
-
-        if (selectedProduct == null) {
-            ModelAndView view = new ModelAndView("error");
-            view.addObject("message", "Sorry, the product with the ID does not exist");
-            return view;
-        }
-
         Hemostatic updated = (Hemostatic) selectedProduct;// Casting
         updated.setTitle(title);
         updated.setDescription(description);

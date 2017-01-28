@@ -54,11 +54,6 @@ public class CommentDao {
                 .uniqueResult();
     }
 
-//    @Transactional
-//    public void deleteCommentById(int id){
-//        Session session = sessionFactory.getCurrentSession();
-//        session.createQuery("delete from Comment where comment.id=:id",Comment.class).setParameter("id",id);
-//    }
 
     @Transactional
     public List<Comment> getAllComment() {

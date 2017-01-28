@@ -2,6 +2,9 @@ package org.george.jylishop.dao;
 
 import org.george.jylishop.domain.Product;
 import org.george.jylishop.domain.PurchaseTransaction;
+import org.george.jylishop.exceptoins.ManufacturerIsNotFoundException;
+import org.george.jylishop.exceptoins.ProductIsNotFoundException;
+import org.george.jylishop.exceptoins.PurchaseIsNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +44,13 @@ public class PurchasesTransactionDao {
 
     @Transactional
     public PurchaseTransaction getUserInvoiceById(int id) {
+        PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
         Session session = sessionFactory.getCurrentSession();
-       return session.get(PurchaseTransaction.class, id);
-
+        purchaseTransaction = session.get(PurchaseTransaction.class, id);
+        if (purchaseTransaction == null) {
+            throw new PurchaseIsNotFoundException(id);
+        }
+        return purchaseTransaction;
     }
-
-
-
 
 }

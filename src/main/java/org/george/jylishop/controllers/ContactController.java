@@ -3,8 +3,11 @@ package org.george.jylishop.controllers;
 import org.george.jylishop.dao.ContactDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.NoSuchElementException;
 
 /**
  * Created by Yulya on 02.05.2016.
@@ -20,5 +23,4 @@ public class ContactController {
         model.addObject("ci",base.getContact());
         return model;
     }
-
 }

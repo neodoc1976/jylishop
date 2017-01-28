@@ -48,23 +48,14 @@ public class AdminTotalController {
 
     @RequestMapping(value = "/admin/product/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteForm(@PathVariable int id) {
-        ModelAndView delete = new ModelAndView("admin-total");
         Product selectedProduct = productDao.getProductById(id);
-
-        if (selectedProduct == null) {
-            ModelAndView view = new ModelAndView("error");
-            view.addObject("message", "Sorry, the product with the ID does not exist");
-            return view;
-        }
-
         productDao.deleteProduct(selectedProduct);
-
         return new ModelAndView("redirect:/admin");
     }
 
     @RequestMapping(value = "/admin/product/{id}/update", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable int id) {
-        Product selectedProduct=null;
+        Product selectedProduct;
         selectedProduct = productDao.getProductById(id);
 
         if (selectedProduct instanceof OpalescenseGel) {

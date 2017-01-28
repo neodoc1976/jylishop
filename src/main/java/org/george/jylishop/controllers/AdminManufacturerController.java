@@ -8,15 +8,13 @@ import org.george.jylishop.domain.Product;
 import org.george.jylishop.services.TextFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Yulya on 18.07.2016.
@@ -153,11 +151,10 @@ public class AdminManufacturerController {
         change.addObject("oldId", oldId);
         change.addObject("newId", newId);
         return change;
-
     }
 
-
 }
+
 
 
 

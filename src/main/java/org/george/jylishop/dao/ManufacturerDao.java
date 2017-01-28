@@ -1,6 +1,7 @@
 package org.george.jylishop.dao;
 
 import org.george.jylishop.domain.Manufacturer;
+import org.george.jylishop.exceptoins.ManufacturerIsNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Yulya on 03.11.2016.
@@ -39,7 +41,12 @@ public class ManufacturerDao {
     @Transactional
     public Manufacturer getManufacturerById(int id){
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Manufacturer.class, id);
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer=session.get(Manufacturer.class, id);
+        if (manufacturer == null){
+            throw new ManufacturerIsNotFoundException(id);
+        }
+        return manufacturer;
 
     }
 
