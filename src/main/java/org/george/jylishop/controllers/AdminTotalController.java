@@ -34,14 +34,13 @@ public class AdminTotalController {
     CommentDao commentDao;
 
 
-
-    @RequestMapping({"/admin","/фвьшт"})
+    @RequestMapping({"/admin", "/фвьшт"})
     public ModelAndView adminList(@RequestParam(required = false) String sort) {
         ModelAndView admin = new ModelAndView("admin-total");
         admin.addObject("catalogue", productDao.getCatalogue());
-        if (sort != null && sort.equals("orderbyid")){
+        if (sort != null && sort.equals("orderbyid")) {
             List<Product> sorted = productDao.getCatalogueOrderById();
-            admin.addObject("catalogue",sorted);
+            admin.addObject("catalogue", sorted);
         }
         return admin;
     }
@@ -61,16 +60,16 @@ public class AdminTotalController {
         if (selectedProduct instanceof OpalescenseGel) {
             ModelAndView view = new ModelAndView("admin-update-gel");
             view.addObject("recall", selectedProduct);
-            view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
-            view.addObject("pictures",pictureService.getAllPictures());
+            view.addObject("manufacturers", manufacturerDao.getAllManufacturers());
+            view.addObject("pictures", pictureService.getAllPictures());
             return view;
         }
 
         if (selectedProduct instanceof Hemostatic) {
             ModelAndView view = new ModelAndView("admin-update-hemo");
             view.addObject("recall", selectedProduct);
-            view.addObject("manufacturers",manufacturerDao.getAllManufacturers());
-            view.addObject("pictures",pictureService.getAllPictures());
+            view.addObject("manufacturers", manufacturerDao.getAllManufacturers());
+            view.addObject("pictures", pictureService.getAllPictures());
 
             return view;
         }
@@ -80,21 +79,18 @@ public class AdminTotalController {
         return view;
     }
 
-   @RequestMapping("/admin/comments")
-    public ModelAndView seeAllComments(){
-       ModelAndView view = new ModelAndView("admin-comments");
-       List<Comment> comments = commentDao.getAllComment();
-       view.addObject("comments",comments);
-       return view;
-   }
+    @RequestMapping("/admin/comments")
+    public ModelAndView seeAllComments() {
+        ModelAndView view = new ModelAndView("admin-comments");
+        List<Comment> comments = commentDao.getAllComment();
+        view.addObject("comments", comments);
+        return view;
+    }
 
     @RequestMapping(value = "/errors/404.html")
     public ModelAndView handle404() {
-
         ModelAndView modelAndView = new ModelAndView("error");
-        modelAndView.addObject("errorCode", "400");
-        modelAndView.addObject("message", "Error 404 happens");
-
+        modelAndView.addObject("message", "Error 404 Happens. Wrong adress.");
         return modelAndView;
     }
 

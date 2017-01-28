@@ -19,8 +19,8 @@ public class Comment {
     @ManyToOne
     private Product product;
     private String message;
-    private int positiveRating ;
-    private int negativeRating ;
+//    private int positiveRating ;
+//    private int negativeRating ;
 
 
     public int getId() {
@@ -63,19 +63,19 @@ public class Comment {
         this.message = message;
     }
 
-    public int getPositiveRating() {
-        return positiveRating;
-    }
-
-    public void setPositiveRating(int positiveRating) {
-        this.positiveRating = positiveRating;
-    }
-
-    public int getNegativeRating() {
-        return negativeRating;
-    }
-
-    public void setNegativeRating(int negativeRating) {
-        this.negativeRating = negativeRating;
-    }
+//    public int getPositiveRating() {
+//        return positiveRating;
+//    }
+//
+//    public void setPositiveRating(int positiveRating) {
+//        this.positiveRating = positiveRating;
+//    }
+//
+//    public int getNegativeRating() {
+//        return negativeRating;
+//    }
+//
+//    public void setNegativeRating(int negativeRating) {
+//        this.negativeRating = negativeRating;
+//    }
 }
