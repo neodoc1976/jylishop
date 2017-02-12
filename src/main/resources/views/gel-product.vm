@@ -42,26 +42,13 @@
         <br/>
         $c.message
         <br/>
-        #if ($user_name)
-            #set($a = false)
-            #foreach ($vote in $c.commentVote)
-                #if ($vote.user.username == $user_name)
-                    #set($a = true)
-                #end
-            #end
+        #if ($user_name && $c.isUserVoted($user_name) == false)
 
-            #if($a == false)
                 <a href="/product/comment/$c.id/positive"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </a>
-                <a href="/product/comment/$c.id/negative">  <i class="fa fa-thumbs-down"
-                                                               aria-hidden="true"></i> </a>
-            #end
+                <a href="/product/comment/$c.id/negative">  <i class="fa fa-thumbs-down" aria-hidden="true"></i> </a>
+        #end
+            rating: <span style="color:red"> $c.getPositiveRating() </span>  <span style="color:blueviolet">  $c.getNegativeRating()</span>
 
-        #end
-        #if ($rating.get($c)<=0)
-            rating: <span style="color:blueviolet">  $rating.get($c)</span>
-        #else
-            rating:<span style="color:red">  $rating.get($c)</span>
-        #end
         <br/>
         <br/>
     #end

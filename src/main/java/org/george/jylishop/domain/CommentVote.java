@@ -26,6 +26,6 @@ public class CommentVote {
     @ManyToOne
     User user;
 
-    boolean rating;
+    Rating rating;
 
 }

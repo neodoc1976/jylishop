@@ -94,23 +94,6 @@ public class ProductController {
     public ModelAndView getProduct(@PathVariable int id) {
         Product selectedProduct = productDao.getProductById(id);
         List<Comment> comments = commentDao.getCommentByProduct(selectedProduct);
-        Map<Comment , Integer> rating = new HashMap<>();
-
-        for (Comment c:comments){
-            List<CommentVote> commentVote = c.getCommentVote();
-            int sum = 0;
-            for (CommentVote vote:commentVote) {
-                if (vote.isRating() ){
-                    sum=sum+1;
-                }
-                else {
-                    sum=sum-1;
-                }
-            }
-            rating.put(c , sum);
-        }
-
-
 
         Collections.sort(comments, new CommentComparator());
         String username = SecurityUtils.getCurrentUsername();
@@ -119,8 +102,6 @@ public class ProductController {
             view.addObject("opalescenseInfo", selectedProduct);
             view.addObject("comments", comments);
             view.addObject("user_name", username);
-            view.addObject("rating",rating);
-
             return view;
         }
 
@@ -129,7 +110,6 @@ public class ProductController {
             view.addObject("hemoInfo", selectedProduct);
             view.addObject("comments", comments);
             view.addObject("user_name", username);
-            view.addObject("rating",rating);
             return view;
         }
 

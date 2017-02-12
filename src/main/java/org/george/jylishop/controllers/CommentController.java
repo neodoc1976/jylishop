@@ -7,6 +7,7 @@ import org.george.jylishop.dao.UserDao;
 import org.george.jylishop.domain.Comment;
 import org.george.jylishop.domain.CommentVote;
 import org.george.jylishop.domain.Product;
+import org.george.jylishop.domain.Rating;
 import org.george.jylishop.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,9 +46,7 @@ public class CommentController {
 
     @RequestMapping(value = "/product/{id}/comment", method = RequestMethod.POST)
     public ModelAndView addComment(@PathVariable int id,
-                                   @RequestParam String message/*,
-                                   @RequestParam String userName */
-    ) {
+                                   @RequestParam String message) {
         if (message.isEmpty()) {
 
             return new ModelAndView("redirect:/products/{id}");
@@ -71,24 +70,18 @@ public class CommentController {
 
         String currentUsername = SecurityUtils.getCurrentUsername();
         Comment comment = commentDao.getCommentById(comment_id);
-        List<CommentVote> commentVoteList = comment.getCommentVote();
-        String userName;
-        for (CommentVote cv : commentVoteList) {
-            userName = (cv.getUser()).getUsername();
-            if (userName.equals(currentUsername)) {
-
-                return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
-            }
-
+        if (comment.isUserVoted(currentUsername)) {
+            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
         }
         CommentVote commentVote = new CommentVote();
         commentVote.setComment(comment);
         commentVote.setUser(userDao.getUserInfo(currentUsername));
-        if (rating.equals("positive")) {
-            commentVote.setRating(true);
-        } else {
-            commentVote.setRating(false);
+        if (rating.equals("positive") == true) {
+            commentVote.setRating(Rating.POSITIVE);
+        }else{
+            commentVote.setRating(Rating.NEGATIVE);
         }
+
         commentVoteDao.addVoteOnComment(commentVote);
         return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
