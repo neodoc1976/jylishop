@@ -35,33 +35,34 @@
         <br/>
     #else No comments for this product.Be to first to add.
     #end
-<br/>
-<br/>
-#foreach ($c in $comments )
-<span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
-said at $c.date <span style='padding-left:125px;'>
     <br/>
-    $c.message
-    #if ($user_name)<a href="/product/comment/$c.id/positive"> Vote For It! </a>
+    #foreach ($c in $comments )
+        <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
+        said at $c.date <span style='padding-left:125px;'>
+        <br/>
+        $c.message
+        <br/>
+        #if ($user_name && $c.isUserVoted($user_name) == false)
+
+            <a href="/product/comment/$c.id/positive"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </a>
+            <a href="/product/comment/$c.id/negative">  <i class="fa fa-thumbs-down" aria-hidden="true"></i> </a>
+        #end
+        rating: <span style="color:red"> $c.getPositiveRating() </span>  <span style="color:blueviolet">  $c.getNegativeRating()</span>
+
+        <br/>
+        <br/>
     #end
-    #if ($rating.get($c)<=0)
-        <span style="color:blueviolet"> rating : $rating.get($c)</span>
-    #else
-        <span style="color:red"> rating : $rating.get($c)</span>
-    #end
-    <br/>
-    <br/>
-#end
-#if ($user_name)
-<form action="/product/$hemoInfo.id/comment" method="post">
-    <p>
+    #if ($user_name)
+    <form action="/product/$hemoInfo.id/comment" method="post">
+        <p>
             <b>Your comment:</b><br/>
             <textarea name="message" cols="50" rows="5"></textarea>
         </p>
-    <p>
+        <p>
             <input type="submit" value="submit">
         </p>
-#else
-#end
-    </div>
+    #else
+    #end
+
+</div>
 #include("views/footer.vm")
