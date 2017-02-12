@@ -45,16 +45,24 @@ public class Comment {
         return sum;
     }
 
-    public int getNegativeRating(){
+    public int getNegativeRating() {
         int sum = 0;
-        for (CommentVote cv : commentVote){
-            if(cv.rating == Rating.NEGATIVE){
+        for (CommentVote cv : commentVote) {
+            if (cv.rating == Rating.NEGATIVE) {
                 sum++;
             }
         }
         return sum;
     }
 
-
+    public int getWorthlessRating() {
+        int sum = 0;
+        for (CommentVote cv : commentVote) {
+            if (cv.rating == Rating.WORTHLESS) {
+                sum++;
+            }
+        }
+        return sum;
+    }
 
 }

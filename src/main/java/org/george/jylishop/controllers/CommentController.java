@@ -76,13 +76,21 @@ public class CommentController {
         CommentVote commentVote = new CommentVote();
         commentVote.setComment(comment);
         commentVote.setUser(userDao.getUserInfo(currentUsername));
+        if (rating.equals("worthless") == true){
+            commentVote.setRating(Rating.WORTHLESS);
+            commentVoteDao.addVoteOnComment(commentVote);
+            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
+        }
         if (rating.equals("positive") == true) {
             commentVote.setRating(Rating.POSITIVE);
-        }else{
-            commentVote.setRating(Rating.NEGATIVE);
+            commentVoteDao.addVoteOnComment(commentVote);
+            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
         }
-
-        commentVoteDao.addVoteOnComment(commentVote);
+        if (rating.equals("negative") == true) {
+            commentVote.setRating(Rating.NEGATIVE);
+            commentVoteDao.addVoteOnComment(commentVote);
+            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
+        }
         return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
 
