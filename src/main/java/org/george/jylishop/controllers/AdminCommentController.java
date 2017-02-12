@@ -1,6 +1,7 @@
 package org.george.jylishop.controllers;
 
 import org.george.jylishop.dao.CommentDao;
+import org.george.jylishop.dao.CommentVoteDao;
 import org.george.jylishop.domain.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,14 @@ import java.util.List;
 public class AdminCommentController {
     @Autowired
     CommentDao commentDao;
+    @Autowired
+    CommentVoteDao commentVoteDao;
 
     @RequestMapping(value="/admin/comments/{id}/delete",method = RequestMethod.GET)
     public ModelAndView deleteComment(@PathVariable int id){
-        commentDao.getCommentById(id);
-        commentDao.deleteComment(commentDao.getCommentById(id));
+       Comment currentComment = commentDao.getCommentById(id);
+        commentVoteDao.deleteCommentAllVote(currentComment);
+        commentDao.deleteComment(currentComment);
         return new ModelAndView("redirect:/admin/comments");
     }
     @RequestMapping("/admin/comments")

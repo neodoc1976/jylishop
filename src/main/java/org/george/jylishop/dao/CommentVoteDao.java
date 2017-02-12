@@ -38,6 +38,13 @@ public class CommentVoteDao {
         Session session = sessionFactory.getCurrentSession();
         session.save(commentVote);
     }
+    @Transactional
+    public void deleteCommentAllVote (Comment comment){
+        Session session = sessionFactory.getCurrentSession();
+       session.createQuery("delete CommentVote where comment_id = :comment_id").
+               setParameter("comment_id",comment.getId()).executeUpdate();;
+    }
+
 
 
 
