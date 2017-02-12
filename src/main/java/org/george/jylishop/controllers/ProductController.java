@@ -5,26 +5,16 @@ import org.george.jylishop.domain.*;
 import org.george.jylishop.domain.utils.CommentComparator;
 import org.george.jylishop.services.PictureService;
 import org.george.jylishop.utils.SecurityUtils;
-import org.hibernate.mapping.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.print.Doc;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Yulya on 20.05.2016.
@@ -45,6 +35,8 @@ public class ProductController {
     BasketDao basketDao;
     @Autowired
     CommentDao commentDao;
+    @Autowired
+    CommentVoteDao commentVoteDao;
 
     @RequestMapping({"/", "/total"})
     public ModelAndView totalList(@RequestParam(required = false) String sort) {
@@ -100,11 +92,26 @@ public class ProductController {
 
     @RequestMapping({"/products/{id}"})
     public ModelAndView getProduct(@PathVariable int id) {
-
-
         Product selectedProduct = productDao.getProductById(id);
-
         List<Comment> comments = commentDao.getCommentByProduct(selectedProduct);
+        Map<Comment , Integer> rating = new HashMap<>();
+
+        for (Comment c:comments){
+            List<CommentVote> commentVote = c.getCommentVote();
+            int sum = 0;
+            for (CommentVote vote:commentVote) {
+                if (vote.isRating() ){
+                    sum=sum+1;
+                }
+                else {
+                    sum=sum-1;
+                }
+            }
+            rating.put(c , sum);
+        }
+
+
+
         Collections.sort(comments, new CommentComparator());
         String username = SecurityUtils.getCurrentUsername();
         if (selectedProduct instanceof OpalescenseGel) {
@@ -112,6 +119,8 @@ public class ProductController {
             view.addObject("opalescenseInfo", selectedProduct);
             view.addObject("comments", comments);
             view.addObject("user_name", username);
+            view.addObject("rating",rating);
+
             return view;
         }
 
@@ -120,51 +129,13 @@ public class ProductController {
             view.addObject("hemoInfo", selectedProduct);
             view.addObject("comments", comments);
             view.addObject("user_name", username);
+            view.addObject("rating",rating);
             return view;
         }
 
         ModelAndView view = new ModelAndView("error");
         view.addObject("message", " SORRY,UNKNOWN TYPE PRODUCT! ");
         return view;
-    }
-
-    @RequestMapping(value = "/product/{id}/comment", method = RequestMethod.POST)
-    public ModelAndView addComment(@PathVariable int id,
-                                   @RequestParam String message/*,
-                                   @RequestParam String userName */
-    ) {
-        if (message.isEmpty()) {
-
-            return new ModelAndView("redirect:/products/{id}");
-        }
-        Comment comment = new Comment();
-        Product selectedProduct = productDao.getProductById(id);
-        comment.setProduct(selectedProduct);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy ");
-        Date date = new Date();
-        comment.setDate(dateFormat.format(date));
-        comment.setMessage(message);
-        comment.setUserName(SecurityUtils.getCurrentUsername());
-        commentDao.addComment(comment);
-        return new ModelAndView("redirect:/products/{id}");
-    }
-
-    @RequestMapping("/product/comment/{comment_id}/positive_rating")
-    public ModelAndView positiveRatingForComment
-            (@PathVariable int comment_id) {
-        Comment comment = commentDao.getCommentById(comment_id);
-        comment.setPositiveRating(comment.getPositiveRating() + 1);
-        commentDao.updateComment(comment);
-        return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
-    }
-
-    @RequestMapping("/product/comment/{comment_id}/negative_rating")
-    public ModelAndView negativeRatingForComment
-            (@PathVariable int comment_id) {
-        Comment comment = commentDao.getCommentById(comment_id);
-        comment.setNegativeRating(comment.getNegativeRating() - 1);
-        commentDao.updateComment(comment);
-        return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
 
     @RequestMapping({"/manufacturer/{id}"})

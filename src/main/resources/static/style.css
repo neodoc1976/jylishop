@@ -96,3 +96,9 @@ red {
 .meny {
     margin: 50px 50px 50px 50px;
 }
+.triangle {
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}

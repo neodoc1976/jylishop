@@ -37,15 +37,31 @@
     #end
     <br/>
     #foreach ($c in $comments )
-         <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
+        <span style="color:#0101DF"> <i class="fa fa-user" aria-hidden="true"></i>$c.userName</span>
         said at $c.date <span style='padding-left:125px;'>
-        #if ($user_name)
-        <a href="/product/comment/$c.id/positive_rating"><span style="color:red"> $c.positiveRating</span></a>
-        <span style='padding-left:25px;'>
-            <a href="/product/comment/$c.id/negative_rating"> <span style="color:blueviolet"> $c.negativeRating</span></span></span></a>
-            #end
         <br/>
         $c.message
+        <br/>
+        #if ($user_name)
+            #set($a = false)
+            #foreach ($vote in $c.commentVote)
+                #if ($vote.user.username == $user_name)
+                    #set($a = true)
+                #end
+            #end
+
+            #if($a == false)
+                <a href="/product/comment/$c.id/positive"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </a>
+                <a href="/product/comment/$c.id/negative">  <i class="fa fa-thumbs-down"
+                                                               aria-hidden="true"></i> </a>
+            #end
+
+        #end
+        #if ($rating.get($c)<=0)
+            rating: <span style="color:blueviolet">  $rating.get($c)</span>
+        #else
+            rating:<span style="color:red">  $rating.get($c)</span>
+        #end
         <br/>
         <br/>
     #end
@@ -58,8 +74,8 @@
         <p>
             <input type="submit" value="submit">
         </p>
-        #else
-            #end
+    #else
+    #end
 
 </div>
 

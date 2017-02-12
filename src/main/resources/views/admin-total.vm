@@ -17,6 +17,7 @@
     center {
         margin: auto;
     }
+
 </style>
 <center>
     <table cellpadding="20" cellspacing="0" border="3">
@@ -61,5 +62,7 @@
         #end
 
     </table>
+
 </center>
+
 #include("views/footer.vm")

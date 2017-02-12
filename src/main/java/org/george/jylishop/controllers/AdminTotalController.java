@@ -3,10 +3,7 @@ package org.george.jylishop.controllers;
 import org.george.jylishop.dao.CommentDao;
 import org.george.jylishop.dao.ManufacturerDao;
 import org.george.jylishop.dao.ProductDao;
-import org.george.jylishop.domain.Comment;
-import org.george.jylishop.domain.Hemostatic;
-import org.george.jylishop.domain.OpalescenseGel;
-import org.george.jylishop.domain.Product;
+import org.george.jylishop.domain.*;
 import org.george.jylishop.services.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,13 +76,7 @@ public class AdminTotalController {
         return view;
     }
 
-    @RequestMapping("/admin/comments")
-    public ModelAndView seeAllComments() {
-        ModelAndView view = new ModelAndView("admin-comments");
-        List<Comment> comments = commentDao.getAllComment();
-        view.addObject("comments", comments);
-        return view;
-    }
+
 
     @RequestMapping(value = "/errors/404.html")
     public ModelAndView handle404() {
