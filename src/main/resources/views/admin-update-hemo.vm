@@ -20,10 +20,6 @@
     <p><b>Syringe/dispencer volume:</b> <br/>
         <input type="text" size="10" name="volume" value="$recall.volume">
     </p>
-    <p><b>Price:</b><br/>
-        <input type="text" size="10" name="price" value="$recall.price">
-
-    </p>
     <p><select name="picture">
         <option disabled>Select picture</option>
         #foreach ($p in $pictures)
@@ -41,10 +37,9 @@
         <textarea name="description" cols="50" rows="5">$recall.description</textarea>
 
     </p>
-    <p><b>Quantity:</b> <br/>
-        <input type="text" size="10" name="quantity" value="$recall.quantity">
 
-    <p><select name="manufacturerId">
+    <p><b>Manufacturer:</b><br/>
+        <select name="manufacturerId">
         <option disabled>Select manufacturer</option>
         #foreach ($m in $manufacturers)
             <option
