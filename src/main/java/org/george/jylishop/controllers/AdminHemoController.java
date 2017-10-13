@@ -84,7 +84,6 @@ public class AdminHemoController {
         newcomer.setManufacturer(manufacturerDao.getManufacturerById(manufacturerId));
         newcomer.setQuantity(quantity);
         productDao.addProduct(newcomer);
-//        post.addObject("catalogue", base.getCatalogue());
         return  "redirect:/admin";
 
     }

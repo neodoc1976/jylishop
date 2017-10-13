@@ -43,16 +43,28 @@
         #if ($user_name && $c.isUserVoted($user_name) == false)
             Please,rate this comment
         <span style='padding-left:25px;'>
+            <img src="http://www.gifki.org/data/media/111/strelka-animatsionnaya-kartinka-0517.gif" border="0"
+                 alt="strelka-animatsionnaya-kartinka-0517"/>
+        <span style='padding-left:25px;'>
             <a href="/product/comment/$c.id/positive"><i class="fa fa-plus-square-o" aria-hidden="true"></i> </a>
         <span style='padding-left:10px;'>
             <a href="/product/comment/$c.id/negative"><i class="fa fa-minus-square-o" aria-hidden="true"></i>  </a>
-        <span style='padding-left:10px;'>
-            <a href="/product/comment/$c.id/worthless">  <i class="fa fa-trash-o" aria-hidden="true"></i> </a>
+        ##        <span style='padding-left:10px;'>
+        ##            <a href="/product/comment/$c.id/worthless">  <i class="fa fa-trash-o" aria-hidden="true"></i> </a>
         #else
             You rated this comment,thanks
         #end
+        #if ($c.userName == $user_name)
+        <span style='padding-left:10px;'>
+            <a href="/product/comments/$c.id/delete">  <i class="fa fa-trash-o" aria-hidden="true"></i> </a>
+        #end
         <br/> <br/>
-        $c.message
+        #if($c.isDeleted==true)
+            Comment was deleted by user
+            #else
+                $c.message ( $c.isDeleted) ($c.getDeleted)
+            #end
+
         <br/> <br/>
         Rating
     <span style='padding-left:25px;'>
@@ -64,9 +76,9 @@
                                            aria-hidden="true"></i><b>.negative<span
                 style='padding-left:5px;'> $c.getNegativeRating()</b></span>
     <span style='padding-left:15px;'>
-        <span style="color:blueviolet"><i class="fa fa-trash"
-                                          aria-hidden="true"></i><b>.worthless<span
-                style='padding-left:5px;'>$c.getWorthlessRating()</b> </span>
+    ##        <span style="color:blueviolet"><i class="fa fa-trash"
+    ##                                          aria-hidden="true"></i><b>.worthless<span
+    ##                style='padding-left:5px;'>$c.getWorthlessRating()</b> </span>
         <br/><br/><br/><br/><br/>
     #end
     #if ($user_name)

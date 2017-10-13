@@ -1,10 +1,14 @@
 #include("views/header.vm")
-
+<br/>
+<br/>
+<br/>
 <table cellpadding="25" cellspacing="0" border="3">
+ #if (!$basket.isEmpty())
 <tr>
+
     <br/>
     <br/>
-    <center><b>Your Basket,$user_name</b></center>
+    <center><b>Your basket,$user_name </b> <br/> your money $tool.format("#0.00",$userMoney) $</center>
     <br/>
 
     <th> Product name <br/></th>
@@ -40,5 +44,9 @@
 </table>
 
 <center><a href=/products/basket/buy> <b bgcolor="#CC00FF">BUY!</b> </a></center>
+
+      #else
+      <center><b>$user_name.toUpperCase() your basket is empty</b> <br/> your money $tool.format("#0.00",$userMoney) $</center>
+ #end
 
 #include("views/footer.vm")

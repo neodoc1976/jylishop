@@ -24,6 +24,7 @@ public class Comment {
     private String message;
     @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
     public List<CommentVote> commentVote;
+    private boolean isDeleted ;
 
 
     public boolean isUserVoted(String userName) {
@@ -54,15 +55,15 @@ public class Comment {
         }
         return sum;
     }
-
-    public int getWorthlessRating() {
-        int sum = 0;
-        for (CommentVote cv : commentVote) {
-            if (cv.rating == Rating.WORTHLESS) {
-                sum++;
-            }
-        }
-        return sum;
-    }
+//
+//    public int getWorthlessRating() {
+//        int sum = 0;
+//        for (CommentVote cv : commentVote) {
+//            if (cv.rating == Rating.WORTHLESS) {
+//                sum++;
+//            }
+//        }
+//        return sum;
+//    }
 
 }

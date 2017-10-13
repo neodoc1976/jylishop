@@ -1,0 +1,29 @@
+#include("views/admin-header.vm")
+</body>
+</br>
+</br>
+</br>
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<form action="/admin/products/$recall.id/getting" method="post">
+    <p><b>GETTING Products</b></p><br/>
+    <p/>
+    <p><b>Title: $recall.title</b><br/>
+
+    </p>
+
+    <p><b>Price:</b><br/>
+        <input type="text" size="10" name="price" value="$recall.price">
+    </p>
+
+    <p><b>Quantity:</b> <br/>
+        <input type="text" size="10" name="quantity" value="$recall.quantity">
+
+
+    <p><input type="submit" value="submit">
+    </p>
+    #include("views/footer.vm")
+
+</html>

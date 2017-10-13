@@ -76,7 +76,15 @@ public class AdminTotalController {
         return view;
     }
 
+    @RequestMapping(value = "/admin/product/{id}/getting", method = RequestMethod.GET)
+    public ModelAndView gettingForm(@PathVariable int id) {
+        Product selectedProduct;
+        selectedProduct = productDao.getProductById(id);
+        ModelAndView view = new ModelAndView("admin-getting-product");
+        view.addObject("recall", selectedProduct);
+        return view;
 
+    }
 
     @RequestMapping(value = "/errors/404.html")
     public ModelAndView handle404() {

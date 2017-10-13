@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -76,11 +77,11 @@ public class CommentController {
         CommentVote commentVote = new CommentVote();
         commentVote.setComment(comment);
         commentVote.setUser(userDao.getUserInfo(currentUsername));
-        if (rating.equals("worthless") == true){
-            commentVote.setRating(Rating.WORTHLESS);
-            commentVoteDao.addVoteOnComment(commentVote);
-            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
-        }
+//        if (rating.equals("worthless") == true) {
+//            commentVote.setRating(Rating.WORTHLESS);
+//            commentVoteDao.addVoteOnComment(commentVote);
+//            return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
+//        }
         if (rating.equals("positive") == true) {
             commentVote.setRating(Rating.POSITIVE);
             commentVoteDao.addVoteOnComment(commentVote);
@@ -93,5 +94,18 @@ public class CommentController {
         }
         return new ModelAndView("redirect:/products/" + comment.getProduct().getId());
     }
+
+    @RequestMapping(value = "/product/comments/{comment_id}/delete", method = RequestMethod.GET)
+    public ModelAndView replaceFildInComment(@PathVariable int comment_id) {//deleteCommentByUser(@PathVariable int comment_id) {
+        Comment currentComment = commentDao.getCommentById(comment_id);
+        int path_id = currentComment.getProduct().getId();
+//        commentVoteDao.deleteCommentAllVote(currentComment);
+//        commentDao.deleteComment(currentComment);
+        currentComment.setDeleted(true);
+        commentDao.updateComment(currentComment);
+
+        return new ModelAndView("redirect:/products/" + path_id);
+    }
+
 
 }

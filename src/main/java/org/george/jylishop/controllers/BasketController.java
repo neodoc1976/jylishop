@@ -42,7 +42,9 @@ public class BasketController {
         Set<Product> keySet = map.keySet();
         List<Product> list = new ArrayList<>(keySet);
         list.sort(new ProductNameComparator());
+        double userMoney = userDao.getUserInfo(SecurityUtils.getCurrentUsername()).getMoney() ;
 
+        model.addObject("userMoney",userMoney);
         model.addObject("list", list);
         model.addObject("basket", map);
         model.addObject("user_name", SecurityUtils.getCurrentUsername());
@@ -129,7 +131,7 @@ public class BasketController {
             user.setMoney(userMoney - totalCostOfBasket);
             userDao.updateCurrentUserInfo(user);
             basket.setPurchases(purchases);
-            PurchaseTransaction purchaseTransaction =new PurchaseTransaction();
+            PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
             purchaseTransaction.setEarnings(totalCostOfBasket);
             purchaseTransaction.setUser(user);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
