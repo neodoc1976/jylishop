@@ -85,6 +85,20 @@ public class AdminTotalController {
         return view;
 
     }
+    @RequestMapping(value = "/admin/products/{id}/getting", method = RequestMethod.POST)
+    public ModelAndView gettingGel(@PathVariable int id,
+                                   @RequestParam Double price,
+                                   @RequestParam int batchQuantity) {
+
+        Product selectedProduct = productDao.getProductById(id);
+        int storageQuantity = selectedProduct.getQuantity();
+        int newQuantity = storageQuantity + batchQuantity;
+        selectedProduct.setQuantity(newQuantity );
+        selectedProduct.setPrice(price);
+        productDao.updateProduct(selectedProduct);
+//        post.addObject("catalogue", base.getCatalogue());
+        return new ModelAndView ("redirect:/admin");
+    }
 
     @RequestMapping(value = "/errors/404.html")
     public ModelAndView handle404() {

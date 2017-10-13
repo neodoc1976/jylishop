@@ -20,7 +20,7 @@
     <p><b>Quantity in a storage: $recall.quantity  </b>   </p>
 
     <p><b>Quantity in a new batch:</b> <br/>
-        <input type="text" size="10" name="quantity" value=0 >
+        <input type="text" size="10" name="batchQuantity" value=0 >
 
 
     <p><input type="submit" value="submit">

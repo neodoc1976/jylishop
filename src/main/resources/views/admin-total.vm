@@ -20,7 +20,7 @@
 
 </style>
 <center>
-    <table cellpadding="20" cellspacing="0" border="1">
+    <table cellpadding="5" cellspacing="0" border="1">
         <center> OUR PRODUCTS</center>
         </br>
         </br>
@@ -34,9 +34,10 @@
             <th> Quantity </th>
             <th> Manufacturer</th>
             <th> Logo</th>
-            <th> Delete</th>
-            <th> Edit</th>
             <th> Getting product</th>
+            <th> Edit</th>
+            <th> Delete</th>
+
 
         </tr>
 
@@ -57,9 +58,11 @@
                 <td><b>$product.quantity </td>
                 <td>$product.manufacturer.name</td>
                 <td><img src="/resources/logo/$product.manufacturer.logo" width="140" alt="File not found"></td>
-                <td><a href="/admin/product/$product.id/delete">Delete this</a></td>
-                <td><a href="/admin/product/$product.id/update">Edit this</a></td>
                 <td><a href="/admin/product/$product.id/getting">New batch</a></td>
+                <td><a href="/admin/product/$product.id/update">Edit this</a></td>
+                <td><a href="/admin/product/$product.id/delete">Delete this</a></td>
+
+
             </tr>
         #end
 

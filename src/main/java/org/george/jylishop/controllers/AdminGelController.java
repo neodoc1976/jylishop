@@ -110,21 +110,8 @@ public class AdminGelController {
 //        post.addObject("catalogue", base.getCatalogue());
        return new ModelAndView ("redirect:/admin");
     }
-    //Getting of products
 
-    @RequestMapping(value = "/admin/products/{id}/getting", method = RequestMethod.POST)
-    public ModelAndView gettingGel(@PathVariable int id,
-                                 @RequestParam Double price,
-                                 @RequestParam int batchQuantity) {
 
-        Product selectedProduct = productDao.getProductById(id);
-        int storageQuantity = selectedProduct.getQuantity();
-        int newQuantity = storageQuantity + batchQuantity;
-        selectedProduct.setQuantity(newQuantity );
-        selectedProduct.setPrice(price);
-        productDao.updateProduct(selectedProduct);
-//        post.addObject("catalogue", base.getCatalogue());
-        return new ModelAndView ("redirect:/admin");
-    }
+
 
 }
